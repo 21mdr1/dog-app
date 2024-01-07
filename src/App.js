@@ -4,7 +4,7 @@ import Walk from './pages/Walk/Walk';
 import User from './pages/User/User';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
