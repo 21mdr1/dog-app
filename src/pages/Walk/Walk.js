@@ -15,12 +15,22 @@ function Walk() {
         {displayForm && (
             <div className='form__background'>
                 <form className="form">
-                        <div className="form__content">
-                        <input type="text" className="form__input" />
+                    <div className="form__content">
+                        <select className="form__input" defaultValue='2'>
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                            <option value="3" className="form__option">3</option>
+                        </select>
                         <p className="form__text">:</p>
-                        <input type="text" className="form__input" />
+                        <select className="form__input" defaultValue='2'>
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                        </select>
                         <p className="form__text">:</p>
-                        <input type="text" className="form__input" />
+                        <select className="form__input">
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                        </select>
                     </div>
                     <button type='submit' className="form__button">Log Walk</button>
                 </form>
