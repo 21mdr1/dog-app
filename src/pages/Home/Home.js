@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import BottomNav from '../../components/BottomNav/BottomNav';
 import SittingDog from '../../components/SittingDog/SittingDog';
 import TopNav from '../../components/TopNav/TopNav';
@@ -10,7 +9,7 @@ function Home() {
         <>
         <TopNav />
         <SittingDog />
-        <BottomNav />
+        <BottomNav page='home' />
         </>
     );
 }

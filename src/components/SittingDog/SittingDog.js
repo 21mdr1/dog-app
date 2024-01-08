@@ -1,8 +1,12 @@
+import dog from '../../assets/static-images/home-dog-prototype-2.svg';
 import './SittingDog.scss';
 
 function SittingDog() {
     return (
-        <p>Sitting Dog</p>
+        <main className="home-main">
+            <img src={dog} alt="sitting dog" className="sitting-dog" />
+            <div className="sitting-dog__shadow"></div>
+        </main>
     );
 }
 
