@@ -20,3 +20,22 @@
     row-gap: $row-gap;
     flex-wrap: $flex-wrap;
 }
+
+@mixin avatar {
+    width: $avatar-size;
+
+    &__container {
+        position: relative;
+    }
+
+    &__mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background-color: $light-mask;
+        width: $avatar-size;
+        height: $avatar-size;
+        line-height: 0;
+    }
+}

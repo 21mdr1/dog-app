@@ -7,9 +7,6 @@ import './BottomNav.scss';
 function BottomNav({ page, clickHandler}) {
     let mainImage;
 
-    function walkClickHandler(event) {
-    }
-
     switch(page) {
         case 'home':
             mainImage = '';

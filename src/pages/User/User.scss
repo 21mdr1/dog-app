@@ -1,0 +1,97 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.page {
+    &--user {
+        background-color: $light-orange;
+    }
+}
+
+.header {
+    height: 20%;
+    background-color: $dark-orange;
+    position: relative;
+    margin-bottom: 2.75rem;
+}
+
+
+.user-avatar {
+    @include avatar;
+    width: 5.5rem;
+
+    &__mask {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    &__container {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 100%;
+        left: 50%;
+    }
+}
+
+.main-user {
+    padding: $mobile-spacing;
+    @include flex(center, center, 0, 1rem);
+    flex-direction: column;
+}
+
+.graph {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__container {
+        padding: $mobile-spacing;
+        background-color: white;
+        border-radius: $border-radius;
+        box-shadow: $shadow;
+        width: 100%;
+    }
+
+    &__body {
+        @include flex;
+        flex-direction: column-reverse;
+    }
+
+    &__row {
+        width: 100%;
+        @include flex(initial, initial, 0.5rem);
+    }
+
+    &__day {
+        font-weight: 400;
+        width: 2rem;
+        text-align: right;
+        flex-shrink: 0;
+    }
+
+    &__right-side {
+        border-left: 1px solid $silver;
+        flex-grow: 1;
+    }
+
+    &__bar {
+        background: linear-gradient(to top right,
+            white 0%,
+            white calc(50% - 0.8px),
+            #E11F27 50%,
+            white calc(50% + 0.8px),
+            white 100%,
+        );
+        color: transparent;
+        display: inline-block;
+        position: relative;
+        height: 0.35rem;
+
+        &::after {
+            content: url('../../assets/static-images/graph-dog.svg');
+            width: 2rem;
+            height: 1rem;
+            position: absolute;
+            right: -1.2rem;
+            top: 0;
+        }
+    }
+}
