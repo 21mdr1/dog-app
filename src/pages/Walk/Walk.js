@@ -3,34 +3,15 @@ import BottomNav from '../../components/BottomNav/BottomNav';
 import WalkingDog from '../../components/WalkingDog/WalkingDog';
 import TopNav from '../../components/TopNav/TopNav';
 import WalkForm from '../../components/WalkForm/WalkForm';
+import tree from '../../assets/static-images/tree-4.svg';
 import './Walk.scss';
 
 function Walk() {
     let [ displayForm, setDisplayForm ] = useState(false);
-    // let [ inputs, setInputs ] = useState({hours: '0', minutes: '2', seconds: '0'})
-    // let { hours, minutes, seconds } = inputs;
-
-    // function clickOut() {
-    //     setDisplayForm(false);
-    // }
-
-    // function dontClickOut(event) {
-    //     event.stopPropagation();
-    // }
-
-    // function submitHandler(event) {
-    //     event.preventDefault();
-    //     //other logic
-    //     setDisplayForm(false);
-    // }
-
-    // function handleInputChange(event) {
-    //     setInputs({...inputs, [event.target.name]: event.target.value})
-    // }
-
 
     return (
         <div className='page page--walk'>
+            <img src={tree} alt='tree' className="page__background-tree" />
             <TopNav />
             <WalkingDog />
             <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />

@@ -8,5 +8,13 @@
         @include flex(center, center);
         flex-direction: column;
         padding: $mobile-spacing;
+        position: relative;
+    }
+
+    &__background-tree {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 35%;
+        left: 85%;
     }
 }
