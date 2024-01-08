@@ -21,15 +21,15 @@ function BottomNav({ page }) {
 
 
     return (
-        <nav className="bottom-nav">
-            <NavLink to='/' className="bottom-nav__item">
-                <img src={heart} alt="heart" className="bottom-nav__button" />
+        <nav className={`bottom-nav bottom-nav--${page}`}>
+            <NavLink to='/' className={`bottom-nav__item bottom-nav__item--${page}`}>
+                <img src={heart} alt="heart" className={`bottom-nav__button bottom-nav__button--${page}`} />
             </NavLink>
-            <NavLink to='' className="bottom-nav__item bottom-nav__item--main">
-                <img src={mainImage} alt="" className="bottom-nav__button bottom-nav__button--main" />
+            <NavLink to='' className={`bottom-nav__main-item bottom-nav__main-item--${page}`}>
+                <img src={mainImage} alt="" className={`bottom-main-button bottom-main-button--${page}`} />
             </NavLink>
-            <NavLink to='/walk' className="bottom-nav__item">
-                <img src={leash} alt="dog leash" className="bottom-nav__button" />
+            <NavLink to='/walk' className={`bottom-nav__item bottom-nav__item--${page}`}>
+                <img src={leash} alt="dog leash" className={`bottom-nav__button bottom-nav__button--${page}`} />
             </NavLink>
         </nav>
     );
