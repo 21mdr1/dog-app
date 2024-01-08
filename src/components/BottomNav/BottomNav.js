@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import leash from '../../assets/icons/leash-red.svg';
+import leash from '../../assets/icons/leash-red-smaller.svg';
 import heart from '../../assets/icons/heart3.svg';
 import paws from '../../assets/icons/paws-green.svg';
 import './BottomNav.scss';
@@ -21,15 +21,15 @@ function BottomNav({ page }) {
 
 
     return (
-        <nav className="bottom-bar">
+        <nav className="bottom-nav">
             <NavLink to='/' className="bottom-nav__item">
-                <img src={heart} alt="heart" className="bottom-bar__button" />
+                <img src={heart} alt="heart" className="bottom-nav__button" />
             </NavLink>
             <NavLink to='' className="bottom-nav__item bottom-nav__item--main">
-                <img src={mainImage} alt="" className="bottom-bar__button bottom-bar__button--main" />
+                <img src={mainImage} alt="" className="bottom-nav__button bottom-nav__button--main" />
             </NavLink>
             <NavLink to='/walk' className="bottom-nav__item">
-                <img src={leash} alt="dog leash" className="bottom-bar__button" />
+                <img src={leash} alt="dog leash" className="bottom-nav__button" />
             </NavLink>
         </nav>
     );

@@ -1,0 +1,27 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.bottom-nav {
+    background-color: $transparent-purple;
+    border-radius: 15%/50%;
+    height: 3.75rem;
+    width: 14rem;
+
+    @include flex(center, center, 0.75rem);
+
+    &__item {
+        line-height: 0;
+
+        &--main {
+            display: inline-block;
+            background-color: $purple-white;
+            width: $middle-button-size;
+            height: $middle-button-size;
+            border-radius: 50%;
+        }
+    }
+
+    &__button {
+        width: $heart-size;
+    }
+}
