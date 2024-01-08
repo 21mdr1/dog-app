@@ -10,6 +10,9 @@ function BottomNav({ page }) {
 
     switch(page) {
         case 'home':
+            mainImage = '';
+            break;
+        case 'walk':
             mainImage = paws;
             break;
         default: 

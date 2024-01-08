@@ -21,6 +21,17 @@ $light-mask: rgba(50, 50, 50, 0.1);
 $shadow: 4px 4px 12px 1px $dark-mask;
 
 
-//breakpoints
+// breakpoints
 $tablet: 768px;
 $desktop: 1280px;
+
+
+// sizes
+$avatar-size: 3.125rem;
+$heart-size: 2.9375rem;
+$leash-size: 4.3125rem;
+$middle-button-size: 4.6875rem;
+
+
+//spacing
+$mobile-spacing: 1rem;

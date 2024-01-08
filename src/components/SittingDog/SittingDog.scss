@@ -1,0 +1,30 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.home-main {
+    flex-grow: 1;
+    @include flex(center, center);
+}
+
+
+.sitting-dog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+
+    &__container {
+        position: relative;
+    }
+
+    &__shadow {
+        background-color: #937FCE; //make this into a variable?
+        width: 10rem;
+        height: 1.125rem;
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        bottom: -8.75rem;
+    }
+}

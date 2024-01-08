@@ -1,0 +1,12 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+
+.page {
+    &--home {
+        background-color: $purple;
+        @include flex;
+        flex-direction: column;
+        padding: $mobile-spacing;
+    }
+}

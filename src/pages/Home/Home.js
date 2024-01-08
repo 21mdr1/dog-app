@@ -6,11 +6,11 @@ import './Home.scss';
 function Home() {
 
     return (
-        <>
-        <TopNav />
-        <SittingDog />
-        <BottomNav page='home' />
-        </>
+        <div className='page page--home'>
+            <TopNav />
+            <SittingDog />
+            <BottomNav page='home' />
+        </div>
     );
 }
 

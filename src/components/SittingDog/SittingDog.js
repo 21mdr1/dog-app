@@ -4,8 +4,10 @@ import './SittingDog.scss';
 function SittingDog() {
     return (
         <main className="home-main">
-            <img src={dog} alt="sitting dog" className="sitting-dog" />
-            <div className="sitting-dog__shadow"></div>
+            <div className="sitting-dog__container">
+                <div className="sitting-dog__shadow"></div>
+                <img src={dog} alt="sitting dog" className="sitting-dog" />
+            </div>
         </main>
     );
 }

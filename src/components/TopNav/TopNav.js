@@ -10,11 +10,14 @@ function TopNav() {
     }, []);
 
     return (
-        <div className="top-nav">
+        <nav className="top-nav">
             <Link to='/user'>
-                <img src={avatar} alt="user avatar" className="top-nav__avatar" />
+                <div className="avatar__container">
+                    <img src={avatar} alt="user avatar" className="avatar" />
+                    <div className="avatar__mask"></div>
+                </div>
             </Link>
-        </div>
+        </nav>
     );
 }
 

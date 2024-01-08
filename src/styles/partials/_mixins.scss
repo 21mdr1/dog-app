@@ -1,0 +1,22 @@
+@use './variables' as *;
+
+@mixin tablet {
+    @media (min-size: $tablet) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-size: $desktop) {
+        @content;
+    }
+}
+
+@mixin flex($justify-content: initial, $align-items: initial, $column-gap: initial, $row-gap: initial, $flex-wrap: nowrap) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    column-gap: $column-gap;
+    row-gap: $row-gap;
+    flex-wrap: $flex-wrap;
+}
