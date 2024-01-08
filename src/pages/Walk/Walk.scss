@@ -1,0 +1,12 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.page {
+    &--walk {
+        background-image: url('../../assets/static-images/walk-background.svg');
+        background-size: cover;
+        @include flex(center, center);
+        flex-direction: column;
+        padding: $mobile-spacing;
+    }
+}
