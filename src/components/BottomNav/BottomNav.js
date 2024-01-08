@@ -4,9 +4,11 @@ import heart from '../../assets/icons/heart3.svg';
 import paws from '../../assets/icons/paws-green.svg';
 import './BottomNav.scss';
 
-function BottomNav({ page }) {
-
+function BottomNav({ page, clickHandler}) {
     let mainImage;
+
+    function walkClickHandler(event) {
+    }
 
     switch(page) {
         case 'home':
@@ -25,9 +27,9 @@ function BottomNav({ page }) {
             <NavLink to='/' className={`bottom-nav__item bottom-nav__item--${page}`}>
                 <img src={heart} alt="heart" className={`bottom-nav__button bottom-nav__button--${page}`} />
             </NavLink>
-            <NavLink to='' className={`bottom-nav__main-item bottom-nav__main-item--${page}`}>
+            <button type='button' className={`bottom-nav__main-item bottom-nav__main-item--${page}`} onClick={clickHandler}>
                 <img src={mainImage} alt="" className={`bottom-main-button bottom-main-button--${page}`} />
-            </NavLink>
+            </button>
             <NavLink to='/walk' className={`bottom-nav__item bottom-nav__item--${page}`}>
                 <img src={leash} alt="dog leash" className={`bottom-nav__button bottom-nav__button--${page}`} />
             </NavLink>
