@@ -1,4 +1,5 @@
-import barLeash from '../../assets/static-images/graph-leash.svg';
+import { Link } from 'react-router-dom';
+import back from '../../assets/icons/left_line.svg';
 import './User.scss';
 
 function User() {
@@ -23,6 +24,10 @@ function User() {
     return (
         <div className="page page--user">
             <header className="header">
+                <Link to='/' className="back-button">
+                    <img src={back} alt="back" className="back-button__image" />
+                    <span className="back-button__text">Back</span>
+                </Link>
                 <div className="user-avatar__container">
                     <img src={avatar} alt="user avatar" className="user-avatar" />
                     <div className="user-avatar__mask"></div>
