@@ -17,10 +17,7 @@
 .back-button {
     padding: $mobile-spacing;
     @include flex;
-
-    &__text {
-        margin-top: 0.1rem;
-    }
+    cursor: pointer;
 }
 
 
@@ -82,17 +79,19 @@
     }
 
     &__bar {
-        background: linear-gradient(to top right,
-            white 0%,
-            white calc(50% - 0.8px),
-            #E11F27 50%,
-            white calc(50% + 0.8px),
-            white 100%,
+
+        background: linear-gradient(to top, 
+            white 0%, 
+            white calc(50% - 0.8px), 
+            #E11F27 50%, 
+            white calc(50% + 0.8px), 
+            white 100%
         );
+
         color: transparent;
         display: inline-block;
         position: relative;
-        height: 0.35rem;
+        height: 0.75rem;
 
         &::after {
             content: url('../../assets/static-images/graph-dog.svg');
