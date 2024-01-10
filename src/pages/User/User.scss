@@ -1,9 +1,12 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/fonts';
 
 .page {
     &--user {
         background-color: $light-orange;
+        font-family: 'Caveat', 'Comic Sans', cursive;
+        font-size: 1.1rem;
     }
 }
 
