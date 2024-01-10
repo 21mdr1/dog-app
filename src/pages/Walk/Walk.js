@@ -4,7 +4,6 @@ import WalkingDog from '../../components/WalkingDog/WalkingDog';
 import TopNav from '../../components/TopNav/TopNav';
 import WalkForm from '../../components/WalkForm/WalkForm';
 import tree from '../../assets/static-images/tree-4.svg';
-import fullSun from '../../assets/static-images/sun-full.svg';
 import sun1 from '../../assets/animations/sun/sun1.svg';
 import sun2 from '../../assets/animations/sun/sun2.svg';
 import sun3 from '../../assets/animations/sun/sun3.svg';
