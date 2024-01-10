@@ -4,15 +4,27 @@
 
 .page {
     &--user {
-        background-color: $light-orange;
+        //background-color: $light-orange;
         font-family: 'Caveat', 'Comic Sans', cursive;
         font-size: 1.1rem;
+
+        background: linear-gradient(
+                #3f87a6 10%, 
+                #ebf8e1a2 10%
+            ),
+            linear-gradient(to right, 
+                #ebf8e100 10%, 
+                #c73030 10% 10.2%, 
+                #ebf8e100 10.5%
+            );
+        background-size: 100% 25px, 100% 100%;
+        background-repeat: repeat, no-repeat;
     }
 }
 
 .header {
     height: 20%;
-    background-color: $dark-orange;
+    //background-color: $dark-orange;
     position: relative;
     margin-bottom: 2.75rem;
 }
@@ -49,6 +61,20 @@
         border-radius: $border-radius;
         box-shadow: $shadow;
         width: 100%;
+        position: relative;
+
+        &::before {
+            display: block;
+            content: '';
+            background-image: url('../../assets/static-images/plain-washi.svg');
+            background-size: cover;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 0rem;
+            left: 50%;
+            width: 7rem;
+            height: 1.25rem;
+        }
     }
 
     &__body {
@@ -75,12 +101,12 @@
 
     &__bar {
 
-        background: linear-gradient(to top, 
-            white 0%, 
-            white calc(50% - 0.8px), 
+        background: linear-gradient(1deg, 
+            transparent 0%, 
+            transparent calc(50% - 0.8px), 
             #E11F27 50%, 
-            white calc(50% + 0.8px), 
-            white 100%
+            transparent calc(50% + 0.8px), 
+            transparent 100%
         );
 
         color: transparent;
@@ -98,12 +124,3 @@
         }
     }
 }
-
-
-// another background we can use, looks like a notebook page
-// .container {
-//     background: linear-gradient(#3f87a6 10%, #ebf8e1a2 10%),
-//       linear-gradient(to right, #ebf8e100 10%, #c73030 10% 10.2%, #ebf8e100 10.5%);
-//     background-size: 100% 25px, 100% 100%;
-//     background-repeat: repeat, no-repeat;
-//  }
