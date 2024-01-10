@@ -28,10 +28,7 @@ function User() {
                     <img src={back} alt="back" className="back-button__image" />
                     <span className="back-button__text">Back</span>
                 </Link>
-                <div className="user-avatar__container">
-                    <img src={avatar} alt="user avatar" className="user-avatar" />
-                    <div className="user-avatar__mask"></div>
-                </div>
+                <img src={avatar} alt="user avatar" className="user-avatar" />
             </header>
             <main className="main-user">
                 <div className="graph__container">

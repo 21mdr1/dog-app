@@ -27,18 +27,10 @@
 .user-avatar {
     @include avatar;
     width: 5.5rem;
-
-    &__mask {
-        width: 5.5rem;
-        height: 5.5rem;
-    }
-
-    &__container {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 100%;
-        left: 50%;
-    }
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 100%;
+    left: 50%;
 }
 
 .main-user {
