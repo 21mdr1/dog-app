@@ -33,12 +33,13 @@ function User() {
             <main className="main-user">
                 <div className="graph__container">
                     <table className="graph">
+                        <caption>Steps walked</caption>
                         <tbody className='graph__body'>
                             {dataArr.map((day) => {
                                 let length = (day.steps/10000)*100;
                                 return (
                                     <tr className='graph__row'key={day.date}>
-                                        <th className='graph__day'>{formatter.format(day.date)}</th>
+                                        <th className='graph__day'>{formatter.format(day.date).toLowerCase()}</th>
                                         <td className="graph__right-side">
                                             <span 
                                                 style={{'width': `${length}%`}} 
@@ -50,6 +51,14 @@ function User() {
                             })}
                         </tbody>
                     </table>
+                    <div className="legend">
+                        <div className="legend__left"></div>
+                        <div className="legend__container">
+                            <div className="legend__text">0</div>
+                            <div className="legend__text">5k</div>
+                            <div className="legend__text">10k</div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

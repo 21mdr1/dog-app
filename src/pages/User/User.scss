@@ -5,8 +5,8 @@
 .page {
     &--user {
         //background-color: $light-orange;
-        font-family: 'Caveat', 'Comic Sans', cursive;
-        font-size: 1.1rem;
+        font-family: 'Kalam', 'Comic Sans', cursive;
+        line-height: 1.4rem;
 
         background: linear-gradient(
                 #3f87a6 10%, 
@@ -23,14 +23,17 @@
 }
 
 .header {
-    height: 20%;
+    // height: 20%;
+    height: 10%;
     //background-color: $dark-orange;
     position: relative;
     margin-bottom: 2.75rem;
+    margin-bottom: 3rem;
 }
 
 .back-button {
     padding: $mobile-spacing;
+    padding-top: 1.75rem;
     @include flex;
     cursor: pointer;
 }
@@ -58,8 +61,9 @@
     &__container {
         padding: $mobile-spacing;
         background-color: white;
-        border-radius: $border-radius;
-        box-shadow: $shadow;
+        // border-radius: $border-radius;
+        // box-shadow: $shadow;
+        box-shadow: 0px 4px 4px 0px $dark-mask;
         width: 100%;
         position: relative;
 
@@ -97,6 +101,14 @@
     &__right-side {
         border-left: 1px solid $silver;
         flex-grow: 1;
+
+        background: repeating-linear-gradient(
+            to right,
+            $mercury,
+            $mercury 1px,
+            transparent 0px,
+            transparent 10%
+        );
     }
 
     &__bar {
@@ -122,5 +134,20 @@
             right: -1.2rem;
             top: 0;
         }
+    }
+}
+
+.legend{
+    @include flex;
+    column-gap: 0.5rem;
+
+    &__left {
+        width: 2rem;
+    }
+
+    &__container {
+        @include flex(space-between);
+        flex-grow: 1;
+        border-top: 1px solid $silver;
     }
 }
