@@ -27,13 +27,17 @@
     height: 10%;
     //background-color: $dark-orange;
     position: relative;
-    margin-bottom: 2.75rem;
-    margin-bottom: 3rem;
+    // margin-bottom: 2.75rem;
+    // margin-bottom: 3rem;
+    margin-bottom: 1rem;
+    @include flex(space-between, flex-start);
+    padding: $mobile-spacing;
 }
 
 .back-button {
-    padding: $mobile-spacing;
-    padding-top: 1.6rem;
+    // padding: $mobile-spacing;
+    // padding-top: 1.6rem;
+    padding-top: 0.6rem;
     @include flex;
     cursor: pointer;
 
@@ -45,11 +49,11 @@
 
 .user-avatar {
     @include avatar;
-    width: 5.5rem;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 100%;
-    left: 50%;
+    // width: 5.5rem;
+    // position: absolute;
+    // transform: translate(-50%, -50%);
+    // top: 100%;
+    // left: 50%;
 }
 
 .main-user {
@@ -109,8 +113,8 @@
         background: repeating-linear-gradient(
             to right,
             $mercury,
-            $mercury 1px,
-            transparent 0px,
+            $mercury 1.5px,
+            transparent 1px,
             transparent 10%
         );
     }
