@@ -26,14 +26,14 @@ function User() {
             <header className="header">
                 <Link to='/' className="back-button">
                     <img src={back} alt="back" className="back-button__image" />
-                    <span className="back-button__text">Back</span>
+                    <span className="back-button__text">back</span>
                 </Link>
                 <img src={avatar} alt="user avatar" className="user-avatar" />
             </header>
             <main className="main-user">
                 <div className="graph__container">
                     <table className="graph">
-                        <caption>Steps walked</caption>
+                        <caption>steps walked</caption>
                         <tbody className='graph__body'>
                             {dataArr.map((day) => {
                                 let length = (day.steps/10000)*100;

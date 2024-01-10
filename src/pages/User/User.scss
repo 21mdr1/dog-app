@@ -33,9 +33,13 @@
 
 .back-button {
     padding: $mobile-spacing;
-    padding-top: 1.75rem;
+    padding-top: 1.6rem;
     @include flex;
     cursor: pointer;
+
+    &__text {
+        padding-top: 0.2rem;
+    }
 }
 
 
