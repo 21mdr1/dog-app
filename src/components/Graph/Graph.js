@@ -1,19 +1,33 @@
+import { getLast7Days, getWeekday } from '../../utils/dateUtils';
+import { getRandomNum, roundToNext5000 } from '../../utils/mathUtils';
 import './Graph.scss';
 
 function Graph() {
 
-    let dataObj = {dates: [], values: []};
+    let dataObj = {dates: getLast7Days('timestamp'), values: []};
     let dataArr = [];
 
-    const formatter = new Intl.DateTimeFormat('en-US', {weekday: 'short'});
-
-    for (let i=0; i<7; i++) {
-        let d = new Date();
-        d.setDate(d.getDate() - i);
-        dataObj.dates.push(d);
-        let steps = Math.floor(Math.random() * 10000);
+    for (let date of dataObj.dates) {
+        let steps = getRandomNum(10000);
         dataObj.values.push(steps);
-        dataArr.push({date: d, steps: steps});
+        dataArr.push({date: getWeekday(date), steps: steps});
+    }
+
+    let maxLength = roundToNext5000(Math.max(...dataObj.values));
+
+    function GraphRow({ date, steps }) {
+        const length = Math.round((steps / maxLength)*100);
+        return (
+            <tr className='graph__row'>
+                <th className='graph__day'>{date}</th>
+                <td className="graph__right-side">
+                    <span 
+                        style={{'width': `${length}%`}} 
+                        className={`graph__bar graph__bar--${length}`}
+                    >{steps}</span>
+                </td>
+            </tr>
+        );
     }
 
     return (
@@ -22,17 +36,8 @@ function Graph() {
                 <caption>steps walked</caption>
                 <tbody className='graph__body'>
                     {dataArr.map((day) => {
-                        let length = (day.steps/10000)*100;
                         return (
-                            <tr className='graph__row'key={day.date}>
-                                <th className='graph__day'>{formatter.format(day.date).toLowerCase()}</th>
-                                <td className="graph__right-side">
-                                    <span 
-                                        style={{'width': `${length}%`}} 
-                                        className={`graph__bar graph__bar--${length}`}
-                                    >{day.steps}</span>
-                                </td>
-                            </tr>
+                            <GraphRow key={day.date} date={day.date} steps={day.steps}/>
                         );
                     })}
                 </tbody>
@@ -41,8 +46,8 @@ function Graph() {
                 <div className="legend__left"></div>
                 <div className="legend__container">
                     <div className="legend__text">0</div>
-                    <div className="legend__text">5k</div>
-                    <div className="legend__text">10k</div>
+                    <div className="legend__text">{`${maxLength/2000}k`}</div>
+                    <div className="legend__text">{`${maxLength/1000}k`}</div>
                 </div>
             </div>
         </div>
