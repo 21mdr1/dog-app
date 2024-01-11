@@ -29,25 +29,34 @@ function WalkForm({ setDisplayForm }) {
         <div className='form__background' onClick={clickOut}>
             <form className="form" onClick={dontClickOut} onSubmit={submitHandler}>
                 <div className="form__content">
-                    <select className="form__input" name='hours' value={hours} onChange={handleInputChange}>
-                        <option value="0" className="form__option">0</option>
-                        <option value="1" className="form__option">1</option>
-                        <option value="2" className="form__option">2</option>
-                        <option value="3" className="form__option">3</option>
-                        <option value="4" className="form__option">4</option>
-                    </select>
-                    <p className="form__text">:</p>
-                    <select className="form__input" name='minutes' value={minutes} onChange={handleInputChange}>
-                        <option value="0" className="form__option">0</option>
-                        <option value="1" className="form__option">1</option>
-                        <option value="2" className="form__option">2</option>
-                    </select>
-                    <p className="form__text">:</p>
-                    <select className="form__input" name='seconds' value={seconds} onChange={handleInputChange}>
-                        <option value="0" className="form__option">0</option>
-                        <option value="1" className="form__option">1</option>
-                        <option value="2" className="form__option">2</option>
-                    </select>
+                    <label htmlFor="hours" className="form__label">
+                        <select className="form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
+                            <option value="0" className="form__option">0</option>
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                            <option value="3" className="form__option">3</option>
+                            <option value="4" className="form__option">4</option>
+                        </select>
+                        Hours
+                    </label>
+                    <p className="form__colon">:</p>
+                    <label htmlFor="minutes" className="form__label">
+                        <select className="form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
+                            <option value="0" className="form__option">0</option>
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                        </select>
+                        Minutes
+                    </label>
+                    <p className="form__colon">:</p>
+                    <label htmlFor="seconds" className="form__label">
+                        <select className="form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
+                            <option value="0" className="form__option">0</option>
+                            <option value="1" className="form__option">1</option>
+                            <option value="2" className="form__option">2</option>
+                        </select>
+                        Seconds
+                    </label>
                 </div>
                 <button type='submit' className="form__button">Log Walk</button>
             </form>

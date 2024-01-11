@@ -7,7 +7,7 @@
     width: 16.875rem;
     height: 11.9375rem;
     border-radius: $border-radius;
-    @include flex(center, center, 0, 1.75rem);
+    @include flex(center, center, 0, 1.25rem);
     flex-direction: column;
 
     &__background {
@@ -21,37 +21,38 @@
     }
 
     &__content {
-        @include flex(space-between, center);
+        @include flex(center, center);
     }
 
     &__input {
+        @include hide-dropdown-arrow;
         background-color: $mercury;
         border: none;
-        -webkit-appearance: none;
-        appearance: none;
         width: 2.8125rem;
         height: 2.8125rem;
         text-align: center;
         border-radius: $border-radius;
         font-size: 2rem;
         outline: none;
-
-        &::-ms-expand {
-            display: none;
-        }
+        margin-bottom: 0.2rem;
     }
 
     &__option {
         background-color: $mercury;
-        // border-top: 5px solid $silver;
-        // border-radius: $border-radius;
-        // text-align: center;
     }
 
-    &__text {
+    &__label {
+        @include flex(center, center);
+        flex-direction: column;
         line-height: initial;
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    &__colon {
         font-size: 2rem;
-        padding: 0 0.7rem;
+        padding: 0 0.7rem 1.5rem;
     }
 
     &__button {

@@ -25,3 +25,12 @@
     width: $avatar-size;
     filter: contrast(85%);
 }
+
+@mixin hide-dropdown-arrow {
+    -webkit-appearance: none;
+    appearance: none;
+    
+    &::-ms-expand {
+        display: none;
+    }
+}
