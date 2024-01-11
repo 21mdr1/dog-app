@@ -4,20 +4,8 @@
 
 .page {
     &--user {
-        // background-color: $light-orange;
-        font-family: 'Kalam', 'Comic Sans', cursive;
+        font-family: 'Kalam', 'Comic Sans MS', 'Comic Sans', cursive;
         line-height: 1.4rem;
-
-        // background: linear-gradient(
-        //         #3f87a6 10%, 
-        //         #ebf8e1a2 10%
-        //     ),
-        //     linear-gradient(to right, 
-        //         #ebf8e100 10%, 
-        //         #c73030 10% 10.2%, 
-        //         #ebf8e100 10.5%
-        //     );
-        //#73a7bd 
         background: linear-gradient(
                 #99c0d1 10%, 
                 #ecf1e8a2 10%
@@ -27,27 +15,20 @@
                 #ca4a4a 10% 10.2%, 
                 #ebf8e100 10.5%
             );
-        // using chalkboard or whiteboard
         background-size: 100% 25px, 100% 100%;
         background-repeat: repeat, no-repeat;
     }
 }
 
 .header {
-    // height: 20%;
     height: 10%;
-    //background-color: $dark-orange;
     position: relative;
-    // margin-bottom: 2.75rem;
-    // margin-bottom: 3rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     @include flex(space-between, flex-start);
     padding: $mobile-spacing;
 }
 
 .back-button {
-    // padding: $mobile-spacing;
-    // padding-top: 1.6rem;
     padding-top: 0.6rem;
     @include flex;
     cursor: pointer;
@@ -60,11 +41,6 @@
 
 .user-avatar {
     @include avatar;
-    // width: 5.5rem;
-    // position: absolute;
-    // transform: translate(-50%, -50%);
-    // top: 100%;
-    // left: 50%;
 }
 
 .main-user {
@@ -80,8 +56,6 @@
     &__container {
         padding: $mobile-spacing;
         background-color: white;
-        // border-radius: $border-radius;
-        // box-shadow: $shadow;
         box-shadow: 0px 4px 4px 0px $dark-mask;
         width: 100%;
         position: relative;
