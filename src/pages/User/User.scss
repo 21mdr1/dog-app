@@ -4,19 +4,30 @@
 
 .page {
     &--user {
-        //background-color: $light-orange;
+        // background-color: $light-orange;
         font-family: 'Kalam', 'Comic Sans', cursive;
         line-height: 1.4rem;
 
+        // background: linear-gradient(
+        //         #3f87a6 10%, 
+        //         #ebf8e1a2 10%
+        //     ),
+        //     linear-gradient(to right, 
+        //         #ebf8e100 10%, 
+        //         #c73030 10% 10.2%, 
+        //         #ebf8e100 10.5%
+        //     );
+        //#73a7bd 
         background: linear-gradient(
-                #3f87a6 10%, 
-                #ebf8e1a2 10%
+                #99c0d1 10%, 
+                #ecf1e8a2 10%
             ),
             linear-gradient(to right, 
                 #ebf8e100 10%, 
-                #c73030 10% 10.2%, 
+                #ca4a4a 10% 10.2%, 
                 #ebf8e100 10.5%
             );
+        // using chalkboard or whiteboard
         background-size: 100% 25px, 100% 100%;
         background-repeat: repeat, no-repeat;
     }
@@ -110,13 +121,13 @@
         border-left: 1px solid $silver;
         flex-grow: 1;
 
-        background: repeating-linear-gradient(
-            to right,
-            $mercury,
-            $mercury 1.5px,
-            transparent 1px,
-            transparent 10%
-        );
+        // background: repeating-linear-gradient(
+        //     to right,
+        //     $mercury,
+        //     $mercury 1.5px,
+        //     transparent 1px,
+        //     transparent 10%
+        // );
     }
 
     &__bar {
