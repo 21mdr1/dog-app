@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getWeekday, getLast7Days } from "./dateUtils";
+import { getWeekday, isInLastWeek } from "./dateUtils";
 
 // Local Storage Utils
 
@@ -13,6 +13,18 @@ function getLocally(key) {
         return JSON.parse(data);
     }
     return null;
+}
+
+function purgeOldLocalSteps(data) {
+    for(let i = 0; i < data.length; i++) {
+        // newer data will always be at the end of the array
+        if (isInLastWeek(data[0].timestamp)) {
+            break;
+        }
+        data.unshift();
+    }
+
+    return data;
 }
 
 // Remote Storage Utils
@@ -38,9 +50,10 @@ function recordSteps(steps) {
 }
 
 function recordStepsLocally(steps) {
-    let data = getLocally('stepsWalked') || [];
-
     steps.timestamp = Date.now();
+
+    let data = getLocally('stepsWalked') || [];
+    data = purgeOldLocalSteps(data);
     data.push(steps);
 
     saveLocally('stepsWalked', data);
@@ -71,6 +84,9 @@ function getLastWeeksStepsLocally() {
 
     let last7Days = [];
     for(let item of data) {
+        if (!(isInLastWeek(item.timestamp))) {
+            continue;
+        }
         let date = getWeekday(item.timestamp); // maybe turn to date instead of weekday?
 
         let index = last7Days.findIndex((el) => el.date === date);

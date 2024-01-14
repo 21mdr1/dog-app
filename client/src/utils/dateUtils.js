@@ -18,8 +18,12 @@ function getLast7Days(format) {
     return days;
 }
 
-function isInLastWeek() {
-    
+function isInLastWeek(timestamp) {
+    let today = Date.now();
+    let day = 1000 * 3600 * 24;
+    let difference = Math.floor((today - timestamp) / day);
+
+    return difference < 7;
 }
 
-export { getWeekday, getLast7Days };
+export { getWeekday, getLast7Days, isInLastWeek };
