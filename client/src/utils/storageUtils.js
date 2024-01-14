@@ -1,46 +1,64 @@
 import axios from axios;
 
-function saveInLocalStorage(data) {
-    localStorage.setItem(data.key, data.value);
+// Local Storage Utils
+
+function saveLocally(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
 }
 
-async function saveInDB(data) {
-    try {
-        let response = await axios.post();
-
-        return response.data;
-    } catch(err) {
-        console.log('Error saving data');
+function getLocally(key) {
+    let data = localStorage.getItem(key);
+    if (data) {
+        return JSON.parse(data);
     }
+    return []; //what about preferences
 }
+
+// Remote Storage Utils
+
+// async function saveInDB(data) {
+//     try {
+//         let response = await axios.post();
+
+//         return response.data;
+//     } catch(err) {
+//         console.log('Error saving data');
+//     }
+// }
+
+// record steps
 
 function recordSteps(steps) {
     if (userIsSignedIn) {
-        recordStepsLocally(steps);
+        //recordStepsRemotely(steps); 
     } else {
-        recordStepsRemotely(steps);
+        recordStepsLocally(steps);
     }
 }
 
 function recordStepsLocally(steps) {
-    localStorage.setItem({timestamp: timestamp, steps: steps});
+    let data = getLocally('stepsWalked');
+    data.append(steps);
+    saveLocally('stepsWalked', data);
 }
 
-async function recordStepsRemotely(steps) {
-    try {
-        let response = await axios.post(url, {timestamp: timestamp, steps: steps});
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// async function recordStepsRemotely(steps) {
+//     try {
+//         let response = await axios.post(url, {timestamp: timestamp, steps: steps});
+//         return response.data;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
+
+// retrieve steps
 
 function lastWeeksSteps() {
     if (userIsSignedIn) {
-        return lastWeeksStepsLocally();
+        //return lastWeeksStepsRemotely();
     } else {
-        return lastWeeksStepsRemotely();
+        return lastWeeksStepsLocally();
     }
 }
 
@@ -50,30 +68,27 @@ function lastWeeksStepsLocally() {
     return localStorage.getItem('timestamp');
 }
 
-async function lastWeeksStepsRemotely() {
-    try {
-        let response = await axios.get(url);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-async function createUser(user) {
-    try {
-        let response = await axios.post(url, user);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
-}
+// async function lastWeeksStepsRemotely() {
+//     try {
+//         let response = await axios.get(url);
+//         return response.data;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
 
+// create user
 
-// maybe save users by IP before getting an acount
+// async function createUser(user) {
+//     try {
+//         let response = await axios.post(url, user);
+//         return response.data;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
-// -> user utils <-
-// login user
-// sign out user
-// register user
-// user is logged in
+
+// transfer local data to remote
+

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './WalkForm.scss';
+import { convertToSteps, convertToMins } from '../../utils/mathUtils';
 
 
 function WalkForm({ setDisplayForm }) {
@@ -17,8 +18,13 @@ function WalkForm({ setDisplayForm }) {
 
     function submitHandler(event) {
         event.preventDefault();
+        let mins = convertToMins(inputs);
+        let steps = convertToSteps(mins);
+
         // call api to submit walk, 
-        //show a success message under the form?
+        //show a success message under the form for a few seconds or error message if it doesn't work?
+        // reset inputs
+        
         setDisplayForm(false);
     }
 
