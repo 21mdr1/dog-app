@@ -1,19 +1,36 @@
-import { getLast7Days, getWeekday } from '../../utils/dateUtils';
+import { getWeekday } from '../../utils/dateUtils';
 import { getRandomNum, roundToNext5000 } from '../../utils/mathUtils';
+import { getLastWeeksSteps } from '../../utils/storageUtils';
+import { useState, useEffect } from 'react';
 import './Graph.scss';
 
 function Graph() {
 
-    let dataObj = {dates: getLast7Days('timestamp'), values: []};
-    let dataArr = [];
+    // let dataObj = {dates: getLast7Days('timestamp'), values: []};
 
-    for (let date of dataObj.dates) {
-        let steps = getRandomNum(10000);
-        dataObj.values.push(steps);
-        dataArr.push({date: getWeekday(date), steps: steps});
+    let [ stepsArr, setStepsArr ] = useState([]); 
+
+    useEffect(() => {
+        async function getSteps() {
+            let steps = await getLastWeeksSteps()
+            setStepsArr(steps);
+        }
+        
+        getSteps();
+
+    }, [])
+
+    if ( stepsArr.length === 0) {
+        return (
+            <div className="graph__container">
+                <p>steps walked</p>
+                <p>No data</p>
+            </div>
+        );
     }
 
-    let maxLength = roundToNext5000(Math.max(...dataObj.values));
+    //let maxLength = roundToNext5000(Math.max(...stepsArr.values));
+    let maxLength = 10000;
 
     function GraphRow({ date, steps }) {
         const length = Math.round((steps / maxLength)*100);
@@ -35,7 +52,7 @@ function Graph() {
             <table className="graph">
                 <caption>steps walked</caption>
                 <tbody className='graph__body'>
-                    {dataArr.map((day) => {
+                    {stepsArr.map((day) => {
                         return (
                             <GraphRow key={day.date} date={day.date} steps={day.steps}/>
                         );

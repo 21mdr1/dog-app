@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getLast7Days } from "./dateUtils";
+import { getWeekday, getLast7Days } from "./dateUtils";
 
 // Local Storage Utils
 
@@ -58,31 +58,28 @@ function recordStepsLocally(steps) {
 
 // retrieve steps
 
-function lastWeeksSteps() {
+function getLastWeeksSteps() {
     //if (userIsSignedIn) {
         //return lastWeeksStepsRemotely();
     //} else {
-        return lastWeeksStepsLocally();
+        return getLastWeeksStepsLocally();
     //}
 }
 
-function lastWeeksStepsLocally() {
-    let data = localStorage.getItem('stepsWalked');
-    // add up last week's steps
+function getLastWeeksStepsLocally() {
+    let data = getLocally('stepsWalked') || [];
+
     let last7Days = [];
     for(let item of data) {
-        let date = item.date; // turn to date not timestamp
-        let added = false;
-        for(let day of last7Days) {
-            if (date === day.date) {
-                day.steps += item.steps;
-                added = true;
-                break;
-            }
-            if(!added) {
-                last7Days.append(day);
-            }
+        let date = getWeekday(item.timestamp); // maybe turn to date instead of weekday?
+
+        let index = last7Days.findIndex((el) => el.date === date);
+        if (index === -1) {
+            last7Days.push({date: date, steps: item.steps});
+            continue;
         }
+
+        last7Days[index].steps += item.steps;
     }
 
     return last7Days;
@@ -135,4 +132,4 @@ function recordPreferences(preference, value) {
 
 
 
-export { recordSteps, recordPreferences, lastWeeksSteps };
+export { recordSteps, recordPreferences, getLastWeeksSteps };
