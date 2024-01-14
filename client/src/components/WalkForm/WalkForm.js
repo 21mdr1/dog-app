@@ -6,7 +6,7 @@ import './WalkForm.scss';
 
 function WalkForm({ setDisplayForm }) {
 
-    let [ inputs, setInputs ] = useState({hours: '0', minutes: '2', seconds: '0'})
+    let [ inputs, setInputs ] = useState({hours: '0', minutes: '10', seconds: '0'})
     let { hours, minutes, seconds } = inputs;
 
     function clickOut() {
@@ -38,29 +38,51 @@ function WalkForm({ setDisplayForm }) {
                 <div className="form__content">
                     <label htmlFor="hours" className="form__label">
                         <select className="form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
-                            <option value="0" className="form__option">0</option>
-                            <option value="1" className="form__option">1</option>
-                            <option value="2" className="form__option">2</option>
-                            <option value="3" className="form__option">3</option>
-                            <option value="4" className="form__option">4</option>
+                            {Array.from({length: 13}, (_val, index) => {
+                                return (
+                                    <option 
+                                        key={index} 
+                                        value={index} 
+                                        className='form__option'
+                                    >
+                                        {index}
+                                    </option>
+                                )
+                            })}
                         </select>
                         Hours
                     </label>
                     <p className="form__colon">:</p>
                     <label htmlFor="minutes" className="form__label">
                         <select className="form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
-                            <option value="0" className="form__option">0</option>
-                            <option value="1" className="form__option">1</option>
-                            <option value="2" className="form__option">2</option>
+                            {Array.from({length: 61}, (_val, index) => {
+                                return (
+                                    <option 
+                                        key={index} 
+                                        value={index} 
+                                        className='form__option'
+                                    >
+                                        {index}
+                                    </option>
+                                )
+                            })}
                         </select>
                         Minutes
                     </label>
                     <p className="form__colon">:</p>
                     <label htmlFor="seconds" className="form__label">
                         <select className="form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
-                            <option value="0" className="form__option">0</option>
-                            <option value="1" className="form__option">1</option>
-                            <option value="2" className="form__option">2</option>
+                            {Array.from({length: 61}, (_val, index) => {
+                                return (
+                                    <option 
+                                        key={index} 
+                                        value={index} 
+                                        className='form__option'
+                                    >
+                                        {index}
+                                    </option>
+                                )
+                            })}
                         </select>
                         Seconds
                     </label>
