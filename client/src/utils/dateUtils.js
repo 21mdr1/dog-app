@@ -18,4 +18,8 @@ function getLast7Days(format) {
     return days;
 }
 
+function isInLastWeek() {
+    
+}
+
 export { getWeekday, getLast7Days };

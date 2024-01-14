@@ -1,4 +1,5 @@
 import axios from axios;
+import { getLast7Days } from "./dateUtils";
 
 // Local Storage Utils
 
@@ -11,7 +12,7 @@ function getLocally(key) {
     if (data) {
         return JSON.parse(data);
     }
-    return []; //what about preferences
+    return null;
 }
 
 // Remote Storage Utils
@@ -29,15 +30,15 @@ function getLocally(key) {
 // record steps
 
 function recordSteps(steps) {
-    if (userIsSignedIn) {
-        //recordStepsRemotely(steps); 
-    } else {
+    // if (userIsSignedIn) {
+    //     //recordStepsRemotely(steps); 
+    // } else {
         recordStepsLocally(steps);
-    }
+    //}
 }
 
 function recordStepsLocally(steps) {
-    let data = getLocally('stepsWalked');
+    let data = getLocally('stepsWalked') || [];
     data.append(steps);
     saveLocally('stepsWalked', data);
 }
@@ -63,9 +64,46 @@ function lastWeeksSteps() {
 }
 
 function lastWeeksStepsLocally() {
-    // save by IP instead of using localStorage?
+    let data = localStorage.getItem('stepsWalked');
     // add up last week's steps
-    return localStorage.getItem('timestamp');
+    let last7Days = [];
+    for(let item of data) {
+        let date = item.date; // turn to date not timestamp
+        let added = false;
+        for(let day of last7Days) {
+            if (date === day.date) {
+                day.steps += item.steps;
+                added = true;
+                break;
+            }
+            if(!added) {
+                last7Days.append(day);
+            }
+        }
+    }
+
+    return last7Days;
+}
+
+// record preferences
+
+function recordPreferencesLocally(preference, value) { 
+    let defaults = {
+        avatar: null,
+        animal: 'dog',
+        accessories: null,
+        tooltips: true,
+    };
+
+    let preferences = getLocally('preferences') || defaults;
+
+    preferences[preference] = value;
+    saveLocally(preferences);
+
+}
+
+function recordPreferences(preference, value) {
+    recordPreferencesLocally(preference, value);
 }
 
 // async function lastWeeksStepsRemotely() {
@@ -92,3 +130,6 @@ function lastWeeksStepsLocally() {
 
 // transfer local data to remote
 
+
+
+export { recordSteps, recordPreferences, lastWeeksSteps };
