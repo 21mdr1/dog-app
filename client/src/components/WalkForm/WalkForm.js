@@ -17,7 +17,8 @@ function WalkForm({ setDisplayForm }) {
 
     function submitHandler(event) {
         event.preventDefault();
-        //other logic
+        // call api to submit walk, 
+        //show a success message under the form?
         setDisplayForm(false);
     }
 
