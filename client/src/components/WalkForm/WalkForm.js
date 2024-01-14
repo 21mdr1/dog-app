@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import './WalkForm.scss';
 import { convertToSteps, convertToMins } from '../../utils/mathUtils';
+import { recordSteps } from '../../utils/storageUtils';
+import './WalkForm.scss';
 
 
 function WalkForm({ setDisplayForm }) {
@@ -16,14 +17,13 @@ function WalkForm({ setDisplayForm }) {
         event.stopPropagation();
     }
 
-    function submitHandler(event) {
+    async function submitHandler(event) {
         event.preventDefault();
         let mins = convertToMins(inputs);
         let steps = convertToSteps(mins);
-
         // call api to submit walk, 
         //show a success message under the form for a few seconds or error message if it doesn't work?
-        // reset inputs
+        await recordSteps({ minsWalked: mins, steps: steps });
         
         setDisplayForm(false);
     }

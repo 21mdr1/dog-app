@@ -8,7 +8,7 @@ function roundToNext5000(num) {
 }
 
 function convertToMins({ hours, minutes, seconds }) {
-    return (hours*60 + minutes + seconds/60);
+    return (Number(hours)*60 + Number(minutes) + Number(seconds)/60);
 }
 
 function convertToSteps(mins) {

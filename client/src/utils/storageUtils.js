@@ -1,4 +1,4 @@
-import axios from axios;
+import axios from 'axios';
 import { getLast7Days } from "./dateUtils";
 
 // Local Storage Utils
@@ -39,7 +39,10 @@ function recordSteps(steps) {
 
 function recordStepsLocally(steps) {
     let data = getLocally('stepsWalked') || [];
-    data.append(steps);
+
+    steps.timestamp = Date.now();
+    data.push(steps);
+
     saveLocally('stepsWalked', data);
 }
 
@@ -56,11 +59,11 @@ function recordStepsLocally(steps) {
 // retrieve steps
 
 function lastWeeksSteps() {
-    if (userIsSignedIn) {
+    //if (userIsSignedIn) {
         //return lastWeeksStepsRemotely();
-    } else {
+    //} else {
         return lastWeeksStepsLocally();
-    }
+    //}
 }
 
 function lastWeeksStepsLocally() {
