@@ -1,5 +1,5 @@
 import { getWeekday } from '../../utils/dateUtils';
-import { getRandomNum, roundToNext5000 } from '../../utils/mathUtils';
+import { roundToNext5000 } from '../../utils/mathUtils';
 import { getLastWeeksSteps } from '../../utils/storageUtils';
 import { useState, useEffect } from 'react';
 import './Graph.scss';
@@ -21,7 +21,7 @@ function Graph() {
     if ( stepsArr.length === 0) {
         return (
             <div className="graph__container">
-                <p>steps walked</p>
+                <p className='graph__title'>steps walked</p>
                 <p>No data</p>
             </div>
         );
@@ -47,7 +47,7 @@ function Graph() {
     return (
         <div className="graph__container">
             <table className="graph">
-                <caption>steps walked</caption>
+                <caption className='graph__title'>steps walked</caption>
                 <tbody className='graph__body'>
                     {stepsArr.map((day) => {
                         return (
