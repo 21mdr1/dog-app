@@ -1,5 +1,5 @@
 
-function getRandomNum(max) {
+function getRandomNum(max) { // will delete soon
     return Math.floor(Math.random() * max);
 }
 
@@ -15,10 +15,4 @@ function convertToSteps(mins) {
     return mins*60;
 }
 
-// may not need this one:
-
-function convertTimeToSteps(time) {
-    return convertToSteps(convertToMins(time));
-}
-
-export { getRandomNum, roundToNext5000, convertTimeToSteps, convertToMins, convertToSteps };
+export { getRandomNum, roundToNext5000, convertToMins, convertToSteps };

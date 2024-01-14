@@ -6,8 +6,6 @@ import './Graph.scss';
 
 function Graph() {
 
-    // let dataObj = {dates: getLast7Days('timestamp'), values: []};
-
     let [ stepsArr, setStepsArr ] = useState([]); 
 
     useEffect(() => {
@@ -29,8 +27,7 @@ function Graph() {
         );
     }
 
-    //let maxLength = roundToNext5000(Math.max(...stepsArr.values));
-    let maxLength = 10000;
+    let maxLength = roundToNext5000(Math.max(...stepsArr.map(a => a.steps)));
 
     function GraphRow({ date, steps }) {
         const length = Math.round((steps / maxLength)*100);
