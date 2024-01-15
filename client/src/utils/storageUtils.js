@@ -1,7 +1,8 @@
+require('dotenv').config();
 import axios from 'axios';
 import { getWeekday, isInLastWeek } from "./dateUtils";
 
-const BASE_URL = 'http://localhost:8080'; // move to .env
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 // defaults
 
