@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { getWeekday, isInLastWeek } from "./dateUtils";
 
+const BASE_URL = 'http://localhost:8080'; // move to .env
+
+// defaults
+
+function defaultAction(data) {
+    console.log(data)
+}
+
 // Local Storage Utils
 
 function saveLocally(key, data) {
@@ -29,21 +37,47 @@ function purgeOldLocalSteps(data) {
 
 // Remote Storage Utils
 
-// async function saveInDB(data) {
-//     try {
-//         let response = await axios.post();
+async function saveInDB(data, endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
+    try {
+        let response = await axios.post(endpoint, data);
+        
+        onSuccess(response.data);
+        return response.data;
 
-//         return response.data;
-//     } catch(err) {
-//         console.log('Error saving data');
-//     }
-// }
+    } catch(error) {
+        onFailure(error);
+    }
+}
+
+async function getFromDB(endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
+    try {
+        let response = await axios.get(endpoint);
+        
+        onSuccess(response.data);
+        return response.data;
+
+    } catch(error) {
+        onFailure(error);
+    }
+}
+
+async function changeInDB(data, endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
+    try {
+        let response = await axios.put(endpoint, data);
+        
+        onSuccess(response.data);
+        return response.data;
+
+    } catch(error) {
+        onFailure(error);
+    }
+}
 
 // record steps
 
 function recordSteps(steps) {
     // if (userIsSignedIn) {
-    //     //recordStepsRemotely(steps); 
+    //     recordStepsRemotely(steps); 
     // } else {
         recordStepsLocally(steps);
     //}
@@ -59,21 +93,23 @@ function recordStepsLocally(steps) {
     saveLocally('stepsWalked', data);
 }
 
-// async function recordStepsRemotely(steps) {
-//     try {
-//         let response = await axios.post(url, {timestamp: timestamp, steps: steps});
-//         return response.data;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+async function recordStepsRemotely(steps, onSuccess, onFailure = (error) => {console.log('Error saving steps:', error)}) {
+    let data = saveInDB(
+        steps, 
+        `${BASE_URL}/steps`, 
+        onSuccess, 
+        onFailure
+    );
+
+    return data;
+}
 
 
 // retrieve steps
 
-function getLastWeeksSteps() {
+function getLastWeeksSteps(userId) {
     //if (userIsSignedIn) {
-        //return lastWeeksStepsRemotely();
+        //return lastWeeksStepsRemotely(userId);
     //} else {
         return getLastWeeksStepsLocally();
     //}
@@ -101,6 +137,17 @@ function getLastWeeksStepsLocally() {
     return last7Days;
 }
 
+async function getLastWeeksStepsRemotely(userId, onSuccess, onFailure = (error) => {console.log('Error getting steps:', error)}) {
+
+    let data = getFromDB(
+        `${BASE_URL}/steps/${userId}`, 
+        onSuccess, 
+        onFailure
+    );
+
+    return data;
+}
+
 // record preferences
 
 function recordPreferencesLocally(preference, value) { 
@@ -118,18 +165,21 @@ function recordPreferencesLocally(preference, value) {
 
 }
 
-function recordPreferences(preference, value) {
-    recordPreferencesLocally(preference, value);
+async function recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+    let data = await changeInDB(
+        {preference: preference, value: value, userId: userId}, 
+        `${BASE_URL}/preferences`,
+        onSuccess,
+        onFailure
+    );
+    
+    return data;
 }
 
-// async function lastWeeksStepsRemotely() {
-//     try {
-//         let response = await axios.get(url);
-//         return response.data;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+function recordPreferences(preference, value, userId, onSuccess, onFailure) {
+    recordPreferencesLocally(preference, value);
+    //recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure);
+}
 
 
 // create user
