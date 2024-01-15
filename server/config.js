@@ -8,7 +8,6 @@ const config = {
         user: DB_USER,
         password: DB_PASS,
         database: DB_NAME,
-        timeout: 60000,
     },
     listPerPage: 10,
 }

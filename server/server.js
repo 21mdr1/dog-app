@@ -1,25 +1,21 @@
 require('dotenv').config();
-const { PORT, CORS_ORIGIN, DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
-const express = require('express');
+const { PORT, CORS_ORIGIN } = process.env;
 const cors = require('cors');
-
+const express = require('express');
 const app = express();
+//const query = require('./db');
+
+const stepsRoutes =  require('./routes/steps');
+const preferencesRoutes =  require('./routes/preferences');
 
 app.use(cors({ origin: CORS_ORIGIN}));
 app.use(express.json());
 
 app.use('/images', express.static('./static/images'));
 
-// app.use(
-//     express.urlencoded({
-//         extended: true,
-//     })
-// );
-
+app.use('/steps', stepsRoutes);
+app.use('/preferences', preferencesRoutes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
-})
-
-// config.js
-// helper.js
+});
