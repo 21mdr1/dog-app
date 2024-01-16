@@ -33,17 +33,17 @@ function WalkForm({ setDisplayForm }) {
     }
 
     return (
-        <div className='form__background' onClick={clickOut}>
-            <form className="form" onClick={dontClickOut} onSubmit={submitHandler}>
-                <div className="form__content">
-                    <label htmlFor="hours" className="form__label">
-                        <select className="form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
+        <div className='walk-form__background' onClick={clickOut}>
+            <form className="walk-form" onClick={dontClickOut} onSubmit={submitHandler}>
+                <div className="walk-form__content">
+                    <label htmlFor="hours" className="walk-form__label">
+                        <select className="walk-form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
                             {Array.from({length: 13}, (_val, index) => {
                                 return (
                                     <option 
                                         key={index} 
                                         value={index} 
-                                        className='form__option'
+                                        className='walk-form__option'
                                     >
                                         {index}
                                     </option>
@@ -52,15 +52,15 @@ function WalkForm({ setDisplayForm }) {
                         </select>
                         Hours
                     </label>
-                    <p className="form__colon">:</p>
-                    <label htmlFor="minutes" className="form__label">
-                        <select className="form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
+                    <p className="walk-form__colon">:</p>
+                    <label htmlFor="minutes" className="walk-form__label">
+                        <select className="walk-form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
                             {Array.from({length: 61}, (_val, index) => {
                                 return (
                                     <option 
                                         key={index} 
                                         value={index} 
-                                        className='form__option'
+                                        className='walk-form__option'
                                     >
                                         {index}
                                     </option>
@@ -69,15 +69,15 @@ function WalkForm({ setDisplayForm }) {
                         </select>
                         Minutes
                     </label>
-                    <p className="form__colon">:</p>
-                    <label htmlFor="seconds" className="form__label">
-                        <select className="form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
+                    <p className="walk-form__colon">:</p>
+                    <label htmlFor="seconds" className="walk-form__label">
+                        <select className="walk-form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
                             {Array.from({length: 61}, (_val, index) => {
                                 return (
                                     <option 
                                         key={index} 
                                         value={index} 
-                                        className='form__option'
+                                        className='walk-form__option'
                                     >
                                         {index}
                                     </option>
@@ -87,7 +87,7 @@ function WalkForm({ setDisplayForm }) {
                         Seconds
                     </label>
                 </div>
-                <button type='submit' className="form__button">Log Walk</button>
+                <button type='submit' className="walk-form__button">Log Walk</button>
             </form>
         </div>
     );

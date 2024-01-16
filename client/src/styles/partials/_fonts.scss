@@ -1,11 +1,13 @@
+// Caveat
 @font-face {
     font-family: 'Caveat';
     src: url('../../assets/fonts/caveat/Caveat-VariableFont_wght.ttf') format('truetype-variations');
     font-weight: 125 950;
     font-stretch: 75% 125%;
-    font-style: italic;
+    font-style: normal;
 }
 
+// Kalam
 @font-face {
     font-family: 'Kalam';
     src: url('../../assets/fonts/kalam/Kalam-Light.ttf') format('truetype');
@@ -24,3 +26,73 @@
     font-weight: 700;
 }
 
+// Inter
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/Inter-VariableFont_slnt_wght.ttf') format('truetype-variations');
+    font-stretch: 75% 125%;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../../assets/fonts/inter/static/Inter-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
