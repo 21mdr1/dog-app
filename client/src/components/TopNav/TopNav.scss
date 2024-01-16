@@ -20,9 +20,38 @@
             border: 2px solid #48666F;
             z-index: 1;
         }
+
+        &--user {
+            color: #323232;
+            border: 2px solid #323232;
+            line-height: 1rem;
+            padding: 0 0.58rem;
+            margin-bottom: 0.3rem;
+        }
+    }
+}
+
+.back-button {
+    padding-top: 0.6rem;
+    @include flex;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    &__text {
+        padding-top: 0.2rem;
+    }
+
+    &--walk , &--home {
+        display: none;
     }
 }
 
 .avatar {
     @include avatar;
+
+    &__wrapper {
+        line-height: 0;
+    }
 }

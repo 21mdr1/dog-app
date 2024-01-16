@@ -5,6 +5,7 @@
 .page {
     &--user {
         font-family: 'Kalam', 'Comic Sans MS', 'Comic Sans', cursive;
+        padding: $mobile-spacing;
         line-height: 1.4rem;
         background: linear-gradient(
                 #99c0d1 10%, 
@@ -20,32 +21,7 @@
     }
 }
 
-.header {
-    height: 10%;
-    position: relative;
-    margin-bottom: 1.5rem;
-    @include flex(space-between, flex-start);
-    padding: $mobile-spacing;
-}
-
-.back-button {
-    padding-top: 0.6rem;
-    @include flex;
-    cursor: pointer;
-
-    &__text {
-        padding-top: 0.2rem;
-    }
-}
-
-
-.user-avatar {
-    @include avatar;
-}
-
 .main-user {
-    padding: $mobile-spacing;
-    @include flex(center, center, 0, 1rem);
-    flex-direction: column;
+    padding: $mobile-spacing 0;
 }
 
