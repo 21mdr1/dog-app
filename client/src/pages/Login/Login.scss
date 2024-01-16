@@ -1,0 +1,75 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.page {
+    &--login {
+        background-color: $light-orange;
+        @include flex(center, center);
+    }
+}
+
+.back-button {
+    &--login {
+        padding-top: 0;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    &__text {
+        &--login {
+            font-size: 0.8rem;
+            padding-top: 0.3rem;
+        }
+    }
+}
+
+.login-form {
+    
+    margin: 1rem;
+    width: 100%;
+
+    & > * {
+        display: block;
+    }
+
+    &__title {
+        text-align: center;
+        font-weight: 400;
+        color: #4B4F52;
+        margin: 0 2rem 1rem;
+    }
+
+    &__input {
+        width: 100%;
+        border: none;
+        background-color: $alabaster;
+        padding: 0.75rem;
+        padding-left: 2.25rem;
+        border-radius: 50px;
+        margin-bottom: 1rem;
+    }
+
+    &__button {
+        background-color: #EE9268;
+        color: white;
+        border-radius: 1rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 1rem;
+        width: 100%;
+        cursor: pointer;
+        margin-bottom: 0.75rem;
+    }
+
+    &__text {
+        text-align: center;
+        color: #4B4F52;
+        font-size: 0.9rem;
+
+        &--highlight {
+            font-weight: 600;
+            color: #CB4022;
+        }
+    }
+}   
