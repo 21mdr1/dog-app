@@ -26,7 +26,7 @@ function Walk() {
                 <img src={sun6} alt="" className="sun__layer6" />
             </div>
             <img src={tree} alt='tree' className="page__background-tree" />
-            <TopNav />
+            <TopNav page='walk'/>
             <WalkingDog />
             <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />
             {displayForm && <WalkForm setDisplayForm={setDisplayForm} />}

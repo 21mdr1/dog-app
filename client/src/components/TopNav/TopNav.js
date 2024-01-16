@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TopNav.scss';
 
-function TopNav() {
+function TopNav({ page }) {
     let [ avatar, setAvatar ] = useState('');
 
     useEffect(() => {
@@ -10,7 +10,10 @@ function TopNav() {
     }, []);
 
     return (
-        <nav className="top-nav">
+        <nav className={`top-nav top-nav--${page}`}>
+            <Link to='/login' className={`top-nav__link top-nav__link--${page}`}>
+                Log In
+            </Link>
             <Link to='/user'>
                 <img src={avatar} alt="user avatar" className="avatar" />
             </Link>

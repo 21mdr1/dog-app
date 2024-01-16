@@ -7,7 +7,7 @@ function Home() {
 
     return (
         <div className='page page--home'>
-            <TopNav />
+            <TopNav page='home' />
             <SittingDog />
             <BottomNav page='home' />
         </div>
