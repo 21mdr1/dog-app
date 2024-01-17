@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { formIsValid, inputIsValid } from '../../utils/validationUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
@@ -38,7 +39,7 @@ function Register() {
                 <input 
                     type="text" 
                     name='email' 
-                    className="register-form__input" 
+                    className={`register-form__input ${!inputIsValid('email', email) && 'register-form__input--invalid'}`}
                     placeholder='Email'
                     value={email}
                     onChange={handleInputChange}
@@ -46,7 +47,7 @@ function Register() {
                 <input 
                     type="text" 
                     name='username' 
-                    className="register-form__input" 
+                    className={`register-form__input ${!inputIsValid('username', username) && 'register-form__input--invalid'}`}
                     placeholder='Username'
                     value={username}
                     onChange={handleInputChange}
@@ -54,7 +55,7 @@ function Register() {
                 <input 
                     type="password" 
                     name='password' 
-                    className="register-form__input"
+                    className={`register-form__input ${!inputIsValid('password', password) && 'register-form__input--invalid'}`}
                     placeholder='Password'
                     value={password}
                     onChange={handleInputChange} 
@@ -62,12 +63,12 @@ function Register() {
                 <input 
                     type="password" 
                     name='confirmPassword' 
-                    className="register-form__input" 
+                    className={`register-form__input ${!inputIsValid('confirmPassword', confirmPassword, password) && 'register-form__input--invalid'}`} 
                     placeholder='Confirm password'
                     value={confirmPassword}
                     onChange={handleInputChange}
                 />
-                <button className="register-form__button">
+                <button className="register-form__button" disabled={!formIsValid(inputs)}>
                     Create Account
                 </button>
                 <p className='register-form__text'>Already have an account? 
