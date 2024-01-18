@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 
-router.post('/user', async (request, response) => {
+router.post('/', async (request, response) => {
     let {username, email, password} = request.body;
 
     let sql = `INSERT INTO users(username, email, password)
