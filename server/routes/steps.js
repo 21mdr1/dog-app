@@ -4,8 +4,6 @@ const config = require('../config');
 const express = require('express');
 const router = express.Router();
 
-// rowsAsArrays: true
-
 router.get('/:userId', async (request, response) => {
     let days = request.query.days || 7;
     let { userId } = request.params;
