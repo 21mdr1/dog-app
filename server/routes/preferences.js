@@ -16,7 +16,7 @@ router.get('/:userId', async (request, response) => {
     response.json(result);
 });
 
-router.put('/', async (request, response) => {
+router.patch('/', async (request, response) => {
     let {preference, value, userId} = request.body;
 
     let sql = `UPDATE preferences
