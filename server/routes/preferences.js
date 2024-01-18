@@ -30,4 +30,17 @@ router.patch('/', async (request, response) => {
     response.json(result);
 });
 
+router.post('/', async (request, response) => {
+    let {avatar, userId, tooltips} = request.body;
+
+    let sql = `INSERT INTO preferences(avatar, user_id, tooltips)
+        VALUES (?, ?, ?)`;
+    let inserts = [avatar, userId, tooltips];
+
+    const connection = await mysql.createConnection(config.db);
+    let [result, _fields] = await connection.query(sql, inserts);
+
+    response.json(result);
+})
+
 module.exports = router;
