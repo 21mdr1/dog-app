@@ -5,18 +5,20 @@ import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
 function Register() {
-    const defaults = {
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
-    }
-    let [ inputs, setInputs ] = useState(defaults);
+    let [ inputs, setInputs ] = useState({email: '', username: '', password: '', confirmPassword: ''});
     let { email, username, password, confirmPassword } = inputs;
+
+    let [ errors, setErrors] = useState({email: [], username: [], password: [], confirmPassword: []});
+    console.log(errors);
 
     function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
+    }
+
+    function handleInputBlur(event) {
+        const { name, value } = event.target;
+        setErrors({...errors, [name]: inputIsValid(name, value, password, true)});
     }
 
     function handleSubmit(event) {
@@ -43,6 +45,7 @@ function Register() {
                     placeholder='Email'
                     value={email}
                     onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                 />
                 <input 
                     type="text" 
@@ -51,6 +54,7 @@ function Register() {
                     placeholder='Username'
                     value={username}
                     onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                 />
                 <input 
                     type="password" 
@@ -58,7 +62,8 @@ function Register() {
                     className={`register-form__input ${!inputIsValid('password', password) && 'register-form__input--invalid'}`}
                     placeholder='Password'
                     value={password}
-                    onChange={handleInputChange} 
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur} 
                 />
                 <input 
                     type="password" 
@@ -67,6 +72,7 @@ function Register() {
                     placeholder='Confirm password'
                     value={confirmPassword}
                     onChange={handleInputChange}
+                    onBlur={handleInputBlur}
                 />
                 <button className="register-form__button" disabled={!formIsValid(inputs)}>
                     Create Account
