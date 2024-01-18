@@ -10,8 +10,6 @@ function Register() {
 
     let [ errors, setErrors] = useState({email: [], username: [], password: [], confirmPassword: []});
     let { email: emailErrors, username: usernameErrors, password: passwordErrors, confirmPassword: confirmPasswordErrors } = errors;
-    console.log(errors);
-    console.log(emailErrors.length);
 
     function handleInputChange(event) {
         let { name, value } = event.target;
@@ -49,6 +47,9 @@ function Register() {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur}
                 />
+                { emailErrors.length !== 0 && <p className="register-form__error">
+                    {emailErrors[0]}
+                </p>}
                 <input 
                     type="text" 
                     name='username' 
@@ -58,6 +59,9 @@ function Register() {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur}
                 />
+                { usernameErrors.length !== 0 && <p className="register-form__error">
+                    {usernameErrors[0]}
+                </p> }
                 <input 
                     type="password" 
                     name='password' 
@@ -67,6 +71,9 @@ function Register() {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur} 
                 />
+                { passwordErrors.length !== 0 && <p className="register-form__error">
+                    {passwordErrors[0]}
+                </p> }
                 <input 
                     type="password" 
                     name='confirmPassword' 
@@ -76,6 +83,9 @@ function Register() {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur}
                 />
+                { confirmPasswordErrors.length !== 0 && <p className="register-form__error">
+                    {confirmPasswordErrors[0]}
+                </p> }
                 <button className="register-form__button" disabled={!formIsValid(inputs)}>
                     Create Account
                 </button>

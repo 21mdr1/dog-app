@@ -18,13 +18,9 @@
 }
 
 .register-form {
-    
     margin: 1rem;
-    width: 100%;
-
-    & > * {
-        display: block;
-    }
+    @include flex(center, stretch);
+    flex-direction: column;
 
     &__title {
         text-align: center;
@@ -40,11 +36,18 @@
         padding: 0.75rem;
         padding-left: 2.25rem;
         border-radius: 50px;
-        margin-bottom: 1rem;
+        margin: 0.5rem 0;
 
         &--invalid {
             outline: 1px solid #D22D2D;
         }
+    }
+
+    &__error {
+        font-size: 0.75rem;
+        text-align: center;
+        text-transform: lowercase;
+        color: #D22D2D;
     }
 
     &__button {
@@ -56,7 +59,7 @@
         padding: 1rem;
         width: 100%;
         cursor: pointer;
-        margin-bottom: 0.75rem;
+        margin: 0.5rem 0 0.75rem;
 
         &:disabled {
             background-color: $silver;
@@ -68,10 +71,6 @@
         text-align: center;
         color: #4B4F52;
         font-size: 0.9rem;
-
-        &--error {
-            color: #D22D2D;
-        }
 
         &--highlight {
             font-weight: 600;
