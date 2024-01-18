@@ -59,7 +59,7 @@ function passwordIsValid(pass) {
 }
 
 function passwordConfirmIsValid(confirmPass, pass) {
-    return (confirmPass === pass) ? [] : ['Password confirmation must match password'];
+    return (confirmPass != '' && confirmPass === pass) ? [] : ['Password confirmation must match password'];
 }
 
 export { formIsValid, inputIsValid }; 

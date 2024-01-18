@@ -9,7 +9,9 @@ function Register() {
     let { email, username, password, confirmPassword } = inputs;
 
     let [ errors, setErrors] = useState({email: [], username: [], password: [], confirmPassword: []});
+    let { email: emailErrors, username: usernameErrors, password: passwordErrors, confirmPassword: confirmPasswordErrors } = errors;
     console.log(errors);
+    console.log(emailErrors.length);
 
     function handleInputChange(event) {
         let { name, value } = event.target;
@@ -41,7 +43,7 @@ function Register() {
                 <input 
                     type="text" 
                     name='email' 
-                    className={`register-form__input ${!inputIsValid('email', email) && 'register-form__input--invalid'}`}
+                    className={`register-form__input ${emailErrors.length !== 0 && 'register-form__input--invalid'}`}
                     placeholder='Email'
                     value={email}
                     onChange={handleInputChange}
@@ -50,7 +52,7 @@ function Register() {
                 <input 
                     type="text" 
                     name='username' 
-                    className={`register-form__input ${!inputIsValid('username', username) && 'register-form__input--invalid'}`}
+                    className={`register-form__input ${usernameErrors.length !== 0 && 'register-form__input--invalid'}`}
                     placeholder='Username'
                     value={username}
                     onChange={handleInputChange}
@@ -59,7 +61,7 @@ function Register() {
                 <input 
                     type="password" 
                     name='password' 
-                    className={`register-form__input ${!inputIsValid('password', password) && 'register-form__input--invalid'}`}
+                    className={`register-form__input ${passwordErrors.length !== 0 && 'register-form__input--invalid'}`}
                     placeholder='Password'
                     value={password}
                     onChange={handleInputChange}
@@ -68,7 +70,7 @@ function Register() {
                 <input 
                     type="password" 
                     name='confirmPassword' 
-                    className={`register-form__input ${!inputIsValid('confirmPassword', confirmPassword, password) && 'register-form__input--invalid'}`} 
+                    className={`register-form__input ${confirmPasswordErrors.length !== 0 && 'register-form__input--invalid'}`} 
                     placeholder='Confirm password'
                     value={confirmPassword}
                     onChange={handleInputChange}
