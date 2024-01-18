@@ -51,7 +51,7 @@ function passwordIsValid(pass) {
         error.push('Password must contain a number');
     }
 
-    if (pass.match(/[\W\D\S]/) === null) {
+    if (pass.match(/[^A-Za-z0-9]/) === null) {
         error.push('Password must contain a special character');
     }
 
