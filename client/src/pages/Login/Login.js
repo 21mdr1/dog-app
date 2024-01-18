@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { formIsValid } from '../../utils/validationUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Login.scss';
 
 function Login() {
-    const defaults = {
-        email: '',
-        password: '',
-    }
-    let [ inputs, setInputs ] = useState(defaults);
+    let [ inputs, setInputs ] = useState({ email: '', password: '' });
     let { email, password } = inputs;
 
     function handleInputChange(event) {
@@ -49,7 +46,7 @@ function Login() {
                     value={password}
                     onChange={handleInputChange} 
                 />
-                <button className="login-form__button">
+                <button className="login-form__button" disabled={!formIsValid(inputs)}>
                     Sign In
                 </button>
                 <p className='login-form__text'>Don't have an account? 
