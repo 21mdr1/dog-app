@@ -45,7 +45,7 @@ Who will use your app? How will they use it? Any special considerations that you
 
 ### APIs
 
-- No external APIs will be used for the first sprint
+- The multiavatar API will be used to generate user avatars off the user's username
 
 ### Sitemap
 
