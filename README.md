@@ -45,7 +45,7 @@ Who will use your app? How will they use it? Any special considerations that you
 
 ### APIs
 
-- The multiavatar API will be used to generate user avatars off the user's username
+- The multiavatar API will be used to generate user avatars off their username
 
 ### Sitemap
 
@@ -61,21 +61,27 @@ Who will use your app? How will they use it? Any special considerations that you
 
 #### Home Page
 ![](./readme_images/home-mobile.png)
+![](./readme_images/home-desktop.png)
 
 #### Walking Page
 ![](./readme_images/walk-mobile.png)
+![](./readme_images/walk-desktop.png)
 
 #### Record-a-Walk Form
 ![](./readme_images/form-mobile.png)
+![](./readme_images/form-desktop.png)
 
 #### User Statistics Page
 ![](./readme_images/user-mobile.png)
+![](./readme_images/user-desktop.png)
 
 #### Login Page
 ![](./readme_images/login-mobile.png)
+![](./readme_images/login-desktop.png)
 
 #### Register Page
 ![](./readme_images/register-mobile.png)
+![](./readme_images/register-desktop.png)
 
 ### Data
 
