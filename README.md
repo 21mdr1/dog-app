@@ -2,7 +2,7 @@
 
 ## Overview
 
-What is your app? Brief description in a couple of sentences.
+Dog App provides a fun way to track daily steps paired with an intrinsic motivation model (walking your dog)
 
 ### Problem
 
@@ -79,7 +79,7 @@ Who will use your app? How will they use it? Any special considerations that you
 
 ### Data
 
-Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
+![](./readme_images/database_structure.png)
 
 ### Endpoints
 
