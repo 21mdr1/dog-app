@@ -79,6 +79,31 @@ Who will use your app? How will they use it? Any special considerations that you
 
 ### Data
 
+- This app intends to mimic the experience of using a mobile app. This means: before login, a user's walk data will be saved locally (in localStorage).
+    - Only a week's worth of data will be saved at any time to alleviate space usage
+    - If a user decides to create an account, any data stored locally will be transferred to the database
+
+#### Local Storage Structure
+
+```
+"stepsWalked": [
+    {
+        "minsWalked": 2,
+        "steps": 120,
+        "timestamp": 1705259672162
+    }
+]
+```
+
+```
+"preferences": {
+    "avatar": 'https://api.multiavatar.com/maria.svg',
+    "tooltips": true
+}
+```
+
+
+#### Database Structure
 ![](./readme_images/database_structure.png)
 
 ### Endpoints
@@ -87,7 +112,10 @@ List endpoints that your server will implement, including HTTP methods, paramete
 
 ### Auth
 
-Does your project include any login or user profile functionality? If so, describe how authentication/authorization will be implemented.
+- Authentiaction will be done using JWT
+    - Added after core features have first been implemented
+    - Store JWT in localStorage, remove when a user logs out
+    - Add states for logged in that will change where the user's data gets sent to and whether 'Log In' prompts are shown
 
 ## Roadmap
 
