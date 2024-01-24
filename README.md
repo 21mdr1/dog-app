@@ -114,7 +114,93 @@ Who will use your app? How will they use it? Any special considerations that you
 
 ### Endpoints
 
-List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+**GET /steps/:userId**
+
+- Get steps the user has walked in the last number of days.
+
+Parameters: 
+- userId: the id of the user to get data from (this may be fully replaced by the JWT token?)
+- token: user's JWT token
+
+Queries:
+- days (optional): the number of days to get data for, defaults to 7
+
+Response:
+```
+[
+    {
+        "logged_date": "15/1/2024",
+        "total_steps": "360"
+    },
+    ...
+]
+```
+
+**POST /steps**
+
+- Record a 'walk'
+
+Parameters:
+- token: JWT of the user
+
+Body of request: 
+```
+{
+    "steps": 320,
+    "minsWalked": 2,
+    "userId": 1
+}
+```
+Note: userId may be fully replaced by JWT?
+
+Response:
+```
+{
+    "steps_id": 10,
+    "entry_logged": 2024-01-15 01:22:37,
+    "steps": 320,
+    "mins_walked": 2,
+    "user_id": 1
+}
+```
+
+**POST /user/register**
+- Create a new user
+
+Body:
+```
+{
+    "username": example,
+    "email": exampe@example.com,
+    "password": example123
+}
+```
+
+Response:
+```
+{
+    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+}
+```
+
+**POST /users/login**
+
+- Login user
+
+Body:
+```
+{
+    "email": exampe@example.com,
+    "password": example123
+}
+```
+
+Response:
+```
+{
+    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+}
+```
 
 ### Auth
 
