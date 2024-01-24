@@ -2,20 +2,16 @@
 
 ## Overview
 
-Dog app lets you track your steps and visualize your walk history. But, it's not like your average pedometer app: dog app gives you a virtual companion to take on walks with you, helping you build healthier habits by reminding you to take care of your virtual friend.
+Dog app lets you track your steps and visualize your walk history. But, it's not like your average pedometer app: dog app gives you a virtual companion to take on walks with you, helping you build healthier habits by reminding you to take care of your new found friend.
 
 ### Problem
 
+Health tracking apps are very common and popular - in this day and age a user wants to be able to keep track of their habits in order to build new ones. However, most pedometer apps do little more than track steps in the background. This model makes it hard for a user to remember to check on their progress and increase their daily steps. 
 
-
-Why is your app needed? Background information around any pain points or other reasons.
- 
 
 ### User Profile
 
-People who are looking for a fun way to track their steps, and who want an empathetic form of external accountability.
-
-Who will use your app? How will they use it? Any special considerations that your app must take into account.
+Dog app is for those who like tracking their steps, but want to do so in a fun, inovative way. People who are looking for gentle, yet firm, motivation to improve their daily step habits - you may not want to go outside, but your virtual pet is waiting for their daily walk.
 
 ### Features
 
@@ -38,7 +34,7 @@ Who will use your app? How will they use it? Any special considerations that you
 - Client libraries
     - react
     - react-router-dom
-    - react-select (or a similar library for dropdowns)
+    - react-select (or maybe NextUI or a similar library for dropdowns)
     - axios
     - sass
 - Server libraries
