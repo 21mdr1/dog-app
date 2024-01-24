@@ -127,6 +127,63 @@ List endpoints that your server will implement, including HTTP methods, paramete
 
 Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
 
+**These steps have already been done:**
+
+- Create client structure and boilerplates
+
+- Create server structure and boilerplates
+
+- Create home page
+
+- Create 'walking' page
+
+- Feature: Form to record walk 
+    - Implement form
+    - Create functionality to save steps to local storage
+    - Create POST /steps/:userid
+
+- Feature: Show graph of user's walk data
+    - Create user data page
+    - Make graph
+    - Create functionality to get steps from local storage
+    - Create GET /steps/:userid
+
+- Feature: Create account
+    - Create register page and form
+    - Create POST /user
+
+- Feature: Login
+    - Implement login page and form
+
+**These steps need to be done:**
+
+- Create migrations
+
+- Create seeds with sample walking data
+
+- Feature: walking companion (animations)
+    - Animate sitting dog
+    - Create and animate walking dog
+
+- Feature: Desktop view
+    - Create home page for desktop view
+        - Create side panel
+    - Create walk form desktop view
+    - Create walk page desktop view
+    - Create user data page desktop view
+    - Create login page desktop view
+    - Create register page desktop view
+
+- Feature: Create account
+    - Implement functionality to move local data to database
+
+- Feature: Login
+    - Create POST /users/login
+
+- Feature: Implement JWT tokens
+    - Server: Update expected requests / responses on protected endpoints
+    - Client: Store JWT in local storage, include JWT on axios calls
+
 ## Nice-to-haves
 
 Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
