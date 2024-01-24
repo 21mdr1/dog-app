@@ -2,13 +2,19 @@
 
 ## Overview
 
-Dog App provides a fun way to track daily steps paired with an intrinsic motivation model (walking your dog)
+Dog app lets you track your steps and visualize your walk history. But, it's not like your average pedometer app: dog app gives you a virtual companion to take on walks with you. It helps you build healthier habits by reminding you to take care of your virtual friend.
+
 
 ### Problem
 
+
+
 Why is your app needed? Background information around any pain points or other reasons.
+ 
 
 ### User Profile
+
+People who are looking for a fun way to track their steps, and who want an empathetic form of external accountability.
 
 Who will use your app? How will they use it? Any special considerations that your app must take into account.
 
@@ -210,8 +216,6 @@ Response:
     - Add states for logged in that will change where the user's data gets sent to and whether 'Log In' prompts are shown
 
 ## Roadmap
-
-Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
 
 **These steps have already been done:**
 
