@@ -290,6 +290,10 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
     - Water intake form
     - Water intake graph
 
+- Add ability to set goals (ie. 15,000 steps in a day)
+    - Goal input in settings
+    - Show progress against goals in graphs and home side panel
+
 - Allow user to customize virtual pet
     - Add accessories
     - Change pet to other animals or dog breeds
