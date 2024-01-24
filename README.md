@@ -247,6 +247,12 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 
 - Create seeds with sample walking data
 
+- Handle errors and bad input in api requests
+
+- Create tooltips for buttons
+
+- Add reminders / motivational phrases in home page
+
 - Feature: walking companion (animations)
     - Animate sitting dog
     - Create and animate walking dog
@@ -261,10 +267,11 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
     - Create register page desktop view
 
 - Feature: Create account
+    - Change POST /user to POST /user/register
     - Implement functionality to move local data to database
 
 - Feature: Login
-    - Create POST /users/login
+    - Create POST /user/login
 
 - Feature: Implement JWT tokens
     - Server: Update expected requests / responses on protected endpoints
@@ -272,19 +279,20 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 
 ## Nice-to-haves
 
-Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+- Create user preferences/settings page
+    - Change avatar
+    - Disable tooltips
+    - Change username / email / password
+    - Delete account
 
-- Add friends too compare dog walks
-- Implement mobile part of the project as a react native app
-- Use the expo-sensors library to automatically detect steps
-- Make web app into a chrome extension
-- Add water-intake-tracking functionality
-- Add sleep-tracking functionality (allowing user to record sleeping time)
-- Add food tracking functionality (record a 'snacks' - however, there are no plans for calorie or nutrition tracking functionality)
-- Give the walking-page different backgrounds that change per season
-- Allow user to customize their virtual pet
-    - Change to other animals or dog breeds
-    - Dress up pet
-- Allow user to randomly generate an avatar fo themselves if they don't like their own
-- Change home-page dog to react to how the user has been taking care of themselves (ie. looks sad if the user hasn't walked in some time, etc.)
-- 
+- Add water-intake tracking functionality
+    - Water tracking page and dog
+    - Water intake form
+    - Water intake graph
+
+- Allow user to customize virtual pet
+    - Add accessories
+    - Change pet to other animals or dog breeds
+
+- Make virtual pet react to how user's behavior
+    - Pet looks sad if user hasn't walked in a while, etc.
