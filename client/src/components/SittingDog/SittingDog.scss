@@ -85,14 +85,17 @@
     &__blink-eye {
         position: absolute;
         top: -0.5rem;
+        transform: scale(0.75);
         display: none;
 
         &--right {
-            right: -3.75rem;
+            transform: rotateY(180deg) scale(0.65);
+            right: -5rem;
         }
 
         &--left {
-            left: -3.75rem;
+            transform: scale(0.65);
+            left: -5rem;
         }
     } 
 
