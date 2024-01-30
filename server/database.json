@@ -1,0 +1,18 @@
+{
+    "defaultEnv": {"ENV": "NODE_ENV"},
+    "dev": {
+      "driver": "mysql2",
+      "user": {"ENV": "DB_USER"},
+      "password": {"ENV": "DB_PASS"},
+      "database": {"ENV": "DB_NAME"},
+      "mutilpleStatements": true
+    },
+    "prod": {
+        "driver": "mysql2",
+        "user": {"ENV": "DB_USER"},
+        "password": {"ENV": "DB_PASS"},
+        "database": {"ENV": "DB_NAME"},
+        "mutilpleStatements": true
+    },
+    "sql-file": true
+}
