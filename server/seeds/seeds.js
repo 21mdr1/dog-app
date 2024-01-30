@@ -2,13 +2,41 @@ const userSeed = require('./data/users-data');
 const stepsSeed = require('./data/steps-data');
 const preferencesSeed = require('./data/prefereces-data');
 
-// let {username, email, password} = request.body;
+const mysql = require('mysql2/promise');
+const config = require('../config');
 
-// let sql = `INSERT INTO users(username, email, password)
-//     values (?, ?, ?)`;
-// let inserts = [username, email, password];
+async function seed() {
+    const connnection = await mysql.createConnection(config.db);
 
-// const connection = await mysql.createConnection(config.db);
-// let [result, ] = await connection.query(sql, inserts);
+    for (let user of userSeed) {
+        await connnection.query(
+            `
+            INSERT INTO users(username, email, password)
+                VALUES (?, ?, ?);
+            `, 
+            [user.username, user.email, user.password]
+        );
+    }
 
-// response.json(result);
+    for (let preference of preferencesSeed) {
+        await connnection.query(
+            `
+            INSERT INTO preferences(user_id, tooltips)
+                VALUES (?, ?);
+            `, 
+            [preference.user_id, preference.tooltips]
+        );
+    }
+
+    for (let steps of stepsSeed) {
+        await connnection.query(
+            `
+            INSERT INTO steps(entry_logged, steps, mins_walked, user_id) 
+                VALUES (FROM_UNIXTIME(?), ?, ?, ?);
+            `, 
+            [steps.entry_logged, steps.steps, steps.mins_walked, steps.user_id]
+        );
+    }
+}
+
+seed();
