@@ -1,6 +1,5 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
-@use '../../styles/partials/animations' as *;
 
 .home-main {
     flex-grow: 1;
@@ -12,38 +11,13 @@
     transform: scale(0.75);
 
     &__shadow {
-        background-color: #937FCE; //make this into a variable?
+        background-color: $purple-shadow;
         width: 13rem;
         height: 2.75rem;
         border-radius: 50%;
         position: absolute;
         left: -6.5rem;
         bottom: -13.75rem;
-    }
-
-    // happy purr
-    &:hover {
-        & .sitting-dog__head {
-            transform: rotate(-10deg);
-            transition: 0.5s;
-            animation: happy-head-move 2s 0.5s ease-in-out infinite;
-        }
-
-        & .sitting-dog__eye {
-            display: none;
-        }
-
-        & .sitting-dog__blink-eye {
-            display: block;
-        }
-
-        & .sitting-dog__tongue {
-            display: block;
-        }
-
-        & .sitting-dog__tail {
-            animation: happy-tail-wag 0.45s linear infinite; 
-        }
     }
 
     &__full-body {
@@ -61,8 +35,6 @@
         position: absolute;
         top: -4.28rem;
         left: -10.03rem;
-        transform-origin: bottom right;
-        animation: normal-tail-wag 15s 10s ease-in-out infinite;
     }
 
     &__neck {
@@ -76,7 +48,6 @@
         position: absolute;
         top: -5rem;
         left: 0.2rem;
-        animation: normal-head-move 23s 5s ease-in-out infinite;
     }
 
     &__face {
@@ -109,10 +80,6 @@
         &--left {
             left: -3.75rem;
         }
-
-        // &--blinking {
-        //     display: none;
-        // }
     }
 
     &__blink-eye {
@@ -127,10 +94,6 @@
         &--left {
             left: -3.75rem;
         }
-
-        // &--blinking {
-        //     display: block;
-        // }
     } 
 
     &__tongue {
