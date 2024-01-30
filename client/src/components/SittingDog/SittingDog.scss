@@ -7,16 +7,9 @@
     @include flex(center, center);
 }
 
-
 .sitting-dog {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-
-    &__container {
-        position: relative;
-    }
+    position: relative;
+    transform: scale(0.75);
 
     &__shadow {
         background-color: #937FCE; //make this into a variable?
@@ -27,11 +20,6 @@
         left: -6.5rem;
         bottom: -13.75rem;
     }
-}
-
-.sitting-dog {
-    position: relative;
-    transform: scale(0.75);
 
     // happy purr
     &:hover {

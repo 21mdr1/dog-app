@@ -1,5 +1,3 @@
-import dog from '../../assets/static-images/home-dog-prototype-2.svg';
-
 import { ReactComponent as LeftBackLeg } from '../../assets/animations/walking-dog/back-leg-left.svg';
 import { ReactComponent as Body } from '../../assets/animations/walking-dog/body.svg';
 import { ReactComponent as RightBackLeg } from '../../assets/animations/walking-dog/back-leg-right.svg';

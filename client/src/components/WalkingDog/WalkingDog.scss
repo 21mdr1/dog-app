@@ -1,21 +1,15 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/animations' as *;
 
 .home-main {
     flex-grow: 1;
     @include flex(center, center);
 }
 
-
 .walking-dog {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-
-    &__container {
-        position: relative;
-    }
+    position: relative;
+    transform: scale(0.35);
 
     &__shadow {
         background-color: #A6C078; //make this into a variable?
@@ -26,11 +20,6 @@
         left: -25rem;
         bottom: -29rem;
     }
-}
-
-.walking-dog {
-    position: relative;
-    transform: scale(0.35);
 
     &--isWalking {
         & .walking-dog__right-front-leg {
