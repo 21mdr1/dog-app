@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BottomNav from '../../components/BottomNav/BottomNav';
-import WalkingDog from '../../components/WalkingDog/WalkingDog';
+import AnimatedWalkingDog from '../../components/AnimatedWalkingDog/AnimatedWalkingDog';
 import TopNav from '../../components/TopNav/TopNav';
 import WalkForm from '../../components/WalkForm/WalkForm';
 import tree from '../../assets/static-images/tree-4.svg';
@@ -27,7 +27,7 @@ function Walk() {
             </div>
             <img src={tree} alt='tree' className="page__background-tree" />
             <TopNav page='walk'/>
-            <WalkingDog />
+            <AnimatedWalkingDog />
             <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />
             {displayForm && <WalkForm setDisplayForm={setDisplayForm} />}
         </div>

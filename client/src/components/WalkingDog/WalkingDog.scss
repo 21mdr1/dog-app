@@ -47,6 +47,20 @@
         }
     }
 
+    &__blink-eye {
+        position: absolute;
+        display: none;
+
+        &--left {
+            left: -0.5rem;
+        }
+
+        &--right {
+            right: -10rem;
+            top: -0.5rem;
+        }
+    }
+
     &__tongue {
         position: absolute;
         display: none;

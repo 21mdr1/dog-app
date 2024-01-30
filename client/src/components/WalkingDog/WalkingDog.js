@@ -6,6 +6,8 @@ import { ReactComponent as RightFrontLeg } from '../../assets/animations/walking
 import { ReactComponent as Head } from '../../assets/animations/walking-dog/head.svg';
 import { ReactComponent as LeftEye } from '../../assets/animations/walking-dog/left-eye.svg';
 import { ReactComponent as RightEye } from '../../assets/animations/walking-dog/right-eye.svg';
+import { ReactComponent as LeftEyeBlink } from '../../assets/animations/walking-dog/left-eye-blink.svg';
+import { ReactComponent as RightEyeBlink } from '../../assets/animations/walking-dog/right-eye-blink.svg';
 import { ReactComponent as Tail } from '../../assets/animations/walking-dog/tail.svg';
 import { ReactComponent as Tongue } from '../../assets/animations/walking-dog/tongue.svg';
 
@@ -32,7 +34,9 @@ function WalkingDog({ isHeadBobbing, tongueIsOut, isWaggingTail, isBlinking }) {
                 <div className='walking-dog__head'>
                     <Head className='walking-dog__face' />
                     <LeftEye className='walking-dog__eye walking-dog__eye--left' />
+                    <LeftEyeBlink className='walking-dog__blink-eye walking-dog__blink-eye--left' />
                     <RightEye className='walking-dog__eye walking-dog__eye--right' />
+                    <RightEyeBlink className='walking-dog__blink-eye walking-dog__blink-eye--right' />
                     <Tongue className='walking-dog__tongue' />
                 </div>
                 <div className='walking-dog__full-body'>
