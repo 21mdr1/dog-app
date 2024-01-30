@@ -1,8 +1,8 @@
-import { ReactComponent as LeftBackLeg } from '../../assets/animations/walking-dog/back-leg-left.svg';
+import { ReactComponent as NearBackLeg } from '../../assets/animations/walking-dog/near-back-leg.svg';
+import { ReactComponent as FarBackLeg } from '../../assets/animations/walking-dog/far-back-leg.svg';
 import { ReactComponent as Body } from '../../assets/animations/walking-dog/body.svg';
-import { ReactComponent as RightBackLeg } from '../../assets/animations/walking-dog/back-leg-right.svg';
-import { ReactComponent as LeftFrontLeg } from '../../assets/animations/walking-dog/front-leg-left.svg';
-import { ReactComponent as RightFrontLeg } from '../../assets/animations/walking-dog/front-leg-right.svg';
+import { ReactComponent as NearFrontLeg } from '../../assets/animations/walking-dog/near-front-leg.svg';
+import { ReactComponent as FarFrontLeg } from '../../assets/animations/walking-dog/far-front-leg.svg';
 import { ReactComponent as Head } from '../../assets/animations/walking-dog/head.svg';
 import { ReactComponent as LeftEye } from '../../assets/animations/walking-dog/left-eye.svg';
 import { ReactComponent as RightEye } from '../../assets/animations/walking-dog/right-eye.svg';
@@ -42,11 +42,11 @@ function WalkingDog({ isBobbingHead, tongueIsOut, isWaggingTail, isBlinking }) {
                 </div>
                 <div className='walking-dog__full-body'>
                     <Tail className='walking-dog__tail' />
-                    <RightBackLeg className='walking-dog__right-back-leg' />
-                    <RightFrontLeg className='walking-dog__right-front-leg' />
+                    <FarBackLeg className='walking-dog__far-back-leg' />
+                    <FarFrontLeg className='walking-dog__far-front-leg' />
                     <Body className='walking-dog__body' />
-                    <LeftBackLeg className='walking-dog__left-back-leg' />
-                    <LeftFrontLeg className='walking-dog__left-front-leg' />
+                    <NearBackLeg className='walking-dog__near-back-leg' />
+                    <NearFrontLeg className='walking-dog__near-front-leg' />
                 </div>
             </div>
         </main>

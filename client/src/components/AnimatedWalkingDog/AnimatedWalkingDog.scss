@@ -6,22 +6,22 @@
 
     &--isWalking {
         & .walking-dog {
-            &__right-front-leg {
+            &__far-front-leg {
                 transform-origin: top;
                 animation: walking-leg-forward 1.25s linear infinite;
             }
 
-            &__left-front-leg {
+            &__near-front-leg {
                 transform-origin: top;
                 animation: walking-leg-backward 1.25s linear infinite;
             }
 
-            &__right-back-leg {
+            &__far-back-leg {
                 transform-origin: top;
                 animation: walking-leg-backward 1.25s linear infinite;
             }
 
-            &__left-back-leg {
+            &__near-back-leg {
                 transform-origin: top;
                 animation: walking-leg-forward 1.25s linear infinite;
             }
