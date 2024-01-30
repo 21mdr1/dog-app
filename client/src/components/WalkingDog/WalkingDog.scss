@@ -21,61 +21,6 @@
         bottom: -29rem;
     }
 
-    &--isWalking {
-        & .walking-dog__right-front-leg {
-            transform-origin: top;
-            animation: walking-leg-forward 1.25s linear infinite;
-        }
-    
-        & .walking-dog__left-front-leg {
-            transform-origin: top;
-            animation: walking-leg-backward 1.25s linear infinite;
-        }
-    
-        & .walking-dog__right-back-leg {
-            transform-origin: top;
-            animation: walking-leg-backward 1.25s linear infinite;
-        }
-    
-        & .walking-dog__left-back-leg {
-            transform-origin: top;
-            animation: walking-leg-forward 1.25s linear infinite;
-        }
-
-        & .walking-dog__tail {
-            transform-origin: bottom right;
-            animation: walk-tail-wag 0.83s ease-in-out infinite;
-        }
-
-        & .walking-dog__head {
-            transform-origin: bottom;
-            animation: walk-head-bob 1.25s linear infinite;
-        }
-    }
-
-    &--isStickingTongueOut {
-        & .walking-dog__tongue {
-            display: block;
-        }
-    }
-
-    &--isWaggingTail {
-        & .walking-dog__tail {
-            transform-origin: bottom right;
-            animation: walk-tail-wag 0.83s ease-in-out 2;
-        }
-    }
-
-    &--isBlinking {
-        & .walking-dog__eye {
-            display: none;
-        }
-
-        & .walking-dog__blink-eye {
-            display: block;
-        }
-    }
-
     &__head {
         position: absolute;
         top: -11.25rem;
