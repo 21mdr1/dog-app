@@ -135,3 +135,74 @@
         transform: rotate(0deg);
     }
 }
+
+// walking dog animations
+@keyframes walking-leg-backward {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    33% {
+        transform: rotate(20deg);
+    }
+
+    83% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+
+
+@keyframes walking-leg-forward {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    33% {
+        transform: rotate(-20deg);
+    }
+
+    83% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes walk-tail-wag {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-20deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes walk-head-bob {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-5deg);
+    }
+
+    75% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
