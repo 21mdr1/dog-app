@@ -7,16 +7,19 @@ import { ReactComponent as Neck } from '../../assets/animations/sitting-dog/neck
 import { ReactComponent as Eye } from '../../assets/animations/sitting-dog/right-eye.svg';
 import { ReactComponent as Tail } from '../../assets/animations/sitting-dog/full-tail.svg';
 import { ReactComponent as Tongue } from '../../assets/animations/sitting-dog/tongue.svg';
-import { useState } from 'react';
 import './SittingDog.scss';
 
-function SittingDog() {
+function SittingDog({ isBlinking }) {
 
-    let [ isBlinking, setIsBlinking ] = useState(false);
+    function determineClasses() {
+        let blinking = isBlinking ? 'sitting-dog--isBlinking' : null;
+
+        return `sitting-dog ${blinking}`
+    }
 
     return (
         <main className="home-main">
-            <div className="sitting-dog">
+            <div className={determineClasses()}>
                 <div className="sitting-dog__shadow"></div>
                 <div className='sitting-dog__full-body'>
                     <Tail className='sitting-dog__tail' />
@@ -25,10 +28,10 @@ function SittingDog() {
                 </div>
                 <div className='sitting-dog__head'>
                     <Face className='sitting-dog__face' />
-                    <Eye className={`sitting-dog__eye sitting-dog__eye--right ${isBlinking && 'sitting-dog__eye--blinking'}`} />
-                    <Eye className={`sitting-dog__eye sitting-dog__eye--left ${isBlinking && 'sitting-dog__eye--blinking'}`} />
-                    <BlinkEye className={`sitting-dog__blink-eye sitting-dog__blink-eye--right ${isBlinking && 'sitting-dog__blink-eye--blinking'}`} />
-                    <BlinkEye className={`sitting-dog__blink-eye sitting-dog__blink-eye--left ${isBlinking && 'sitting-dog__blink-eye--blinking'}`} />
+                    <Eye className='sitting-dog__eye sitting-dog__eye--right' />
+                    <Eye className='sitting-dog__eye sitting-dog__eye--left' />
+                    <BlinkEye className='sitting-dog__blink-eye sitting-dog__blink-eye--right' />
+                    <BlinkEye className='sitting-dog__blink-eye sitting-dog__blink-eye--left' />
                     <Tongue className='sitting-dog__tongue' />
                     <LeftEar className='sitting-dog__ear sitting-dog__ear--left' />
                     <RightEar className='sitting-dog__ear sitting-dog__ear--right' />
