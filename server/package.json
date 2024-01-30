@@ -8,7 +8,8 @@
     "start": "nodemon server.js",
     "migrate:up": "npx db-migrate up",
     "migrate:down": "npx db-migrate down",
-    "migrate:reset": "npx db-migrate reset"
+    "migrate:reset": "npx db-migrate reset",
+    "seed": "node ./seeds/seeds.js"
   },
   "author": "",
   "license": "ISC",
