@@ -14,15 +14,16 @@ import { ReactComponent as Tongue } from '../../assets/animations/walking-dog/to
 import { useState } from 'react';
 import './WalkingDog.scss';
 
-function WalkingDog({ isHeadBobbing, tongueIsOut, isWaggingTail, isBlinking }) {
+function WalkingDog({ isBobbingHead, tongueIsOut, isWaggingTail, isBlinking }) {
 
     let [ isWalking, setIsWalking ] = useState(false);
 
     function determineClasses() {
         let walking = isWalking ? 'walking-dog--isWalking' : null;
         let blinking = isBlinking ? 'walking-dog--isBlinking' : null;
-        let tailWagging = isWaggingTail ? 'walking-dog--isWaggingTail' : null;
+        let tailWagging = isWaggingTail && !isWalking ? 'walking-dog--isWaggingTail' : null;
         let tongueOut = tongueIsOut ? 'walking-dog--isStickingTongueOut' : null;
+        let headBobbing = isBobbingHead && !isWalking ? 'walking-dog--isBobbingHead' : null;
 
         return `walking-dog ${walking} ${blinking} ${tongueOut} ${tailWagging}`;
     }

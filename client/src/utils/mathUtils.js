@@ -1,5 +1,5 @@
 
-function getRandomNum(max) { // will delete soon
+function getRandomNum(max) {
     return Math.floor(Math.random() * max);
 }
 

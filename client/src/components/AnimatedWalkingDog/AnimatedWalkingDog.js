@@ -1,3 +1,4 @@
+import { blink, wagTail, stickTongueOut, bobHead, moveNaturally } from '../../utils/animationUtils';
 import { useState, useEffect } from 'react';
 import WalkingDog from '../WalkingDog/WalkingDog';
 import './AnimatedWalkingDog.scss';
@@ -6,63 +7,41 @@ function AnimatedWalkingDog() {
 
     // let [ isWalking, setIsWalking ] = useState(false);
 
-    let [ isHeadBobbing, setIsHeadBobbing] = useState(false);
+    let [ isBobbingHead, setIsBobbingHead] = useState(false);
     let [ tongueIsOut, setTongueIsOut ] = useState(false);
     let [ isWaggingTail, setIsWaggingTail ] = useState(false);
     let [ isBlinking, setIsBlinking ] = useState(false);
 
     useEffect(() => {
-        function blink() {
-            function changeEyes() {
-                setIsBlinking(true);
-                setTimeout(
-                    () => setIsBlinking(false),
-                    1000
-                );
+
+        let intervals = [];
+
+        intervals.concat(moveNaturally(blink, setIsBlinking));
+        intervals.concat(moveNaturally(wagTail, setIsWaggingTail));
+        intervals.concat(moveNaturally(stickTongueOut, setTongueIsOut));
+
+        // let blinkId = setTimeout(() => {
+        //     setInterval(blink, 7000, setIsBlinking)
+        // }, 5000)
+
+        // let wagTailId = setTimeout(() => {
+        //     setInterval(wagTail, 5000, setIsWaggingTail);
+        // }, 0);
+
+        // let stickTongueOutId = setTimeout(() => {
+        //     setInterval(stickTongueOut, 15000, setTongueIsOut)
+        // }, 7000)
+
+        return () => {
+            for (let interval of intervals) {
+                clearInterval(interval);
             }
-
-            setTimeout(() => {
-                setInterval(changeEyes, 7000)
-            }, 5000)
         }
-
-        function wagTail() {
-            function moveTail() {
-                setIsWaggingTail(true);
-                setTimeout(
-                    () => setIsWaggingTail(false), 
-                    2000
-                );
-            }
-
-            setTimeout(() => {
-                setInterval(moveTail, 5000);
-            }, 0);
-        }
-
-        function stickTongueOut() {
-            function changeTongue() {
-                setTongueIsOut(true);
-                setTimeout(
-                    () => setTongueIsOut(false),
-                    1200
-                )
-            }
-
-            setTimeout(() => {
-                setInterval(changeTongue, 15000)
-            }, 7000)
-        }
-
-        blink();
-        wagTail();
-        stickTongueOut();
-
     }, []);
 
     return (
         <WalkingDog
-            isHeadBobbing={isHeadBobbing}
+            isBobbingHead={isBobbingHead}
             tongueIsOut={tongueIsOut}
             isWaggingTail={isWaggingTail}
             isBlinking={isBlinking}
