@@ -19,12 +19,135 @@
 
     &__shadow {
         background-color: #937FCE; //make this into a variable?
-        width: 10rem;
-        height: 1.125rem;
+        width: 13rem;
+        height: 2.75rem;
         border-radius: 50%;
         position: absolute;
-        transform: translate(-50%, -50%);
-        left: 50%;
-        bottom: -8.75rem;
+        left: -6.5rem;
+        bottom: -13.75rem;
+    }
+}
+
+.sitting-dog {
+    position: relative;
+    transform: scale(0.75);
+
+    // happy purr
+    &:hover {
+        & .sitting-dog__head {
+            transform: rotate(-10deg);
+            transition: 0.5s;
+            animation: happy-head-move 2s 0.5s ease-in-out infinite;
+        }
+
+        & .sitting-dog__eye {
+            display: none;
+        }
+
+        & .sitting-dog__blink-eye {
+            display: block;
+        }
+
+        & .sitting-dog__tongue {
+            display: block;
+        }
+
+        & .sitting-dog__tail {
+            animation: happy-tail-wag 0.45s linear infinite; 
+        }
+    }
+
+    &__full-body {
+        position: absolute;
+        top: 6.45rem;
+    }
+
+    &__body {
+        position: absolute;
+        top: -6.47rem;
+        left: -7.66rem;
+    }
+
+    &__tail {
+        position: absolute;
+        top: -4.28rem;
+        left: -10.03rem;
+        transform-origin: bottom right;
+        animation: normal-tail-wag 15s 10s ease-in-out infinite;
+    }
+
+    &__neck {
+        position: absolute;
+        top: -9rem;
+        left: -4.85rem;
+    }
+
+    &__head {
+        transform: rotate(0deg);
+        position: absolute;
+        top: -5rem;
+        left: 0.2rem;
+        animation: normal-head-move 23s 5s ease-in-out infinite;
+    }
+
+    &__face {
+        position: absolute;
+        top: -5.69rem;
+        left: -6.22rem;
+    }
+
+    &__ear {
+        position: absolute;
+        top: -8.21rem;
+
+        &--right {
+            right: -6.5rem;
+        }
+
+        &--left {
+            left: -6.55rem;
+        }
+    }
+
+    &__eye {
+        position: absolute;
+        top: -1rem;
+
+        &--right {
+            right: -3.75rem;
+        }
+
+        &--left {
+            left: -3.75rem;
+        }
+
+        &--blinking {
+            display: none;
+        }
+    }
+
+    &__blink-eye {
+        position: absolute;
+        top: -0.5rem;
+        display: none;
+
+        &--right {
+            right: -3.75rem;
+        }
+
+        &--left {
+            left: -3.75rem;
+        }
+
+        &--blinking {
+            display: block;
+        }
+    } 
+
+    &__tongue {
+        position: absolute;
+        top: 3.8rem;
+        left: -0.68rem;
+        display: none;
     }
 }
