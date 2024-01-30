@@ -62,4 +62,11 @@
             }
         }
     }
+
+    &--isBobbingHead {
+        & .walking-dog__head {
+            transform-origin: bottom;
+            animation: walk-head-bob 1.25s linear infinite;
+        }
+    }
 }

@@ -3,7 +3,7 @@ import { getRandomNum } from './mathUtils';
 
 function blink(setIsBlinking) {
     setIsBlinking(true);
-    setTimeout(setIsBlinking, 1000, false);
+    setTimeout(setIsBlinking, 650, false);
 }
 
 function wagTail(setIsWaggingTail) {
@@ -18,11 +18,14 @@ function stickTongueOut(setIsStickingTongueOut) {
 
 function bobHead(setIsBobbingHead) {
     setIsBobbingHead(true);
-    setTimeout(setIsBobbingHead, 2000, false);
+    setTimeout(setIsBobbingHead, 2500, false);
 }
 
 function moveNaturally(action, setAction) {
     let intervals = [];
+
+    let delay = getRandomNum(10) * 1000;
+    setTimeout(action, delay, setAction);
 
     for (let i = 0; i < 3; i++) {
         let delay = (getRandomNum(10) + 10) * 1000;

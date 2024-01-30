@@ -12,7 +12,7 @@
     transform: scale(0.35);
 
     &__shadow {
-        background-color: #A6C078; //make this into a variable?
+        background-color: $green-shadow;
         width: 50rem;
         height: 4rem;
         border-radius: 50%;

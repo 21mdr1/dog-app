@@ -25,7 +25,7 @@ function WalkingDog({ isBobbingHead, tongueIsOut, isWaggingTail, isBlinking }) {
         let tongueOut = tongueIsOut ? 'walking-dog--isStickingTongueOut' : null;
         let headBobbing = isBobbingHead && !isWalking ? 'walking-dog--isBobbingHead' : null;
 
-        return `walking-dog ${walking} ${blinking} ${tongueOut} ${tailWagging}`;
+        return `walking-dog ${walking} ${blinking} ${tongueOut} ${tailWagging} ${headBobbing}`;
     }
 
     return (
