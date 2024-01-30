@@ -1,2 +1,2 @@
 /* Replace with your SQL commands */
-IF EXISTS (DROP TABLE preferences);
+DROP TABLE IF EXISTS preferences;
