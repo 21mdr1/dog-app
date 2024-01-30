@@ -1,0 +1,65 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/animations' as *;
+
+.walking-dog {
+
+    &--isWalking {
+        & .walking-dog {
+            &__right-front-leg {
+                transform-origin: top;
+                animation: walking-leg-forward 1.25s linear infinite;
+            }
+
+            &__left-front-leg {
+                transform-origin: top;
+                animation: walking-leg-backward 1.25s linear infinite;
+            }
+
+            &__right-back-leg {
+                transform-origin: top;
+                animation: walking-leg-backward 1.25s linear infinite;
+            }
+
+            &__left-back-leg {
+                transform-origin: top;
+                animation: walking-leg-forward 1.25s linear infinite;
+            }
+
+            &__tail {
+                transform-origin: bottom right;
+                animation: walk-tail-wag 0.83s ease-in-out infinite;
+            }
+
+            &__head {
+                transform-origin: bottom;
+                animation: walk-head-bob 1.25s linear infinite;
+            }
+        }
+    }
+
+    &--isStickingTongueOut {
+        & .walking-dog__tongue {
+            display: block;
+        }
+    }
+
+    &--isWaggingTail {
+        & .walking-dog__tail {
+            transform-origin: bottom right;
+            animation: walk-tail-wag 0.83s ease-in-out 2;
+        }
+    }
+
+    &--isBlinking {
+        & .walking-dog {
+            &__eye {
+                display: none;
+            }
+
+            &__blink-eye {
+                display: block;
+            }
+        }
+    }
+}
