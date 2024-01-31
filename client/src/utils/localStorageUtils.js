@@ -32,14 +32,19 @@ function purgeOldLocalSteps(data) {
 
 // Actions
 
-function recordStepsLocally(steps) {
-    steps.timestamp = Date.now();
+function recordStepsLocally(steps, onSuccess = () => {}, onFailure = (error) => {console.log('Error saving steps:', error)}) {
+    try {
+        steps.timestamp = Date.now();
 
-    let data = getLocally('stepsWalked') || [];
-    data = purgeOldLocalSteps(data);
-    data.push(steps);
+        let data = getLocally('stepsWalked') || [];
+        data = purgeOldLocalSteps(data);
+        data.push(steps);
 
-    saveLocally('stepsWalked', data);
+        saveLocally('stepsWalked', data);
+        onSuccess(data);
+    } catch(error) {
+        onFailure(error);
+    }
 }
 
 function getLastWeeksStepsLocally(onSuccess, onFailure) {

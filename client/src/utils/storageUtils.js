@@ -3,11 +3,11 @@ import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemote
 
 // record steps
 
-async function recordSteps(steps, userIsSignedIn) {
+async function recordSteps(steps, userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
-        await recordStepsRemotely(steps); 
+        await recordStepsRemotely(steps, onSuccess, onFailure); 
     } else {
-        recordStepsLocally(steps);
+        recordStepsLocally(steps, onSuccess, onFailure);
     }
 }
 
