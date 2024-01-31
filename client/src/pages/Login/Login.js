@@ -22,16 +22,17 @@ function Login({ setSignedIn }) {
         event.preventDefault();
 
         if (formIsValid(inputs)) {
-            try {
-                await login(username, password, setSignedIn);
-                setInputs({ username: '', password: '' });
-
+            login(
+              username, password, setSignedIn,
+              () => {
                 setMessage("Logged In Successfully");
                 setTimeout(() => {navigate('/')}, 2000);
-            } catch (error) {
-                console.log(error);
+              },
+              (error) => {
+                console.log("Error logging in", error);
                 setMessage('Error logging in');
-            }
+              }
+            );
         } else {
             setMessage('Error logging in');
         }

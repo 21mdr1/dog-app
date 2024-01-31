@@ -4,15 +4,18 @@ function userIsSignedIn() {
     return !!localStorage.getItem('token');
 }
 
-async function login(username, password, setSignedIn) {
+async function login(username, password, setSignedIn, onSuccess, onFailure) {
     let user = {username: username, password: password}
 
     await logUserIn(
         user,
         (data) => {
-            saveLocally('token', data.token)
+            saveLocally('token', data.token);
             setSignedIn(true);
-        });
+            onSuccess && onSuccess(data);
+        },
+        onFailure
+    );
 
 }
 
