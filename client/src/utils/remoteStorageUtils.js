@@ -79,7 +79,6 @@ async function getLastWeeksStepsRemotely(onSuccess, onFailure = (error) => {cons
     return data;
 }
 
-// this will be changed back to be record
 async function recordPreferencesRemotely(preference, value, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
     let data = await changeInDB(
         {preference: preference, value: value}, 

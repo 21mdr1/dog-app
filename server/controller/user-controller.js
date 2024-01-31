@@ -8,46 +8,86 @@ const { SALT_ROUNDS, SECRET_KEY } = process.env;
 const { emailIsValid, passwordIsValid } = require('../utils/validationUtils');
 
 const createUser = async (request, response) => {
-    let { username, email, password } = request.body;
+    let {user, preferences, steps} = request.body;
 
-    if ( !username || !email || !password ) {
+    if ( !user.username || !user.email || !user.password ) {
         return response.status(400).json({
             message: "Please provide username, email, and password for new user in the request"
         });
     }
 
-    if ( !emailIsValid(email) || !passwordIsValid(password) ) {        
+    if ( !emailIsValid(user.email) || !passwordIsValid(user.password) ) {        
         return response.status(400).json({
             message: "Email must be of the form 'yourname@example.com' and password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a number, and a special characte"
         });
     }
 
     try {
-        let sql = `
+
+        const connection = await mysql.createConnection(config.db);
+
+        // create user
+
+        let userSql = `
             INSERT INTO users
                 SET ?;
         `;
-        let passwordHash = await bcrypt.hash(password, Number(SALT_ROUNDS));
-        let params = { username: username, email: email, password: passwordHash};
+        let passwordHash = await bcrypt.hash(user.password, Number(SALT_ROUNDS));
+        let userParams = { username: user.username, email: user.email, password: passwordHash};
 
-        const connection = await mysql.createConnection(config.db);
-        let [{ insertId }, ] = await connection.query(sql, params);
+        let [{ insertId }, ] = await connection.query(userSql, userParams);
 
-        sql = `
+        // create preferences entry
+
+        if (!preferences) {
+            preferences = {}
+        }
+
+        if (preferences.avatar === undefined) {
+            preferences.avatar = null;
+        }
+        if (preferences.tooltips === undefined) {
+            preferences.tooltips = true;
+        }
+
+        let preferencesSql = `
+            INSERT INTO preferences
+                SET ?;
+        `;
+        let preferencesParams = { avatar: preferences.avatar, user_id: insertId, tooltips: preferences.tooltips };
+
+        connection.query(preferencesSql, preferencesParams);
+
+        // move steps
+
+        if (steps && steps.length !== 0) {
+            let stepsSql = `
+                INSERT INTO steps(entry_logged, steps, mins_walked, user_id) 
+                    VALUES (FROM_UNIXTIME(?), ?, ?, ?);
+            `;
+
+            for(let stepsEntry of steps) {
+                await connection.query(stepsSql, [Math.floor(stepsEntry.timestamp / 1000), stepsEntry.steps, stepsEntry.minsWalked, insertId]);
+            }
+        }
+        
+        // send back user
+
+        let getUserSql = `
             SELECT user_id, username, email, accnt_creation FROM users
                 WHERE user_id = ?;
         `;
 
-        params = [insertId];
+        let getUserParams = [insertId];
 
-        let [result, ] = await connection.query(sql, params);
+        let [result, ] = await connection.query(getUserSql, getUserParams);
 
         response.status(201).json(result[0]);
 
     } catch (error) {
         response.status(500).json({
             message: `Unable to create new user: ${error}`
-        })
+        });
     }
     
 }

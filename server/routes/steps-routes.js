@@ -6,7 +6,4 @@ router.route('/')
     .get(stepsController.getSteps)
     .post(stepsController.logSteps);
 
-router.route('/all')
-    .post(stepsController.moveAllSteps);
-
 module.exports = router;
