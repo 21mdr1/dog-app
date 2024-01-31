@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 const stepsRoutes =  require('./routes/steps');
-const preferencesRoutes =  require('./routes/preferences');
+const preferencesRoutes =  require('./routes/preferences-routes');
 const userRoutes = require('./routes/user-routes');
 
 app.use(cors({ origin: CORS_ORIGIN}));

@@ -28,6 +28,68 @@ const getPreferences = async (request, response) => {
     }
 }
 
+const createPreferences = async (request, response) => {
+    let {avatar, userId, tooltips} = request.body;
+
+    if (!userId) {
+        return response.status(400).json({
+            message: 'Please provide a user id in the request'
+        })
+    }
+
+    if (!avatar) {
+        avatar = null;
+    }
+    if (!tooltips) {
+        tooltips = true;
+    }
+
+    try {
+        let sql = `
+            INSERT INTO preferences
+                SET ?;
+        `;
+        let params = { avatar: avatar, user_id: userId, tooltips: tooltips };
+
+        const connection = await mysql.createConnection(config.db);
+        let [{ insertId }, ] = await connection.query(sql, params);
+
+        sql = `
+            SELECT * FROM preferences
+                WHERE preference_id = ?;
+        `
+        params = [insertId];
+
+        let [result, ] = await connection.query(sql, params);
+
+        response.status(201).json(result[0]);
+    } catch (error) {
+        response.status(500).json({
+            message: `Unable to create new preferences entry: ${error}`
+        });
+    }
+}
+
+// results.insertId
+// results.affectedRows
+// results.changedRows
+
+const changePreferences = async (request, response) => {
+    let {preference, value, userId} = request.body;
+
+    let sql = `UPDATE preferences
+        SET ${preference} = ?
+        WHERE user_id = ?;`;
+    let inserts = [value, userId];
+
+    const connection = await mysql.createConnection(config.db);
+    let [result, _fields] = await connection.query(sql, inserts);
+
+    response.json(result);
+}
+
 module.exports = {
     getPreferences,
+    createPreferences,
+    changePreferences,
 }
