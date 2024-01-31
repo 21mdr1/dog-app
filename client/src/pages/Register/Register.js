@@ -33,7 +33,7 @@ function Register() {
 
             register(
                 { username: username, email: email, password: password },
-                (data) => {
+                () => {
                     setMessage("Account created successfully");
                     setTimeout(() => {navigate('/login')}, 2000);
                 },
@@ -43,18 +43,6 @@ function Register() {
                 }
             );
 
-
-            // try {
-            //     await register({ username: username, email: email, password: password });
-                
-            //     setInputs({email: '', username: '', password: '', confirmPassword: ''});
-
-            //     setMessage("Account created successfully");
-            //     setTimeout(() => {navigate('/login')}, 2000);
-            // } catch (error) {
-            //     console.log('error creating account', error);
-            //     setMessage("Error creating account");
-            // }
         } else {
             setMessage("Error creating account");
         }
