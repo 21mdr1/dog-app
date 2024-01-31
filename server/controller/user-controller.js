@@ -20,15 +20,25 @@ const createUser = async (request, response) => {
 
     try {
         let sql = `
-        INSERT INTO users(username, email, password)
-            values (?, ?, ?);
+            INSERT INTO users
+                SET ?;
         `;
-        let params = [username, email, password];
+
+        let params = request.body;
 
         const connection = await mysql.createConnection(config.db);
+        let [{ insertId }, ] = await connection.query(sql, params);
+
+        sql = `
+            SELECT * FROM users
+                WHERE user_id = ?;
+        `;
+
+        params = [insertId];
+
         let [result, ] = await connection.query(sql, params);
 
-        response.status(201).json(result);
+        response.status(201).json(result[0]);
 
     } catch (error) {
         response.status(500).json({

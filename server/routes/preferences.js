@@ -4,6 +4,11 @@ const config = require('../config');
 const express = require('express');
 const router = express.Router();
 
+
+        // results.insertId
+        // results.affectedRows
+        // results.changedRows
+
 router.get('/:userId', async (request, response) => {
 
     let sql = `SELECT * FROM preferences
