@@ -27,12 +27,14 @@
 
     &__background-tree {
         position: absolute;
-        transform: translate(-50%, -50%);
-        top: 35%;
-        left: 85%;
+        transform: scale(0.9);
+        bottom: 37%;
+        left: 55%;
 
         @include tablet {
-            top: 40%;
+            transform: scale(1.5);
+            bottom: 45%;
+            left: 67%;
         }
     }
 }
