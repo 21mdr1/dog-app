@@ -8,6 +8,26 @@
     }
 }
 
+.right {
+    display: none;
+    width: 50vw;
+    height: 100vh;
+    background-color: $yellow;
+
+    @include desktop {
+        @include flex(center, center);
+    }
+}
+
+.left {
+    @include flex(center, center);
+
+    @include desktop {
+        width: 50vw;
+        height: 100vh;
+    }
+}
+
 .back-button {
     &__text {
         &--register {
