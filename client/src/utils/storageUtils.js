@@ -3,33 +3,32 @@ import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemote
 
 // record steps
 
-function recordSteps(steps) {
-    // if (userIsSignedIn) {
-    //     recordStepsRemotely(steps); 
-    // } else {
+function recordSteps(steps, userIsSignedIn) {
+    if (userIsSignedIn) {
+        recordStepsRemotely(steps); 
+    } else {
         recordStepsLocally(steps);
-    //}
+    }
 }
 
 // retrieve steps
 
-function getLastWeeksSteps(userId) {
-    //if (userIsSignedIn) {
-        //return lastWeeksStepsRemotely(userId);
-    //} else {
+function getLastWeeksSteps(userId, userIsSignedIn) {
+    if (userIsSignedIn) {
+        return getLastWeeksStepsRemotely(userId);
+    } else {
         return getLastWeeksStepsLocally();
-    //}
+    }
 }
 
 // record preferences
 
-function recordPreferences(preference, value, userId, onSuccess, onFailure) {
-    recordPreferencesLocally(preference, value);
-    //recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure);
+function recordPreferences(preference, value, userId, userIsSignedIn, onSuccess, onFailure) {
+    if (userIsSignedIn) {
+        recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure);
+    } else {
+        recordPreferencesLocally(preference, value);
+    }
 }
-
-// transfer local data to remote
-
-
 
 export { recordSteps, recordPreferences, getLastWeeksSteps };
