@@ -27,7 +27,7 @@ const createUser = async (request, response) => {
             INSERT INTO users
                 SET ?;
         `;
-        let passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+        let passwordHash = await bcrypt.hash(password, Number(SALT_ROUNDS));
         let params = { username: username, email: email, password: passwordHash};
 
         const connection = await mysql.createConnection(config.db);
