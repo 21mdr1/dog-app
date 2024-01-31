@@ -1,14 +1,9 @@
 const mysql = require('mysql2/promise');
 const config = require('../config');
 
-// results.insertId
-// results.affectedRows
-// results.changedRows
-
-
 const getSteps = async (request, response) => {
     let days = request.query.days || 7;
-    let { userId } = request.params;
+    let { userId } = request.user_id;
 
     try {
         let sql = `
@@ -33,11 +28,12 @@ const getSteps = async (request, response) => {
 }
 
 const logSteps = async (request, response) => {
-    let { steps, minsWalked, userId } = request.body;
+    let { steps, minsWalked } = request.body;
+    let userId = request.user_id;
 
-    if (!steps || !minsWalked || !userId) {
+    if (!steps || !minsWalked) {
         return response.status(400).json({
-            message: "Please provide a userId, a number of steps, and a number of minutes walked in the request"
+            message: "Please provide a number of steps, and a number of minutes walked in the request"
         });
     }
 
@@ -69,11 +65,12 @@ const logSteps = async (request, response) => {
 }
 
 const moveAllSteps = async (request, response) => {
-    let { stepsArr, userId } = request.body;
+    let { stepsArr } = request.body;
+    let userId = request.user_id;
 
-    if (!stepsArr || !userId) {
+    if (!stepsArr) {
         return response.status(400).json({
-            message: "Please provide an array with the steps data and a user id in the request"
+            message: "Please provide an array with the steps data in the request"
         });
     }
 

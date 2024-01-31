@@ -7,7 +7,7 @@ const getPreferences = async (request, response) => {
             SELECT * FROM preferences
                 WHERE ?;
         `;
-        let params = {user_id: request.params.userId };
+        let params = { user_id: request.user_id };
 
         const connection = await mysql.createConnection(config.db);
         let [result, _fields] = await connection.query(sql, params);
@@ -29,13 +29,8 @@ const getPreferences = async (request, response) => {
 }
 
 const createPreferences = async (request, response) => {
-    let {avatar, userId, tooltips} = request.body;
-
-    if (!userId) {
-        return response.status(400).json({
-            message: 'Please provide a user id in the request'
-        })
-    }
+    let { avatar, tooltips } = request.body;
+    let userId = request.user_id;
 
     if (!avatar) {
         avatar = null;
@@ -71,7 +66,8 @@ const createPreferences = async (request, response) => {
 }
 
 const changePreferences = async (request, response) => {
-    let {preference, value, userId} = request.body;
+    let { preference, value } = request.body;
+    let userId = request.user_id;
 
     try {
         let sql = `

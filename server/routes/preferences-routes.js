@@ -3,10 +3,8 @@ const express = require('express');
 const router = express.Router();
 
 router.route('/')
+    .get(preferencesController.getPreferences)
     .post(preferencesController.createPreferences)
     .patch(preferencesController.changePreferences);
-
-router.route('/:userId')
-    .get(preferencesController.getPreferences);
 
 module.exports = router;
