@@ -15,7 +15,6 @@ function signOut() {
 
 async function register(user) {
     let newUser = await createUser(user);
-    console.log(newUser);
 
     let preferences = getPreferencesLocally();
     await recordPreferencesRemotely(preferences, newUser.user_id, () => {clearLocalCache('preferences')});
