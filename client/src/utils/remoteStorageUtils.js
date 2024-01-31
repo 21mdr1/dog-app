@@ -88,7 +88,7 @@ async function recordPreferencesRemotely(preferences, userId, onSuccess, onFailu
     return data;
 }
 
-async function moveAllStepsToRemote(stepsArr, userId, onSuccess ,onFailure = (error) => {console.log('Error recording steps', error)}) {
+async function moveAllStepsToRemote(stepsArr, userId, onSuccess, onFailure = (error) => {console.log('Error recording steps', error)}) {
     let data = await saveInDB(
         {stepsArr: stepsArr, userId: userId},
         `${BASE_URL}/steps/all`, 
@@ -99,7 +99,7 @@ async function moveAllStepsToRemote(stepsArr, userId, onSuccess ,onFailure = (er
     return data;
 }
 
-async function createUser(user, onSuccess ,onFailure = (error) => {console.log('Error creating user', error)}) {
+async function createUser(user, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
     let data = await saveInDB(
         user,
         `${BASE_URL}/user/register`, 
