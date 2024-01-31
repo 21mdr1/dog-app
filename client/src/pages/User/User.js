@@ -7,7 +7,7 @@ function User({ signedIn }) {
         <div className="page page--user">
             <TopNav page='user' signedIn={signedIn} />
             <main className="main-user">
-                <Graph />
+                <Graph signedIn={signedIn} />
             </main>
         </div>
     );

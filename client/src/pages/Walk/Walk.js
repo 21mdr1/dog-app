@@ -17,7 +17,7 @@ function Walk({ signedIn }) {
             <TopNav page='walk' signedIn={signedIn} />
             <AnimatedWalkingDog />
             <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />
-            {displayForm && <WalkForm setDisplayForm={setDisplayForm} />}
+            {displayForm && <WalkForm setDisplayForm={setDisplayForm} signedIn={signedIn}/>}
         </div>
     )
 }

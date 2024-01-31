@@ -4,13 +4,13 @@ import { getLastWeeksSteps } from '../../utils/storageUtils';
 import { useState, useEffect } from 'react';
 import './Graph.scss';
 
-function Graph() {
+function Graph({ signedIn }) {
 
     let [ stepsArr, setStepsArr ] = useState([]); 
 
     useEffect(() => {
         async function getSteps() {
-            let steps = await getLastWeeksSteps()
+            let steps = await getLastWeeksSteps(signedIn)
             setStepsArr(steps);
         }
         

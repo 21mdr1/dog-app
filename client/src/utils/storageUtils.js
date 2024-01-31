@@ -3,9 +3,9 @@ import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemote
 
 // record steps
 
-function recordSteps(steps, userIsSignedIn) {
+async function recordSteps(steps, userIsSignedIn) {
     if (userIsSignedIn) {
-        recordStepsRemotely(steps); 
+        await recordStepsRemotely(steps); 
     } else {
         recordStepsLocally(steps);
     }
@@ -13,9 +13,9 @@ function recordSteps(steps, userIsSignedIn) {
 
 // retrieve steps
 
-function getLastWeeksSteps(userId, userIsSignedIn) {
+async function getLastWeeksSteps(userIsSignedIn) {
     if (userIsSignedIn) {
-        return getLastWeeksStepsRemotely(userId);
+        return await getLastWeeksStepsRemotely();
     } else {
         return getLastWeeksStepsLocally();
     }
@@ -23,9 +23,9 @@ function getLastWeeksSteps(userId, userIsSignedIn) {
 
 // record preferences
 
-function recordPreferences(preference, value, userId, userIsSignedIn, onSuccess, onFailure) {
+async function recordPreferences(preference, value, userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
-        recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure);
+        await recordPreferencesRemotely(preference, value, onSuccess, onFailure);
     } else {
         recordPreferencesLocally(preference, value);
     }

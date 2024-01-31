@@ -9,7 +9,11 @@ function defaultAction(data) {
 
 async function saveInDB(data, endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
     try {
-        let response = await axios.post(endpoint, data);
+        let response = await axios.post(endpoint, data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         
         onSuccess(response.data);
         return response.data;
@@ -21,7 +25,11 @@ async function saveInDB(data, endpoint, onSuccess = defaultAction, onFailure = d
 
 async function getFromDB(endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
     try {
-        let response = await axios.get(endpoint);
+        let response = await axios.get(endpoint, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         
         onSuccess(response.data);
         return response.data;
@@ -33,7 +41,11 @@ async function getFromDB(endpoint, onSuccess = defaultAction, onFailure = defaul
 
 async function changeInDB(data, endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
     try {
-        let response = await axios.put(endpoint, data);
+        let response = await axios.put(endpoint, data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         
         onSuccess(response.data);
         return response.data;
@@ -56,10 +68,10 @@ async function recordStepsRemotely(steps, onSuccess, onFailure = (error) => {con
     return data;
 }
 
-async function getLastWeeksStepsRemotely(userId, onSuccess, onFailure = (error) => {console.log('Error getting steps:', error)}) {
+async function getLastWeeksStepsRemotely(onSuccess, onFailure = (error) => {console.log('Error getting steps:', error)}) {
 
     let data = getFromDB(
-        `${BASE_URL}/steps/${userId}`, 
+        `${BASE_URL}/steps`, 
         onSuccess, 
         onFailure
     );
@@ -67,9 +79,10 @@ async function getLastWeeksStepsRemotely(userId, onSuccess, onFailure = (error) 
     return data;
 }
 
-async function changePreferencesRemotely(preference, value, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+// this will be changed back to be record
+async function recordPreferencesRemotely(preference, value, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
     let data = await changeInDB(
-        {preference: preference, value: value, userId: userId}, 
+        {preference: preference, value: value}, 
         `${BASE_URL}/preferences`,
         onSuccess,
         onFailure
@@ -78,30 +91,13 @@ async function changePreferencesRemotely(preference, value, userId, onSuccess, o
     return data;
 }
 
-async function recordPreferencesRemotely(preferences, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
-    let data = await saveInDB({...preferences, userId: userId}, 
-        `${BASE_URL}/preferences`, 
-        onSuccess, 
-        onFailure
-    );
-
-    return data;
-}
-
-async function moveAllStepsToRemote(stepsArr, userId, onSuccess, onFailure = (error) => {console.log('Error recording steps', error)}) {
+async function createUser(user, preferences, steps, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
     let data = await saveInDB(
-        {stepsArr: stepsArr, userId: userId},
-        `${BASE_URL}/steps/all`, 
-        onSuccess, 
-        onFailure
-    );
-
-    return data;
-}
-
-async function createUser(user, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
-    let data = await saveInDB(
-        user,
+        { 
+            user: user,
+            preferences: preferences,
+            steps: steps,
+        },
         `${BASE_URL}/user/register`, 
         onSuccess, 
         onFailure
@@ -121,4 +117,4 @@ async function logUserIn(user, onSuccess, onFailure = (error) => {console.log('E
     return data;
 }
 
-export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, moveAllStepsToRemote, logUserIn };
+export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn };

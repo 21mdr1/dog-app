@@ -4,7 +4,7 @@ import { recordSteps } from '../../utils/storageUtils';
 import './WalkForm.scss';
 
 
-function WalkForm({ setDisplayForm }) {
+function WalkForm({ setDisplayForm, signedIn }) {
 
     let [ inputs, setInputs ] = useState({hours: '0', minutes: '10', seconds: '0'})
     let { hours, minutes, seconds } = inputs;
@@ -23,7 +23,7 @@ function WalkForm({ setDisplayForm }) {
         let steps = convertToSteps(mins);
         // call api to submit walk, 
         //show a success message under the form for a few seconds or error message if it doesn't work?
-        await recordSteps({ minsWalked: mins, steps: steps });
+        await recordSteps({ minsWalked: mins, steps: steps }, signedIn);
         
         setDisplayForm(false);
     }
