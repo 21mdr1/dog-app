@@ -18,17 +18,24 @@ const createUser = async (request, response) => {
         });
     }
 
-
-    let sql = `
+    try {
+        let sql = `
         INSERT INTO users(username, email, password)
             values (?, ?, ?);
-    `;
-    let params = [username, email, password];
+        `;
+        let params = [username, email, password];
 
-    const connection = await mysql.createConnection(config.db);
-    let [result, ] = await connection.query(sql, params);
+        const connection = await mysql.createConnection(config.db);
+        let [result, ] = await connection.query(sql, params);
 
-    response.json(result);
+        response.status(201).json(result);
+
+    } catch (error) {
+        response.status(500).json({
+            message: `Unable to create new user: ${error}`
+        })
+    }
+    
 }
 
 module.exports = {
