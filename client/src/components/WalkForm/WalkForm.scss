@@ -64,4 +64,11 @@
         padding: 0.95rem 2.5rem;
         cursor: pointer;
     }
+
+    &__message {
+        line-height: initial;
+        font-size: 0.65rem;
+        font-weight: 500;
+        margin-top: -0.75rem;
+    }
 }

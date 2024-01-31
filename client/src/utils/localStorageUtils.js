@@ -47,7 +47,7 @@ function recordStepsLocally(steps, onSuccess = () => {}, onFailure = (error) => 
     }
 }
 
-function getLastWeeksStepsLocally(onSuccess, onFailure) {
+function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {console.log('Error getting setps', data)}) {
     try {
         let data = getLocally('stepsWalked') || [];
 
