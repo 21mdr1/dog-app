@@ -4,12 +4,25 @@
 
 .page {
     &--walk {
-        background-image: url('../../assets/static-images/walk-background.svg');
-        background-size: cover;
         @include flex(center, center);
         flex-direction: column;
         padding: $mobile-spacing;
         position: relative;
+
+        
+        &::before {
+            content: '';
+            background-image: url('../../assets/static-images/walk-background.svg');
+            background-size: cover;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+
+            @include desktop {
+                transform: rotateY(180deg);
+            }
+        }
     }
 
     &__background-tree {
@@ -17,5 +30,9 @@
         transform: translate(-50%, -50%);
         top: 35%;
         left: 85%;
+
+        @include tablet {
+            top: 40%;
+        }
     }
 }
