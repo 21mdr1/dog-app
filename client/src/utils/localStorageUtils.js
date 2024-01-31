@@ -2,6 +2,10 @@ import { getWeekday, isInLastWeek } from "./dateUtils";
 
 // Helpers
 
+function clearLocalCache(key) {
+    localStorage.removeItem(key);
+}
+
 function saveLocally(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
@@ -84,4 +88,4 @@ function getPreferencesLocally() {
 }
 
 
-export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally };
+export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, clearLocalCache };
