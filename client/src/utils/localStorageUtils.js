@@ -88,4 +88,4 @@ function getPreferencesLocally() {
 }
 
 
-export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, clearLocalCache };
+export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };

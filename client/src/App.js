@@ -4,9 +4,13 @@ import Walk from './pages/Walk/Walk';
 import User from './pages/User/User';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import { useState } from 'react';
+import { userIsSignedIn } from './utils/userUtils';
 import './App.scss';
 
 function App() {
+  let [ signedIn, setSignedIn ] = useState(userIsSignedIn());
+
   return (
     <BrowserRouter>
       <Routes>

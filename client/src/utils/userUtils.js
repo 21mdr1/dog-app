@@ -1,8 +1,7 @@
 import { createUser, logUserIn, recordPreferencesRemotely, moveAllStepsToRemote } from "./remoteStorageUtils";
-import { getPreferencesLocally, getAllStepsLocally, clearLocalCache } from "./localStorageUtils";
-
+import { getPreferencesLocally, getAllStepsLocally, clearLocalCache, saveLocally, getLocally } from "./localStorageUtils";
 function userIsSignedIn() {
-    return !!localStorage.getItem('token');
+    return !!getLocally('token');
 }
 
 async function login(username, password) {
@@ -10,12 +9,12 @@ async function login(username, password) {
 
     let token = await logUserIn(
         user,
-        (data) => {localStorage.setItem('token', data.token)});
+        (data) => {saveLocally('token', data.token)});
 
 }
 
 function signOut() {
-    localStorage.removeItem('token');
+    clearLocalCache('token');
 }
 
 async function register(user) {
