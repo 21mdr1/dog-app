@@ -27,7 +27,7 @@ function Login({ setSignedIn }) {
                 setInputs({ username: '', password: '' });
 
                 setMessage("Logged In Successfully");
-                setTimeout(() => {navigate('/')}, 3000);
+                setTimeout(() => {navigate('/')}, 2000);
             } catch (error) {
                 console.log(error);
                 setMessage('Error logging in');

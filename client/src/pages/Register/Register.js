@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { formIsValid, inputIsValid } from '../../utils/validationUtils';
-import { register } from '../../utils/userUtils';
+import { register, login } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
@@ -30,17 +30,31 @@ function Register() {
         event.preventDefault();
 
         if (formIsValid(inputs)) {
-            try {
-                await register({ username: username, email: email, password: password });
-                
-                setInputs({email: '', username: '', password: '', confirmPassword: ''});
 
-                setMessage("Account created successfully");
-                setTimeout(() => {navigate('/login')}, 3000);
-            } catch (error) {
-                console.log('error creating account', error);
-                setMessage("Error creating account");
-            }
+            register(
+                { username: username, email: email, password: password },
+                (data) => {
+                    setMessage("Account created successfully");
+                    setTimeout(() => {navigate('/login')}, 2000);
+                },
+                (error) => {
+                    console.log('error creating account', error);
+                    setMessage("Error creating account");
+                }
+            );
+
+
+            // try {
+            //     await register({ username: username, email: email, password: password });
+                
+            //     setInputs({email: '', username: '', password: '', confirmPassword: ''});
+
+            //     setMessage("Account created successfully");
+            //     setTimeout(() => {navigate('/login')}, 2000);
+            // } catch (error) {
+            //     console.log('error creating account', error);
+            //     setMessage("Error creating account");
+            // }
         } else {
             setMessage("Error creating account");
         }

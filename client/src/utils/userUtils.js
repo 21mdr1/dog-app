@@ -21,7 +21,7 @@ function signOut(setSignedIn) {
     setSignedIn(false);
 }
 
-async function register(user) {
+async function register(user, onSuccess, onFailure) {
     let preferences = getPreferencesLocally();
     let steps = getAllStepsLocally();
 
@@ -30,9 +30,11 @@ async function register(user) {
         preferences, 
         steps, 
         () => {
-            clearLocalCache('preferences')
-            clearLocalCache('steps')
-        }
+            clearLocalCache('preferences');
+            clearLocalCache('stepsWalked');
+            onSuccess && onSuccess();
+        },
+        onFailure
     );
 
     return newUser;
