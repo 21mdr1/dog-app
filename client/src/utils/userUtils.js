@@ -18,12 +18,10 @@ async function register(user) {
     console.log(newUser);
 
     let preferences = getPreferencesLocally();
-    await recordPreferencesRemotely(preferences, newUser.user_id);
-    clearLocalCache('preferences');
+    await recordPreferencesRemotely(preferences, newUser.user_id, () => {clearLocalCache('preferences')});
 
     let steps = getAllStepsLocally();
-    await moveAllStepsToRemote(steps, newUser.user_id);
-    clearLocalCache('steps');
+    await moveAllStepsToRemote(steps, newUser.user_id, () => {clearLocalCache('steps')});
 
     return newUser;
 }
