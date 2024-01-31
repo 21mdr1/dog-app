@@ -68,8 +68,46 @@ const logSteps = async (request, response) => {
     }
 }
 
+const moveAllSteps = async (request, response) => {
+    let { stepsArr, userId } = request.body;
+
+    if (!stepsArr || !userId) {
+        return response.status(400).json({
+            message: "Please provide an array with the steps data and a user id in the request"
+        });
+    }
+
+    try {
+        let resultsArr = [];
+        const connection = await mysql.createConnection(config.db);
+
+        let insertStepsSql = `
+            INSERT INTO steps(entry_logged, steps, mins_walked, user_id) 
+                VALUES (FROM_UNIXTIME(?), ?, ?, ?);
+        `;
+
+        let getStepsSql = `
+            SELECT * FROM steps
+                WHERE steps_id = ?;
+        `
+
+        for(let stepsEntry of stepsArr) {
+            let [{insertId}, ] = await connection.query(insertStepsSql, [Math.floor(stepsEntry.timestamp / 1000), stepsEntry.steps, stepsEntry.minsWalked, userId]);
+            let [result, ] = await connection.query(getStepsSql, insertId);
+            resultsArr.push(result[0]);
+        }
+
+        response.json(resultsArr);
+    } catch (error) {
+        response.status(500).json({
+            message: `Unable to create steps entries: ${error}`
+        });
+    }
+}
+
 
 module.exports = {
     getSteps,
-    logSteps
+    logSteps,
+    moveAllSteps
 }
