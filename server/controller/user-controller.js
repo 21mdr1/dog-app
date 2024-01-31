@@ -24,7 +24,7 @@ const createUser = async (request, response) => {
                 SET ?;
         `;
 
-        let params = request.body;
+        let params = { username: username, email: email, password: password };
 
         const connection = await mysql.createConnection(config.db);
         let [{ insertId }, ] = await connection.query(sql, params);

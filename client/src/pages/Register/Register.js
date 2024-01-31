@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { formIsValid, inputIsValid } from '../../utils/validationUtils';
+import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
@@ -23,6 +24,13 @@ function Register() {
 
     function handleSubmit(event) {
         event.preventDefault();
+
+        if (formIsValid(inputs)) {
+            register({ username: username, email: email, password: password });
+        } else {
+            console.log('Error, form inputs are invalid');
+        }
+
         console.log(inputs);
     }
 
