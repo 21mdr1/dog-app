@@ -3,7 +3,6 @@ const { PORT, CORS_ORIGIN } = process.env;
 const cors = require('cors');
 const express = require('express');
 const app = express();
-//const query = require('./db');
 
 const stepsRoutes =  require('./routes/steps');
 const preferencesRoutes =  require('./routes/preferences');

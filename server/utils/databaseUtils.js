@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const config = require('./config');
+const config = require('../config');
 
 async function query(query, params) {
     const connection = await mysql.createConnection(config.db);
@@ -7,4 +7,11 @@ async function query(query, params) {
     return results;
 }
 
-module.exports = query;
+function emptyOrRows(rows) {
+    return !!rows ? rows : [];
+}
+
+module.exports = {
+    query,
+    emptyOrRows,
+};
