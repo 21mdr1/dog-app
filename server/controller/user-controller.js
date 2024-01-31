@@ -25,16 +25,14 @@ const createUser = async (request, response) => {
             INSERT INTO users
                 SET ?;
         `;
-
         let passwordHash = await bcrypt.hash(password, saltRounds);
-        
         let params = { username: username, email: email, password: passwordHash};
 
         const connection = await mysql.createConnection(config.db);
         let [{ insertId }, ] = await connection.query(sql, params);
 
         sql = `
-            SELECT * FROM users
+            SELECT user_id, username, email, accnt_creation FROM users
                 WHERE user_id = ?;
         `;
 

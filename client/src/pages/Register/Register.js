@@ -27,6 +27,7 @@ function Register() {
 
         if (formIsValid(inputs)) {
             register({ username: username, email: email, password: password });
+            alert('user account was created');
         } else {
             console.log('Error, form inputs are invalid');
         }
