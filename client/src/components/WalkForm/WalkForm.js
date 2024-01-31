@@ -4,10 +4,13 @@ import { recordSteps } from '../../utils/storageUtils';
 import './WalkForm.scss';
 
 
-function WalkForm({ setDisplayForm }) {
+function WalkForm({ setDisplayForm, signedIn }) {
 
     let [ inputs, setInputs ] = useState({hours: '0', minutes: '10', seconds: '0'})
     let { hours, minutes, seconds } = inputs;
+
+    let [ message, setMessage] = useState("");
+
 
     function clickOut() {
         setDisplayForm(false);
@@ -21,11 +24,19 @@ function WalkForm({ setDisplayForm }) {
         event.preventDefault();
         let mins = convertToMins(inputs);
         let steps = convertToSteps(mins);
-        // call api to submit walk, 
-        //show a success message under the form for a few seconds or error message if it doesn't work?
-        await recordSteps({ minsWalked: mins, steps: steps });
+
+        await recordSteps(
+            { minsWalked: mins, steps: steps },
+            signedIn, 
+            () => {
+                setMessage("Walk logged successfully");
+                setTimeout(() => {setDisplayForm(false)}, 2000);
+            }, 
+            () => {
+                setMessage("Error logging walk");
+            }
+        );
         
-        setDisplayForm(false);
     }
 
     function handleInputChange(event) {
@@ -88,6 +99,7 @@ function WalkForm({ setDisplayForm }) {
                     </label>
                 </div>
                 <button type='submit' className="walk-form__button">Log Walk</button>
+                {message && <p className="walk-form__message">{message}</p>}
             </form>
         </div>
     );

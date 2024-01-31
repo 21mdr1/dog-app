@@ -3,11 +3,11 @@ import AnimatedSittingDog from '../../components/AnimatedSittingDog/AnimatedSitt
 import TopNav from '../../components/TopNav/TopNav';
 import './Home.scss';
 
-function Home() {
+function Home({signedIn}) {
 
     return (
         <div className='page page--home'>
-            <TopNav page='home' />
+            <TopNav page='home' signedIn={signedIn} />
             <AnimatedSittingDog />
             <BottomNav page='home' />
         </div>

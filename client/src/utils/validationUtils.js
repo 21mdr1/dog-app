@@ -1,4 +1,8 @@
 
+function capitalize(string) {
+    return string.replace(/^.|\s./, (char) => char.toUpperCase());
+}
+
 function formIsValid(inputs, returnErrors = false) {
     for(let key in inputs) {
         let errors = inputIsValid(key, inputs[key], inputs['password'], true);
@@ -23,7 +27,7 @@ function inputIsValid(inputType, input, input2, returnErrors = false) {
             errors = passwordConfirmIsValid(input, input2);
             break;
         default: 
-            errors = (input.length > 0) ? [] : [`${inputType} must not be empty`];
+            errors = (input.length > 0) ? [] : [`${capitalize(inputType)} must not be empty`];
             break;
     }
     return returnErrors ? errors : !errors.length; 
@@ -59,7 +63,7 @@ function passwordIsValid(pass) {
 }
 
 function passwordConfirmIsValid(confirmPass, pass) {
-    return (confirmPass != '' && confirmPass === pass) ? [] : ['Password confirmation must match password'];
+    return (confirmPass !== '' && confirmPass === pass) ? [] : ['Password confirmation must match password'];
 }
 
 export { formIsValid, inputIsValid }; 

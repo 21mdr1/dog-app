@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { formIsValid, inputIsValid } from '../../utils/validationUtils';
+import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
@@ -10,6 +11,10 @@ function Register() {
 
     let [ errors, setErrors] = useState({email: [], username: [], password: [], confirmPassword: []});
     let { email: emailErrors, username: usernameErrors, password: passwordErrors, confirmPassword: confirmPasswordErrors } = errors;
+
+    let [ message, setMessage ] = useState(null);
+
+    let navigate = useNavigate();
 
     function handleInputChange(event) {
         let { name, value } = event.target;
@@ -21,9 +26,26 @@ function Register() {
         setErrors({...errors, [name]: inputIsValid(name, value, password, true)});
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log(inputs);
+
+        if (formIsValid(inputs)) {
+
+            register(
+                { username: username, email: email, password: password },
+                () => {
+                    setMessage("Account created successfully");
+                    setTimeout(() => {navigate('/login')}, 2000);
+                },
+                (error) => {
+                    console.log('error creating account', error);
+                    setMessage("Error creating account");
+                }
+            );
+
+        } else {
+            setMessage("Error creating account");
+        }
     }
 
     return (
@@ -92,6 +114,7 @@ function Register() {
                 <p className='register-form__text'>Already have an account? 
                     <Link to='/login' className='register-form__text register-form__text--highlight'> Log in</Link>
                 </p>
+                {message && <p className='register-form__text'>{message}</p>}
             </form>
         </div>
     );

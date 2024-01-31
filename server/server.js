@@ -3,16 +3,15 @@ const { PORT, CORS_ORIGIN } = process.env;
 const cors = require('cors');
 const express = require('express');
 const app = express();
-//const query = require('./db');
 
-const stepsRoutes =  require('./routes/steps');
-const preferencesRoutes =  require('./routes/preferences');
-const userRoutes = require('./routes/user');
+const stepsRoutes =  require('./routes/steps-routes');
+const preferencesRoutes =  require('./routes/preferences-routes');
+const userRoutes = require('./routes/user-routes');
 
 app.use(cors({ origin: CORS_ORIGIN}));
 app.use(express.json());
 
-app.use('/images', express.static('./static/images'));
+app.use('/images', express.static('./public/images'));
 
 app.use('/steps', stepsRoutes);
 app.use('/preferences', preferencesRoutes);
