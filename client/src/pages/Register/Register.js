@@ -26,13 +26,15 @@ function Register() {
         setErrors({...errors, [name]: inputIsValid(name, value, password, true)});
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         if (formIsValid(inputs)) {
             try {
-                register({ username: username, email: email, password: password });
+                await register({ username: username, email: email, password: password });
                 
+                setInputs({email: '', username: '', password: '', confirmPassword: ''});
+
                 setMessage("Account created successfully");
                 setTimeout(() => {navigate('/login')}, 3000);
             } catch (error) {

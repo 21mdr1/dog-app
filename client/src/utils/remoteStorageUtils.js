@@ -110,4 +110,15 @@ async function createUser(user, onSuccess, onFailure = (error) => {console.log('
     return data;
 }
 
-export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, moveAllStepsToRemote };
+async function logUserIn(user, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
+    let data = await saveInDB(
+        user,
+        `${BASE_URL}/user/login`, 
+        onSuccess, 
+        onFailure
+    );
+
+    return data;
+}
+
+export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, moveAllStepsToRemote, logUserIn };

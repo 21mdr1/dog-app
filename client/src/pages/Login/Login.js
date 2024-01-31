@@ -1,21 +1,40 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { formIsValid } from '../../utils/validationUtils';
+import { login } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Login.scss';
 
 function Login() {
-    let [ inputs, setInputs ] = useState({ email: '', password: '' });
-    let { email, password } = inputs;
+    let navigate = useNavigate();
+    let [ inputs, setInputs ] = useState({ username: '', password: '' });
+    let { username, password } = inputs;
+
+    let [ message, setMessage ] = useState(null);
+
 
     function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log(inputs);
+
+        if (formIsValid(inputs)) {
+            try {
+                await login(username, password);
+                setInputs({ username: '', password: '' });
+
+                setMessage("Logged In Successfully");
+                setTimeout(() => {navigate('/')}, 3000);
+            } catch (error) {
+                console.log(error);
+                setMessage('Error logging in');
+            }
+        } else {
+            setMessage('Error logging in');
+        }
     }
 
     return (
@@ -32,10 +51,10 @@ function Login() {
                 <h1 className='login-form__title'>Welcome Back!</h1>
                 <input 
                     type="text" 
-                    name='email' 
+                    name='username' 
                     className="login-form__input" 
-                    placeholder='Email'
-                    value={email}
+                    placeholder='Username'
+                    value={username}
                     onChange={handleInputChange}
                 />
                 <input 
@@ -52,6 +71,7 @@ function Login() {
                 <p className='login-form__text'>Don't have an account? 
                     <Link to='/register' className='login-form__text login-form__text--highlight'> Sign up</Link>
                 </p>
+                {message && <p className='register-form__text'>{message}</p>}
             </form>
         </div>
     );
