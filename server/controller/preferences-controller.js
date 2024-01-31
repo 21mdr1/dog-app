@@ -70,22 +70,40 @@ const createPreferences = async (request, response) => {
     }
 }
 
-// results.insertId
-// results.affectedRows
-// results.changedRows
-
 const changePreferences = async (request, response) => {
     let {preference, value, userId} = request.body;
 
-    let sql = `UPDATE preferences
-        SET ${preference} = ?
-        WHERE user_id = ?;`;
-    let inserts = [value, userId];
+    try {
+        let sql = `
+            UPDATE preferences
+                SET ?
+                WHERE user_id = ?;
+        `;
+        let params = [{[preference]: value}, userId];
 
-    const connection = await mysql.createConnection(config.db);
-    let [result, _fields] = await connection.query(sql, inserts);
+        const connection = await mysql.createConnection(config.db);
+        let [{ changedRows }, ] = await connection.query(sql, params);
 
-    response.json(result);
+        if(changedRows === 0) {
+            return response.status(404).json({
+                message: `Preferences item for user with ID ${userId} not found`
+            });
+        }
+
+        sql = `
+            SELECT * FROM preferences
+                WHERE user_id = ?;
+        `;
+        params = [userId];
+
+        let [result, ] = await connection.query(sql, params);
+
+        response.json(result[0]);
+    } catch (error) {
+        response.status(500).json({
+            message: `Unable to update the preferences for user with ID ${request.body.userId}: ${error}`
+        });
+    }    
 }
 
 module.exports = {
