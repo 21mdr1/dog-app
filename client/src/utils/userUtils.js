@@ -15,7 +15,7 @@ async function login(username, password) {
 }
 
 function signOut() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('token');
 }
 
 async function register(user) {
