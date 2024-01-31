@@ -1,11 +1,11 @@
 
 function getTimestamp(date) {
-    if (!date.includes('/')) {
+    if (!String(date).includes('/')) {
         return date;
     }
 
     let [ d, m, y ] = date.split("/");
-    let dateObj = new Date(y, m, d);
+    let dateObj = new Date(y, m-1, d);
     return dateObj.getTime();
 }
 
