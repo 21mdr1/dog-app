@@ -7,12 +7,12 @@ const app = express();
 
 const stepsRoutes =  require('./routes/steps');
 const preferencesRoutes =  require('./routes/preferences');
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user-routes');
 
 app.use(cors({ origin: CORS_ORIGIN}));
 app.use(express.json());
 
-app.use('/images', express.static('./static/images'));
+app.use('/images', express.static('./public/images'));
 
 app.use('/steps', stepsRoutes);
 app.use('/preferences', preferencesRoutes);
