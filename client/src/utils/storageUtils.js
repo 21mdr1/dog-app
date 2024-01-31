@@ -13,9 +13,9 @@ async function recordSteps(steps, userIsSignedIn) {
 
 // retrieve steps
 
-async function getLastWeeksSteps(userIsSignedIn) {
+async function getLastWeeksSteps(userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
-        return await getLastWeeksStepsRemotely();
+        return await getLastWeeksStepsRemotely(onSuccess, onFailure);
     } else {
         return getLastWeeksStepsLocally();
     }

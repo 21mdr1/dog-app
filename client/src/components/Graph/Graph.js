@@ -1,3 +1,4 @@
+import { getWeekday } from '../../utils/dateUtils';
 import { roundToNext5000 } from '../../utils/mathUtils';
 import { getLastWeeksSteps } from '../../utils/storageUtils';
 import { useState, useEffect } from 'react';
@@ -8,13 +9,8 @@ function Graph({signedIn }) {
     let [ stepsArr, setStepsArr ] = useState([]); 
 
     useEffect(() => {
-        async function getSteps() {
-            let steps = await getLastWeeksSteps(signedIn)
-            setStepsArr(steps);
-        }
-        
-        getSteps();
-    }, [signedIn])
+        getLastWeeksSteps(signedIn, (data) => setStepsArr(data))
+    }, [signedIn]);
 
     if ( stepsArr.length === 0) {
         return (
@@ -49,7 +45,7 @@ function Graph({signedIn }) {
                 <tbody className='graph__body'>
                     {stepsArr.map((day) => {
                         return (
-                            <GraphRow key={day.date} date={day.date} steps={day.steps}/>
+                            <GraphRow key={getWeekday(day.date)} date={getWeekday(day.date)} steps={day.steps}/>
                         );
                     })}
                 </tbody>

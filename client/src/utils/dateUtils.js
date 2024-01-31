@@ -1,5 +1,16 @@
 
-function getWeekday(timestamp) {
+function getTimestamp(date) {
+    if (!date.includes('/')) {
+        return date;
+    }
+
+    let [ d, m, y ] = date.split("/");
+    let dateObj = new Date(y, m, d);
+    return dateObj.getTime();
+}
+
+function getWeekday(date) {
+    let timestamp = getTimestamp(date);
     const formatter = new Intl.DateTimeFormat('en-US', {weekday: 'short'});
     return formatter.format(timestamp).toLowerCase();
 }
@@ -26,4 +37,4 @@ function isInLastWeek(timestamp) {
     return difference < 7;
 }
 
-export { getWeekday, getLast7Days, isInLastWeek };
+export { getWeekday, getLast7Days, isInLastWeek, getTimestamp };

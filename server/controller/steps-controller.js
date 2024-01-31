@@ -3,16 +3,16 @@ const config = require('../config');
 
 const getSteps = async (request, response) => {
     let days = request.query.days || 7;
-    let { userId } = request.user_id;
+    let userId = request.user_id;
 
     try {
         let sql = `
             SELECT
-                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS logged_date,
-                SUM(steps) AS total_steps
+                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS date,
+                SUM(steps) AS steps
             FROM steps 
             WHERE (user_id = ?) AND (entry_logged > DATE_SUB(now(), INTERVAL ? DAY))
-            GROUP BY logged_date;
+            GROUP BY date;
         `;
         let params = [userId, days - 1 ];
 

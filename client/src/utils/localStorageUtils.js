@@ -1,4 +1,4 @@
-import { getWeekday, isInLastWeek } from "./dateUtils";
+import { isInLastWeek } from "./dateUtils";
 
 // Helpers
 
@@ -42,26 +42,32 @@ function recordStepsLocally(steps) {
     saveLocally('stepsWalked', data);
 }
 
-function getLastWeeksStepsLocally() {
-    let data = getLocally('stepsWalked') || [];
+function getLastWeeksStepsLocally(onSuccess, onFailure) {
+    try {
+        let data = getLocally('stepsWalked') || [];
 
-    let last7Days = [];
-    for(let item of data) {
-        if (!(isInLastWeek(item.timestamp))) {
-            continue;
+        let last7Days = [];
+        for(let item of data) {
+            if (!(isInLastWeek(item.timestamp))) {
+                continue;
+            }
+            let date = item.timestamp; // maybe turn to date instead of weekday?
+
+            let index = last7Days.findIndex((el) => el.date === date);
+            if (index === -1) {
+                last7Days.push({date: date, steps: item.steps});
+                continue;
+            }
+
+            last7Days[index].steps += item.steps;
         }
-        let date = getWeekday(item.timestamp); // maybe turn to date instead of weekday?
 
-        let index = last7Days.findIndex((el) => el.date === date);
-        if (index === -1) {
-            last7Days.push({date: date, steps: item.steps});
-            continue;
-        }
+        onSuccess(last7Days);
 
-        last7Days[index].steps += item.steps;
+        return last7Days;
+    } catch (error) {
+        onFailure(error);
     }
-
-    return last7Days;
 }
 
 function getAllStepsLocally() {
