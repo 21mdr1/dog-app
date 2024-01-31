@@ -13,8 +13,9 @@ function signOut() {
     localStorage.removeItem('username');
 }
 
-function register(user) {
-    let newUser = createUser(user);
+async function register(user) {
+    let newUser = await createUser(user);
+    console.log(newUser);
 
     let preferences = getPreferencesLocally();
     recordPreferencesRemotely(preferences, newUser.user_id);

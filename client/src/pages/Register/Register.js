@@ -31,8 +31,6 @@ function Register() {
         } else {
             console.log('Error, form inputs are invalid');
         }
-
-        console.log(inputs);
     }
 
     return (
