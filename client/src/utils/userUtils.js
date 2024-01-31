@@ -7,7 +7,7 @@ function userIsSignedIn() {
 async function login(username, password, setSignedIn) {
     let user = {username: username, password: password}
 
-    let token = await logUserIn(
+    await logUserIn(
         user,
         (data) => {
             saveLocally('token', data.token)

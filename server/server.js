@@ -14,18 +14,18 @@ app.use(express.json());
 
 app.use('/images', express.static('./public/images'));
 
-app.use((request, response, next) => {
-    const token = request.headers.authorization.slice("Bearer ".length);
+// app.use((request, response, next) => {
+//     const token = request.headers.authorization.slice("Bearer ".length);
 
-    try {
-        const payload = jwt.verify(token, SECRET_KEY);
-        request.user_id = payload.user_id;
+//     try {
+//         const payload = jwt.verify(token, SECRET_KEY);
+//         request.user_id = payload.user_id;
 
-        next();
-    } catch (error) {
-        response.sendStatus(401);
-    }
-});
+//         next();
+//     } catch (error) {
+//         response.sendStatus(401);
+//     }
+// });
 
 app.use('/steps', stepsRoutes);
 app.use('/preferences', preferencesRoutes);

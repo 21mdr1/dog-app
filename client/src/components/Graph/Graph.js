@@ -1,10 +1,9 @@
-import { getWeekday } from '../../utils/dateUtils';
 import { roundToNext5000 } from '../../utils/mathUtils';
 import { getLastWeeksSteps } from '../../utils/storageUtils';
 import { useState, useEffect } from 'react';
 import './Graph.scss';
 
-function Graph({ signedIn }) {
+function Graph({signedIn }) {
 
     let [ stepsArr, setStepsArr ] = useState([]); 
 
@@ -15,8 +14,7 @@ function Graph({ signedIn }) {
         }
         
         getSteps();
-
-    }, [])
+    }, [signedIn])
 
     if ( stepsArr.length === 0) {
         return (

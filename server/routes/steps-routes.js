@@ -1,9 +1,10 @@
 const stepsController = require('../controller/steps-controller');
+const { authenticate } = require('../utils/databaseUtils');
 const express = require('express');
 const router = express.Router();
 
 router.route('/')
-    .get(stepsController.getSteps)
-    .post(stepsController.logSteps);
+    .get(authenticate, stepsController.getSteps)
+    .post(authenticate, stepsController.logSteps);
 
 module.exports = router;

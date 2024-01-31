@@ -11,7 +11,22 @@ function emptyOrRows(rows) {
     return !!rows ? rows : [];
 }
 
+
+function  authenticate(request, response, next) {
+    const token = request.headers.authorization.slice("Bearer ".length);
+
+    try {
+        const payload = jwt.verify(token, SECRET_KEY);
+        request.user_id = payload.user_id;
+
+        next();
+    } catch (error) {
+        response.sendStatus(401);
+    }
+}
+
 module.exports = {
     query,
     emptyOrRows,
+    authenticate,
 };
