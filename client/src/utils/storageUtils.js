@@ -17,7 +17,7 @@ async function getLastWeeksSteps(userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
         return await getLastWeeksStepsRemotely(onSuccess, onFailure);
     } else {
-        return getLastWeeksStepsLocally();
+        return getLastWeeksStepsLocally(onSuccess, onFailure);
     }
 }
 

@@ -7,7 +7,7 @@ import './Graph.scss';
 function Graph({signedIn }) {
 
     let [ stepsArr, setStepsArr ] = useState([]); 
-
+    
     useEffect(() => {
         getLastWeeksSteps(signedIn, (data) => setStepsArr(data))
     }, [signedIn]);
