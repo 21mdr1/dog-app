@@ -2,7 +2,7 @@ import { createUser, logUserIn, recordPreferencesRemotely, moveAllStepsToRemote 
 import { getPreferencesLocally, getAllStepsLocally, clearLocalCache } from "./localStorageUtils";
 
 function userIsSignedIn() {
-    return !!localStorage.getItem('username');
+    return !!localStorage.getItem('token');
 }
 
 async function login(username, password) {
