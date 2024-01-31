@@ -59,7 +59,7 @@ function Register() {
                 />
                 <span className="back-button__text back-button__text--register">Back</span>
             </Link>
-            <div className="left left--register">
+            <div className="register-left">
                 <form className='register-form' onSubmit={handleSubmit}>
                     <h1 className='register-form__title'>Create an Account</h1>
                     <input 
@@ -119,8 +119,8 @@ function Register() {
                     {message && <p className='register-form__text'>{message}</p>}
                 </form>
             </div>
-            <div className='right right--register'>
-                <img src={registerImage} alt="A woman sits among some flowers" className="right__image right__image--register" />
+            <div className='register-right'>
+                <img src={registerImage} alt="A woman sits among some flowers" className="register-right__image" />
             </div>
         </div>
     );

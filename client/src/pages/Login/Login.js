@@ -49,7 +49,7 @@ function Login({ setSignedIn }) {
                 />
                 <span className="back-button__text back-button__text--login">Back</span>
             </Link>
-            <div className="left left--login">
+            <div className="login-left">
                 <form className='login-form' onSubmit={handleSubmit}>
                     <h1 className='login-form__title'>Welcome Back!</h1>
                     <input 
@@ -77,8 +77,8 @@ function Login({ setSignedIn }) {
                     {message && <p className='register-form__text'>{message}</p>}
                 </form>
             </div>
-            <div className="right right--login">
-                <img src={loginImage} alt="A dog" className="right__image right__image--login" />
+            <div className="login-right">
+                <img src={loginImage} alt="A dog" className="login-right__image" />
             </div>
         </div>
     );

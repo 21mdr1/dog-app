@@ -8,7 +8,7 @@
     }
 }
 
-.right {
+.register-right {
     display: none;
     width: 50vw;
     height: 100vh;
@@ -19,7 +19,7 @@
     }
 }
 
-.left {
+.register-left {
     @include flex(center, center);
 
     @include desktop {
@@ -47,6 +47,10 @@
         font-weight: 400;
         color: #4B4F52;
         margin: 0 2rem 1rem;
+
+        @include tablet {
+            font-size: 2.25rem;
+        }
     }
 
     &__input {
@@ -60,6 +64,10 @@
 
         &--invalid {
             outline: 1px solid #D22D2D;
+        }
+
+        @include tablet {
+            font-size: 1.15rem;
         }
     }
 
@@ -84,6 +92,10 @@
             background-color: $silver;
             cursor: default;
         }
+
+        @include tablet {
+            font-size: 1.15rem;
+        }
     }
 
     &__text {
@@ -94,6 +106,10 @@
         &--highlight {
             font-weight: 600;
             color: #a82b00;
+        }
+
+        @include tablet {
+            font-size: 1.15rem;
         }
     }
 }   
