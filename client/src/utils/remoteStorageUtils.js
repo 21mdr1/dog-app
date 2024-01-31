@@ -84,17 +84,30 @@ async function recordPreferencesRemotely(preferences, userId, onSuccess, onFailu
         onSuccess, 
         onFailure
     );
-    
+
     return data;
 }
 
-async function createUser(user) {
-    try {
-        let response = await axios.post(`${BASE_URL}/user/register`, user);
-        return response.data;
-    } catch (error) {
-        console.log(error);
-    }
+async function moveAllStepsToRemote(stepsArr, userId, onSuccess ,onFailure = (error) => {console.log('Error recording steps', error)}) {
+    let data = await saveInDB(
+        {stepsArr: stepsArr, userId: userId},
+        `${BASE_URL}/steps/all`, 
+        onSuccess, 
+        onFailure
+    );
+
+    return data;
 }
 
-export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser };
+async function createUser(user, onSuccess ,onFailure = (error) => {console.log('Error creating user', error)}) {
+    let data = await saveInDB(
+        user,
+        `${BASE_URL}/user/register`, 
+        onSuccess, 
+        onFailure
+    );
+
+    return data;
+}
+
+export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, moveAllStepsToRemote };

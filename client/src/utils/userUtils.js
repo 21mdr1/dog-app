@@ -1,4 +1,4 @@
-import { createUser, recordPreferencesRemotely } from "./remoteStorageUtils";
+import { createUser, recordPreferencesRemotely, moveAllStepsToRemote } from "./remoteStorageUtils";
 import { getPreferencesLocally, getAllStepsLocally } from "./localStorageUtils";
 
 function userIsSignedIn() {
@@ -19,9 +19,10 @@ function register(user) {
     let preferences = getPreferencesLocally();
     recordPreferencesRemotely(preferences, newUser.user_id);
 
-    // pass local steps to remote
     let steps = getAllStepsLocally();
+    moveAllStepsToRemote(steps, newUser.user_id);
 
+    return newUser;
 }
 
 export { userIsSignedIn, login, signOut, register };
