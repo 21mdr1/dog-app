@@ -16,6 +16,10 @@
         top: 5rem;
     }
 
+    @include desktop {
+        top: 3rem;
+    }
+
     &__shadow {
         background-color: $green-shadow;
         width: 50rem;
