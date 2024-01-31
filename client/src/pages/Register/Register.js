@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { formIsValid, inputIsValid } from '../../utils/validationUtils';
 import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
-import registerImage from '../../assets/static-images/register-image.svg'
+import registerImage from '../../assets/static-images/register-image.svg';
 import './Register.scss';
 
 function Register() {
@@ -120,7 +120,7 @@ function Register() {
                 </form>
             </div>
             <div className='right right--register'>
-                <img src={registerImage} alt="" className="right__image right__image--register" />
+                <img src={registerImage} alt="A woman sits among some flowers" className="right__image right__image--register" />
             </div>
         </div>
     );

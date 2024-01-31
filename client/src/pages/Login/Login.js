@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { formIsValid } from '../../utils/validationUtils';
 import { login } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
+import loginImage from '../../assets/static-images/login-image.svg';
 import './Login.scss';
 
 function Login({ setSignedIn }) {
@@ -48,32 +49,37 @@ function Login({ setSignedIn }) {
                 />
                 <span className="back-button__text back-button__text--login">Back</span>
             </Link>
-            <form className='login-form' onSubmit={handleSubmit}>
-                <h1 className='login-form__title'>Welcome Back!</h1>
-                <input 
-                    type="text" 
-                    name='username' 
-                    className="login-form__input" 
-                    placeholder='Username'
-                    value={username}
-                    onChange={handleInputChange}
-                />
-                <input 
-                    type="password" 
-                    name='password' 
-                    className="login-form__input"
-                    placeholder='Password'
-                    value={password}
-                    onChange={handleInputChange} 
-                />
-                <button className="login-form__button" disabled={!formIsValid(inputs)}>
-                    Sign In
-                </button>
-                <p className='login-form__text'>Don't have an account? 
-                    <Link to='/register' className='login-form__text login-form__text--highlight'> Sign up</Link>
-                </p>
-                {message && <p className='register-form__text'>{message}</p>}
-            </form>
+            <div className="left left--login">
+                <form className='login-form' onSubmit={handleSubmit}>
+                    <h1 className='login-form__title'>Welcome Back!</h1>
+                    <input 
+                        type="text" 
+                        name='username' 
+                        className="login-form__input" 
+                        placeholder='Username'
+                        value={username}
+                        onChange={handleInputChange}
+                    />
+                    <input 
+                        type="password" 
+                        name='password' 
+                        className="login-form__input"
+                        placeholder='Password'
+                        value={password}
+                        onChange={handleInputChange} 
+                    />
+                    <button className="login-form__button" disabled={!formIsValid(inputs)}>
+                        Sign In
+                    </button>
+                    <p className='login-form__text'>Don't have an account? 
+                        <Link to='/register' className='login-form__text login-form__text--highlight'> Sign up</Link>
+                    </p>
+                    {message && <p className='register-form__text'>{message}</p>}
+                </form>
+            </div>
+            <div className="right right--login">
+                <img src={loginImage} alt="A dog" className="right__image right__image--login" />
+            </div>
         </div>
     );
 }
