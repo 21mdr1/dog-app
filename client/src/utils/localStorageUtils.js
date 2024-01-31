@@ -60,6 +60,10 @@ function getLastWeeksStepsLocally() {
     return last7Days;
 }
 
+function getAllStepsLocally() {
+    return getLocally('stepsWalked') || [];
+}
+
 function recordPreferencesLocally(preference, value) { 
     let defaults = {
         avatar: null,
@@ -74,4 +78,10 @@ function recordPreferencesLocally(preference, value) {
     saveLocally(preferences);
 }
 
-export { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally };
+
+function getPreferencesLocally() {
+    return getLocally('preferences');
+}
+
+
+export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally };

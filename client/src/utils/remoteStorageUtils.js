@@ -67,11 +67,21 @@ async function getLastWeeksStepsRemotely(userId, onSuccess, onFailure = (error) 
     return data;
 }
 
-async function recordPreferencesRemotely(preference, value, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+async function changePreferencesRemotely(preference, value, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
     let data = await changeInDB(
         {preference: preference, value: value, userId: userId}, 
         `${BASE_URL}/preferences`,
         onSuccess,
+        onFailure
+    );
+    
+    return data;
+}
+
+async function recordPreferencesRemotely(preferences, userId, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+    let data = await saveInDB({...preferences, userId: userId}, 
+        `${BASE_URL}/preferences`, 
+        onSuccess, 
         onFailure
     );
     
@@ -87,4 +97,4 @@ async function createUser(user) {
     }
 }
 
-export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser };
+export { recordStepsRemotely, changePreferencesRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser };
