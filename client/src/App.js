@@ -14,10 +14,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/walk' element={<Walk />} />
-        <Route path='/user' element={<User />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Home signedIn={signedIn} />} />
+        <Route path='/walk' element={<Walk signedIn={signedIn} />} />
+        <Route path='/user' element={<User signedIn={signedIn} />} />
+        <Route path='/login' element={<Login setSignedIn={setSignedIn} />} />
         <Route path='/register' element={<Register />} />
       </Routes>
     </BrowserRouter>

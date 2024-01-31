@@ -7,14 +7,14 @@ import TopNav from '../../components/TopNav/TopNav';
 import WalkForm from '../../components/WalkForm/WalkForm';
 import './Walk.scss';
 
-function Walk() {
+function Walk({ signedIn }) {
     let [ displayForm, setDisplayForm ] = useState(false);
 
     return (
         <div className='page page--walk'>
             <Sun />
             <Tree className="page__background-tree" />
-            <TopNav page='walk'/>
+            <TopNav page='walk' signedIn={signedIn} />
             <AnimatedWalkingDog />
             <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />
             {displayForm && <WalkForm setDisplayForm={setDisplayForm} />}

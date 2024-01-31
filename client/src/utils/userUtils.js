@@ -1,20 +1,24 @@
 import { createUser, logUserIn, recordPreferencesRemotely, moveAllStepsToRemote } from "./remoteStorageUtils";
 import { getPreferencesLocally, getAllStepsLocally, clearLocalCache, saveLocally, getLocally } from "./localStorageUtils";
 function userIsSignedIn() {
-    return !!getLocally('token');
+    return !!localStorage.getItem('token');
 }
 
-async function login(username, password) {
+async function login(username, password, setSignedIn) {
     let user = {username: username, password: password}
 
     let token = await logUserIn(
         user,
-        (data) => {saveLocally('token', data.token)});
+        (data) => {
+            saveLocally('token', data.token)
+            setSignedIn(true);
+        });
 
 }
 
-function signOut() {
+function signOut(setSignedIn) {
     clearLocalCache('token');
+    setSignedIn(false);
 }
 
 async function register(user) {

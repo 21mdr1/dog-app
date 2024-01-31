@@ -5,7 +5,7 @@ import { login } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Login.scss';
 
-function Login() {
+function Login({ setSignedIn }) {
     let navigate = useNavigate();
     let [ inputs, setInputs ] = useState({ username: '', password: '' });
     let { username, password } = inputs;
@@ -23,7 +23,7 @@ function Login() {
 
         if (formIsValid(inputs)) {
             try {
-                await login(username, password);
+                await login(username, password, setSignedIn);
                 setInputs({ username: '', password: '' });
 
                 setMessage("Logged In Successfully");
