@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { formIsValid, inputIsValid } from '../../utils/validationUtils';
-import { register, login } from '../../utils/userUtils';
+import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import './Register.scss';
 
