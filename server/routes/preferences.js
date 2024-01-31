@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
 const config = require('../config');
 
+const preferencesController = require('../controller/preferences-controller');
 const express = require('express');
 const router = express.Router();
 
@@ -9,17 +10,8 @@ const router = express.Router();
         // results.affectedRows
         // results.changedRows
 
-router.get('/:userId', async (request, response) => {
-
-    let sql = `SELECT * FROM preferences
-        WHERE user_id = ?;`;
-    let inserts = [ request.params.userId ];
-
-    const connection = await mysql.createConnection(config.db);
-    let [result, _fields] = await connection.query(sql, inserts);
-
-    response.json(result);
-});
+router.route('/:userId')
+    .get(preferencesController.getPreferences);
 
 router.patch('/', async (request, response) => {
     let {preference, value, userId} = request.body;

@@ -14,7 +14,7 @@ function signOut() {
 
 function register(user) {
     // create user account
-    createUser(user);
+    let newUser = createUser(user);
     // pass local preferences to remote
 
     // pass local steps to remote
