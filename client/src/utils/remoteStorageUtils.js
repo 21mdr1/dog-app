@@ -8,6 +8,7 @@ function defaultAction(data) {
 }
 
 async function saveInDB(data, endpoint, onSuccess = defaultAction, onFailure = defaultAction) {
+    console.log(localStorage.getItem('token'));
     try {
         let response = await axios.post(endpoint, data, {
             headers: {
