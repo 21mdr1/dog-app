@@ -94,7 +94,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
                     </label>
                 </div>
                 <button type='submit' className="walk-form__button">Log Walk</button>
-                {message && <p className="walk-form__message">{message}</p>}
+                <p className="walk-form__message">{message}</p>
             </form>
         </div>
     );
