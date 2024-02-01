@@ -7,9 +7,16 @@ function Home({signedIn}) {
 
     return (
         <div className='page page--home'>
-            <TopNav page='home' signedIn={signedIn} />
-            <AnimatedSittingDog />
-            <BottomNav page='home' />
+            <div className="page__left">
+                <div className="nav__container">
+                    <TopNav page='home' signedIn={signedIn} />
+                </div>
+                <AnimatedSittingDog />
+                <BottomNav page='home' />
+            </div>
+            <div className="page__right">
+                <TopNav page='home' signedIn={signedIn} />
+            </div>
         </div>
     );
 }
