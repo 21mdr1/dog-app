@@ -60,14 +60,6 @@
         font-size: 1.125rem;
     }
 
-    &__steak-icons {
-        @include flex;
-    }
-
-    &__streak-icon {
-        width: 1.69rem;
-    }
-
     &__progress {
         @include flex(flex-start, center, 1rem);
     }

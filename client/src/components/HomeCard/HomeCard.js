@@ -40,9 +40,7 @@ function HomeCard({ steps, signedIn }) {
                     <div className="home-card__streak-header">
                         Streak:
                     </div>
-                    <div className='home-card__streak-icons'>
-                        <ShowStreak streak={streak} />
-                    </div>
+                    <ShowStreak streak={streak} />
                 </div>
                 <div className="home-card__progress">
                     <div className="home-card__progress-header">
