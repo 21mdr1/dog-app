@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     username varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
+    streak int unsigned NOT NULL DEFAULT 0,
     accnt_creation timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_id) 
 );
