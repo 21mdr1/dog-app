@@ -18,6 +18,14 @@
             );
         background-size: 100% 25px, 100% 100%;
         background-repeat: repeat, no-repeat;
+
+        @include tablet {
+            padding: $tablet-spacing;
+        }
+        
+        @include desktop {
+            padding: $desktop-spacing;
+        }
     }
 }
 

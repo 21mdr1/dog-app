@@ -8,5 +8,13 @@
         @include flex(center, center);
         flex-direction: column;
         padding: $mobile-spacing;
+
+        @include tablet {
+            padding: $tablet-spacing;
+        }
+        
+        @include desktop {
+            padding: $desktop-spacing;
+        }
     }
 }
