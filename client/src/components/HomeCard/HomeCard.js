@@ -8,7 +8,7 @@ function HomeCard({ steps, signedIn }) {
     let [ streak, setStreak ] = useState(0);
 
     useEffect(() => {
-        getStreak(signedIn, (data) => {setStreak(data)});
+        getStreak(signedIn, (data) => {setStreak(data.streak)});
     }, []);
 
     return (

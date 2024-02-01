@@ -38,11 +38,11 @@ function getStreakLocally(onSuccess = () => {}, onFailure = (error) => {console.
         if(isNaN(currentStreak)) {
             currentStreak = 0;
         }
-        onSuccess(currentStreak);
+        onSuccess({ streak: currentStreak });
         return currentStreak;
     } catch (error) {
         onFailure(error);
-        return 0;
+        return { streak: 0 };
     }   
 }
 
