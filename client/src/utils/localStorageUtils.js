@@ -35,13 +35,14 @@ function purgeOldLocalSteps(data) {
 function getStreakLocally(onSuccess = () => {}, onFailure = (error) => {console.log('Error getting streak:', error)}) {
     try {
         let currentStreak = Number(localStorage.getItem('streak'));
-        if(streak.isNaN()) {
+        if(isNaN(currentStreak)) {
             currentStreak = 0;
         }
         onSuccess(currentStreak);
         return currentStreak;
     } catch (error) {
         onFailure(error);
+        return 0;
     }   
 }
 
@@ -68,7 +69,7 @@ function recordStepsLocally(steps, onSuccess = () => {}, onFailure = (error) => 
 
     try {
         // update streak
-        let currentSteps = getTodaysStepsLocally();
+        let currentSteps = getTodaysStepsLocally()[0].steps;
         if (currentSteps < 10000 && currentSteps + steps.steps >= 10000) {
             increaseStreakLocally();
         }
@@ -161,7 +162,7 @@ function getTodaysStepsLocally(onSuccess = () => {}, onFailure = (data) => {cons
 
         // reset streak if needed
         let yesterdaysSteps = getYesterdaysStepsLocally()[0].steps;
-        if (yesterdaysSteps < 10000) {
+        if (todaysSteps.steps < 10000 && yesterdaysSteps < 10000) {
             resetStreakLocally();
         }
 
