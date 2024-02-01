@@ -1,4 +1,4 @@
-import { isInLastWeek } from "./dateUtils";
+import { isInLastWeek, getDate } from "./dateUtils";
 
 // Helpers
 
@@ -56,7 +56,7 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
             if (!(isInLastWeek(item.timestamp))) {
                 continue;
             }
-            let date = item.timestamp; // maybe turn to date instead of weekday?
+            let date = getDate(item.timestamp); // maybe turn to date instead of weekday?
 
             let index = last7Days.findIndex((el) => el.date === date);
             if (index === -1) {

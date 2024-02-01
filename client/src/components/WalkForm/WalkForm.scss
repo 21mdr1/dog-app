@@ -57,6 +57,7 @@
         background-color: $mercury;
         height: 2.8125rem;
         border-bottom: 1px solid $silver;
+        z-index: 20;
 
         &:last-child {
             border: none;

@@ -1,4 +1,10 @@
 
+function getDate(timestamp) {
+    const formatter = new Intl.DateTimeFormat('en-US', {day: 'numeric', month: 'numeric', year: "numeric"});
+    return formatter.format(timestamp);
+}
+
+
 function getTimestamp(date) {
     if (!String(date).includes('/')) {
         return date;
@@ -37,4 +43,4 @@ function isInLastWeek(timestamp) {
     return difference < 7;
 }
 
-export { getWeekday, getLast7Days, isInLastWeek, getTimestamp };
+export { getWeekday, getLast7Days, isInLastWeek, getTimestamp, getDate };
