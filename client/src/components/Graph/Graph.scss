@@ -47,52 +47,6 @@
         @include flex;
         flex-direction: column-reverse;
     }
-
-    &__row {
-        width: 100%;
-        @include flex(initial, initial, 0.5rem);
-    }
-
-    &__day {
-        font-weight: 400;
-        width: 2rem;
-        text-align: right;
-        flex-shrink: 0;
-
-        @include tablet {
-            font-size: 1.25rem;
-        }
-    }
-
-    &__right-side {
-        border-left: 1px solid $silver;
-        flex-grow: 1;
-    }
-
-    &__bar {
-
-        background: linear-gradient(1deg, 
-            transparent 0%, 
-            transparent calc(50% - 0.8px), 
-            #E11F27 50%, 
-            transparent calc(50% + 0.8px), 
-            transparent 100%
-        );
-
-        color: transparent;
-        display: inline-block;
-        position: relative;
-        height: 0.75rem;
-
-        &::after {
-            content: url('../../assets/static-images/graph-dog.svg');
-            width: 2rem;
-            height: 1rem;
-            position: absolute;
-            right: -1.2rem;
-            top: 0;
-        }
-    }
 }
 
 .legend{

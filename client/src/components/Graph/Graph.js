@@ -2,6 +2,7 @@ import { getWeekday } from '../../utils/dateUtils';
 import { roundToNext5000 } from '../../utils/mathUtils';
 import { getLastWeeksSteps } from '../../utils/storageUtils';
 import { useState, useEffect } from 'react';
+import GraphRow from '../GraphRow/GraphRow';
 import './Graph.scss';
 
 function Graph({signedIn }) {
@@ -23,21 +24,6 @@ function Graph({signedIn }) {
 
     let maxLength = roundToNext5000(Math.max(...stepsArr.map(a => a.steps)));
 
-    function GraphRow({ date, steps }) {
-        const length = Math.round((steps / maxLength)*100);
-        return (
-            <tr className='graph__row'>
-                <th className='graph__day'>{date}</th>
-                <td className="graph__right-side">
-                    <span 
-                        style={{'width': `${length}%`}} 
-                        className={`graph__bar graph__bar--${length}`}
-                    >{steps}</span>
-                </td>
-            </tr>
-        );
-    }
-
     return (
         <div className="graph__container">
             <table className="graph">
@@ -45,7 +31,7 @@ function Graph({signedIn }) {
                 <tbody className='graph__body'>
                     {stepsArr.map((day) => {
                         return (
-                            <GraphRow key={getWeekday(day.date)} date={getWeekday(day.date)} steps={day.steps}/>
+                            <GraphRow key={getWeekday(day.date)} date={getWeekday(day.date)} steps={day.steps} maxLength={maxLength}/>
                         );
                     })}
                 </tbody>
