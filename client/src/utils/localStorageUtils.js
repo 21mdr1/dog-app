@@ -1,4 +1,4 @@
-import { isInLastWeek } from "./dateUtils";
+import { isInLastWeek, isToday } from "./dateUtils";
 
 // Helpers
 
@@ -56,11 +56,15 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
             if (!(isInLastWeek(item.timestamp))) {
                 continue;
             }
-            let date = item.timestamp; // maybe turn to date instead of weekday?
+            let formatted_date = new Date(item.timestamp).toDateString();
 
-            let index = last7Days.findIndex((el) => el.date === date);
+            let index = last7Days.findIndex((el) => el.formatted_date === formatted_date);
             if (index === -1) {
-                last7Days.push({date: date, steps: item.steps});
+                last7Days.push({
+                    formatted_date: formatted_date,
+                    date: item.timestamp, 
+                    steps: item.steps
+                });
                 continue;
             }
 
@@ -70,6 +74,28 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
         onSuccess(last7Days);
 
         return last7Days;
+    } catch (error) {
+        onFailure(error);
+    }
+}
+
+function getTodaysStepsLocally(onSuccess = () => {}, onFailure = (data) => {console.log('Error getting setps', data)}) {
+    try {
+        let data = getLocally('stepsWalked') || [];
+
+        let todaysSteps = {date: Date.now(), steps: 0};
+        
+        for(let item of data) {
+            if (!(isToday(item.timestamp))) {
+                continue;
+            }
+
+            todaysSteps.steps += item.steps;
+        }
+
+        onSuccess([todaysSteps]);
+
+        return [todaysSteps];
     } catch (error) {
         onFailure(error);
     }
@@ -99,4 +125,4 @@ function getPreferencesLocally() {
 }
 
 
-export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };
+export { recordStepsLocally, getAllStepsLocally, getTodaysStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };

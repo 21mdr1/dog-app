@@ -8,7 +8,11 @@
 
 .sitting-dog {
     position: relative;
-    transform: scale(0.75);
+    transform: scale(0.6);
+
+    @include tablet {
+        transform: scale(0.8);
+    }
 
     &__shadow {
         background-color: $purple-shadow;

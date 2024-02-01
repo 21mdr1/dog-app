@@ -9,7 +9,16 @@
 
 .walking-dog {
     position: relative;
-    transform: scale(0.35);
+    transform: scale(0.3);
+
+    @include tablet {
+        transform: scale(0.4);
+        top: 10%;
+    }
+
+    @include desktop {
+        top: 12%;
+    }
 
     &__shadow {
         background-color: $green-shadow;

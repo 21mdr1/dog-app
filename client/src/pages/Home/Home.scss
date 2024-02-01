@@ -6,7 +6,50 @@
     &--home {
         background-color: $purple;
         @include flex(center, center);
+    }
+
+    &__left {
+        @include flex(center, center);
         flex-direction: column;
+        flex: 2;
+        height: 100%;
         padding: $mobile-spacing;
+
+        @include tablet {
+            padding: $tablet-spacing;
+        }
+        
+        @include desktop {
+            width: 100vw;
+            padding: $desktop-spacing;
+        }
+
+    }
+
+    &__right {
+        display: none;
+        flex: 1;
+        height: 100%;
+        background-color: #D3C6F7;
+        width: 100vw;
+        padding: $mobile-spacing;
+
+        @include tablet {
+            padding: $tablet-spacing;
+        }
+
+        @include desktop {
+            display: block;
+            padding: $desktop-spacing;
+        }
+    }
+}
+
+.nav {
+    &__container {
+        width: 100%;
+        @include desktop {
+            display: none;
+        }
     }
 }

@@ -8,6 +8,10 @@
     &__title {
         text-align: center;
         width: 100%;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
     }
 
     &__container {
@@ -16,6 +20,14 @@
         box-shadow: 0px 4px 4px 0px $dark-mask;
         width: 100%;
         position: relative;
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include desktop {
+            width: 33%;
+        }
 
         &::before {
             display: block;
@@ -35,56 +47,6 @@
         @include flex;
         flex-direction: column-reverse;
     }
-
-    &__row {
-        width: 100%;
-        @include flex(initial, initial, 0.5rem);
-    }
-
-    &__day {
-        font-weight: 400;
-        width: 2rem;
-        text-align: right;
-        flex-shrink: 0;
-    }
-
-    &__right-side {
-        border-left: 1px solid $silver;
-        flex-grow: 1;
-
-        // background: repeating-linear-gradient(
-        //     to right,
-        //     $mercury,
-        //     $mercury 1.5px,
-        //     transparent 1px,
-        //     transparent 10%
-        // );
-    }
-
-    &__bar {
-
-        background: linear-gradient(1deg, 
-            transparent 0%, 
-            transparent calc(50% - 0.8px), 
-            #E11F27 50%, 
-            transparent calc(50% + 0.8px), 
-            transparent 100%
-        );
-
-        color: transparent;
-        display: inline-block;
-        position: relative;
-        height: 0.75rem;
-
-        &::after {
-            content: url('../../assets/static-images/graph-dog.svg');
-            width: 2rem;
-            height: 1rem;
-            position: absolute;
-            right: -1.2rem;
-            top: 0;
-        }
-    }
 }
 
 .legend{
@@ -99,5 +61,9 @@
         @include flex(space-between);
         flex-grow: 1;
         border-top: 1px solid $silver;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
     }
 }

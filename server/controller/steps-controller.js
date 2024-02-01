@@ -6,18 +6,26 @@ const getSteps = async (request, response) => {
     let userId = request.user_id;
 
     try {
+        let startTimestamp = new Date(Date.now() - (days - 1) * (1000 * 3600 * 24));
+
+        let startDate = startTimestamp.toISOString().split('T')[0] + ' 00:00';
+
         let sql = `
             SELECT
-                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS date,
+                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS formatted_date,
+                AVG(UNIX_TIMESTAMP(entry_logged)*1000) AS date,
                 SUM(steps) AS steps
             FROM steps 
-            WHERE (user_id = ?) AND (entry_logged > DATE_SUB(now(), INTERVAL ? DAY))
-            GROUP BY date;
+            WHERE (user_id = ?) AND (entry_logged >= ? + INTERVAL 0 SECOND)
+            GROUP BY formatted_date;
         `;
-        let params = [userId, days - 1 ];
+
+        let params = [userId, startDate];
 
         const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
+
+        console.log(result);
 
         response.json(result);
     } catch (error) {

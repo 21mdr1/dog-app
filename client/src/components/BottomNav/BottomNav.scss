@@ -1,10 +1,11 @@
-@use '../../styles/partials/variables' as *;
+ @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
 
 .bottom-nav {
     border-radius: 15%/50%;
     height: 3.75rem;
     width: 14rem;
+    z-index: 0;
 
     @include flex(center, center, 0.75rem);
 

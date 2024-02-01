@@ -1,13 +1,13 @@
 @use './variables' as *;
 
 @mixin tablet {
-    @media (min-size: $tablet) {
+    @media (min-width: $tablet) {
         @content;
     }
 }
 
 @mixin desktop {
-    @media (min-size: $desktop) {
+    @media (min-width: $desktop) {
         @content;
     }
 }
@@ -24,6 +24,10 @@
 @mixin avatar {
     width: $avatar-size;
     filter: contrast(85%);
+
+    @include tablet {
+        width: 4rem;
+    }
 }
 
 @mixin hide-dropdown-arrow {

@@ -4,18 +4,44 @@
 
 .page {
     &--walk {
-        background-image: url('../../assets/static-images/walk-background.svg');
-        background-size: cover;
         @include flex(center, center);
         flex-direction: column;
         padding: $mobile-spacing;
         position: relative;
+
+        @include tablet {
+            padding: $tablet-spacing;
+        }
+        
+        @include desktop {
+            padding: $desktop-spacing;
+        }
+
+        &::before {
+            content: '';
+            background-image: url('../../assets/static-images/walk-background.svg');
+            background-size: cover;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+
+            @include desktop {
+                transform: rotateY(180deg);
+            }
+        }
     }
 
     &__background-tree {
         position: absolute;
-        transform: translate(-50%, -50%);
-        top: 35%;
-        left: 85%;
+        transform: scale(0.9);
+        bottom: 37%;
+        left: 55%;
+
+        @include tablet {
+            transform: scale(1.5);
+            bottom: 45%;
+            left: 67%;
+        }
     }
 }

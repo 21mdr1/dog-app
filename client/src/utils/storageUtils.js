@@ -1,5 +1,5 @@
-import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally } from './localStorageUtils';
-import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely } from './remoteStorageUtils';
+import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getTodaysStepsLocally } from './localStorageUtils';
+import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely } from './remoteStorageUtils';
 
 // record steps
 
@@ -21,6 +21,14 @@ async function getLastWeeksSteps(userIsSignedIn, onSuccess, onFailure) {
     }
 }
 
+async function getTodaysSteps(userIsSignedIn, onSuccess, onFailure) {
+    if (userIsSignedIn) {
+        return await getTodaysStepsRemotely(onSuccess, onFailure);
+    } else {
+        return getTodaysStepsLocally(onSuccess, onFailure);
+    }
+}
+
 // record preferences
 
 async function recordPreferences(preference, value, userIsSignedIn, onSuccess, onFailure) {
@@ -31,4 +39,4 @@ async function recordPreferences(preference, value, userIsSignedIn, onSuccess, o
     }
 }
 
-export { recordSteps, recordPreferences, getLastWeeksSteps };
+export { recordSteps, recordPreferences, getLastWeeksSteps, getTodaysSteps };
