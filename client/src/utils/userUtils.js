@@ -37,6 +37,7 @@ async function register(user, onSuccess, onFailure) {
         () => {
             clearLocalCache('preferences');
             clearLocalCache('stepsWalked');
+            clearLocalCache('streak');
             onSuccess && onSuccess();
         },
         onFailure
