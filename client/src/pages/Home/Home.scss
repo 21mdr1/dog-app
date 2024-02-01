@@ -53,16 +53,3 @@
         }
     }
 }
-
-.message {
-    color: #ffffff;
-    width: 75%;
-    text-align: center;
-    position: relative;
-    top: 2rem;
-
-    @include tablet {
-       top: 4rem;
-       font-size: 1.25rem;
-    }
-}

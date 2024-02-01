@@ -1,20 +1,7 @@
 import dog from '../../assets/icons/dog.svg';
-import { useState, useEffect } from 'react';
-import { getTodaysSteps } from '../../utils/storageUtils';
 import './HomeCard.scss';
 
-function HomeCard({ signedIn }) {
-
-    let [ steps, setSteps ] = useState({});
-
-    useEffect(() => {
-        getTodaysSteps(
-            signedIn,
-            (data) => {
-                data.length === 0 ? setSteps({steps: 0}) : setSteps(data[0])}, 
-            (error) => console.log('Error getting steps', error)
-        );
-    }, []);
+function HomeCard({ steps }) {
 
     return (
         <div className='home-card'>
