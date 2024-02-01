@@ -32,5 +32,15 @@
 .main-user {
     padding: $mobile-spacing 0;
     @include flex(center, center, 1.5rem);
+
+    @include tablet {
+        padding: $tablet-spacing 0;
+    }
+
+    @include desktop {
+        padding: 0;
+        width: 63.75rem;
+        margin: auto;
+    }
 }
 
