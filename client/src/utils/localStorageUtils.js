@@ -196,4 +196,4 @@ function getPreferencesLocally() {
 }
 
 
-export { recordStepsLocally, getAllStepsLocally, getTodaysStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };
+export { recordStepsLocally, getAllStepsLocally, getTodaysStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache, getStreakLocally };

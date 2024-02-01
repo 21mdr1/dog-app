@@ -33,7 +33,7 @@ function Home({ signedIn }) {
             </div>
             <div className="page__right">
                 <TopNav page='home' signedIn={signedIn} />
-                <HomeCard steps={steps} />
+                <HomeCard steps={steps} signedIn={signedIn} />
             </div>
         </div>
     );
