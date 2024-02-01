@@ -17,7 +17,6 @@ function getTimestamp(date) {
 
 function getWeekday(date) {
     let timestamp = getTimestamp(date);
-    console.log(getDate(timestamp));
     const formatter = new Intl.DateTimeFormat('en-US', {weekday: 'short'});
     return formatter.format(timestamp).toLowerCase();
 } 

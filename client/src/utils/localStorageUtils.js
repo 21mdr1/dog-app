@@ -56,11 +56,15 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
             if (!(isInLastWeek(item.timestamp))) {
                 continue;
             }
-            let date = getDate(item.timestamp);
+            let formatted_date = new Date(item.timestamp).toDateString();
 
-            let index = last7Days.findIndex((el) => el.date === date);
+            let index = last7Days.findIndex((el) => el.formatted_date === formatted_date);
             if (index === -1) {
-                last7Days.push({date: date, steps: item.steps});
+                last7Days.unshift({
+                    formatted_date: formatted_date,
+                    date: item.timestamp, 
+                    steps: item.steps
+                });
                 continue;
             }
 
@@ -79,7 +83,7 @@ function getTodaysStepsLocally(onSuccess = () => {}, onFailure = (data) => {cons
     try {
         let data = getLocally('stepsWalked') || [];
 
-        let todaysSteps = {date: getDate(Date.now()), steps: 0};
+        let todaysSteps = {date: Date.now(), steps: 0};
         
         for(let item of data) {
             if (!(isToday(item.timestamp))) {
