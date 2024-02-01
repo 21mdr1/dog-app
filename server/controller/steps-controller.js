@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 const config = require('../config');
-const { increaseStreak } = require('../utils/streakManagementUtils');
+const { checkResetStreak, checkIncreaseStreak } = require('../utils/streakManagementUtils');
 
 const getSteps = async (request, response) => {
     let days = request.query.days || 7;
@@ -26,6 +26,10 @@ const getSteps = async (request, response) => {
         const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
 
+        if (days === 1) {
+            checkResetStreak(result[0].steps, userId);
+        }
+
         console.log(result);
 
         response.json(result);
@@ -47,7 +51,7 @@ const logSteps = async (request, response) => {
     }
 
     try {
-        increaseStreak();
+        checkIncreaseStreak();
         const connection = await mysql.createConnection(config.db);
         let sql = `
             INSERT INTO steps
