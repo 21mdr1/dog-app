@@ -178,7 +178,7 @@ function getAllStepsLocally() {
 
 function recordPreferencesLocally(preferences, onSuccess = () => {}, onFailure = (data) => {console.log('Error recording preferences', data)}) { 
     try {
-        saveLocally(preferences);
+        saveLocally('preferences', preferences);
         onSuccess();
     } catch (error) {
         onFailure(error);
