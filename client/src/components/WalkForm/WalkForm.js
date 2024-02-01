@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { convertToSteps, convertToMins } from '../../utils/mathUtils';
 import { recordSteps } from '../../utils/storageUtils';
+import close from '../../assets/icons/close_line.svg';
 import Select from 'react-select';
 import './WalkForm.scss';
 
@@ -50,6 +51,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
     return (
         <div className='walk-form__background' onClick={clickOut}>
             <form className="walk-form" onClick={dontClickOut} onSubmit={submitHandler}>
+                <img src={close} alt="close" className="walk-form__exit" onClick={clickOut} />
                 <div className="walk-form__content">
                     <label htmlFor="hours" className="walk-form__label">
                         <Select 
