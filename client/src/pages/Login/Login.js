@@ -21,13 +21,14 @@ function Login({ setSignedIn }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setMessage("");
 
         if (formIsValid(inputs)) {
             login(
               username, password, setSignedIn,
               () => {
                 setMessage("Logged In Successfully");
-                setTimeout(() => {navigate('/')}, 2000);
+                setTimeout(() => {navigate('/')}, 1500);
               },
               (error) => {
                 console.log("Error logging in", error);

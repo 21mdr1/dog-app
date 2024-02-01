@@ -29,14 +29,14 @@ function Register() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setMessage("");
 
         if (formIsValid(inputs)) {
-
             register(
                 { username: username, email: email, password: password },
                 () => {
                     setMessage("Account created successfully");
-                    setTimeout(() => {navigate('/login')}, 2000);
+                    setTimeout(() => {navigate('/login')}, 1500);
                 },
                 (error) => {
                     console.log('error creating account', error);
