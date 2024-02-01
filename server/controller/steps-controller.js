@@ -8,11 +8,12 @@ const getSteps = async (request, response) => {
     try {
         let sql = `
             SELECT
-                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS date,
+                DATE_FORMAT(entry_logged, '%e/%c/%Y') AS formatted_date,
+                AVG(UNIX_TIMESTAMP(entry_logged)*1000) AS date,
                 SUM(steps) AS steps
             FROM steps 
             WHERE (user_id = ?) AND (entry_logged > DATE_SUB(now(), INTERVAL ? DAY))
-            GROUP BY date;
+            GROUP BY formatted_date;
         `;
         let params = [userId, days - 1 ];
 

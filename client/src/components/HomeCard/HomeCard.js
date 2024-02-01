@@ -10,7 +10,8 @@ function HomeCard({ signedIn }) {
     useEffect(() => {
         getTodaysSteps(
             signedIn,
-            (data) => setSteps(data[0]), 
+            (data) => {
+                data.length === 0 ? setSteps({steps: 0}) : setSteps(data[0])}, 
             (error) => console.log('Error getting steps', error)
         );
     }, []);
