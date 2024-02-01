@@ -2,6 +2,7 @@ import BottomNav from '../../components/BottomNav/BottomNav';
 import AnimatedSittingDog from '../../components/AnimatedSittingDog/AnimatedSittingDog';
 import TopNav from '../../components/TopNav/TopNav';
 import './Home.scss';
+import HomeCard from '../../components/HomeCard/HomeCard';
 
 function Home({signedIn}) {
 
@@ -16,6 +17,7 @@ function Home({signedIn}) {
             </div>
             <div className="page__right">
                 <TopNav page='home' signedIn={signedIn} />
+                <HomeCard />
             </div>
         </div>
     );

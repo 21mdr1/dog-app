@@ -1,0 +1,90 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+
+.home-card {
+    margin-top: 3rem;
+    background-color: #C0B1EB;
+    border-radius: 1rem;
+    width: 100%;
+    padding: 1rem;
+    @include flex;
+    column-gap: 1rem;
+
+    &__progress-bar {
+        width: 8.625rem;
+        height: 8.625rem;
+        border-radius: 50%; 
+        
+        @include flex(center, center);
+        flex-direction: column;
+        
+        background: 
+            radial-gradient(closest-side, #C0B1EB 79%, transparent 80% 100%),
+            conic-gradient(#7058AF 70%, #E6DCFF 0);
+
+            &::before {
+                content: "7000";
+                color: #E1E1E1;
+                font-size: 1.5rem;
+            }
+
+
+            &::after {
+                content: "steps walked";
+                text-transform: uppercase;
+                color: #E1E1E1;
+                font-size: 0.625rem;
+            }
+    }
+
+    &__right {
+        @include flex(space-evenly, flex-start);
+        flex-direction: column;
+    }
+
+    &__streak {
+        @include flex(flex-start, center, 1rem);
+    }
+
+    &__streak-header {
+        text-transform: uppercase;
+        color: #E1E1E1;
+        font-size: 1.125rem;
+    }
+
+    &__steak-icons {
+        @include flex;
+    }
+
+    &__streak-icon {
+        width: 1.69rem;
+    }
+
+    &__progress {
+        @include flex(flex-start, center, 1rem);
+    }
+
+    &__progress-header {
+        width: 5rem;
+        text-transform: uppercase;
+        color: #E1E1E1;
+        font-size: 0.875rem;
+
+        @include flex(flex-end, center);
+
+        &::after {
+            content: ':';
+            font-size: 1.125rem;
+        }
+    }
+    
+    &__progress-percentage {
+        text-transform: uppercase;
+        color: #7058AF;
+        font-size: 2rem;
+    }
+
+}
+
+
