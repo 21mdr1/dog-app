@@ -17,9 +17,10 @@ function getTimestamp(date) {
 
 function getWeekday(date) {
     let timestamp = getTimestamp(date);
+    console.log(getDate(timestamp));
     const formatter = new Intl.DateTimeFormat('en-US', {weekday: 'short'});
     return formatter.format(timestamp).toLowerCase();
-}
+} 
 
 function getLast7Days(format) {
     let days = [];
@@ -44,11 +45,10 @@ function isInLastWeek(timestamp) {
 }
 
 function isToday(timestamp) {
-    let today = Date.now();
-    let day = 1000 * 3600 * 24;
-    let difference = Math.floor((today - timestamp) / day);
+    let date = new Date(timestamp).toDateString();
+    let today = new Date().toDateString();
 
-    return difference < 1;
+    return today === date;
 }
 
 export { getWeekday, getLast7Days, isInLastWeek, isToday, getTimestamp, getDate };
