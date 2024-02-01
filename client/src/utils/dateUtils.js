@@ -43,4 +43,12 @@ function isInLastWeek(timestamp) {
     return difference < 7;
 }
 
-export { getWeekday, getLast7Days, isInLastWeek, getTimestamp, getDate };
+function isToday(timestamp) {
+    let today = Date.now();
+    let day = 1000 * 3600 * 24;
+    let difference = Math.floor((today - timestamp) / day);
+
+    return difference < 1;
+}
+
+export { getWeekday, getLast7Days, isInLastWeek, isToday, getTimestamp, getDate };

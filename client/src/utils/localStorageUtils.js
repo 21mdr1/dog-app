@@ -1,4 +1,4 @@
-import { isInLastWeek, getDate } from "./dateUtils";
+import { isInLastWeek, getDate, isToday } from "./dateUtils";
 
 // Helpers
 
@@ -56,7 +56,7 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
             if (!(isInLastWeek(item.timestamp))) {
                 continue;
             }
-            let date = getDate(item.timestamp); // maybe turn to date instead of weekday?
+            let date = getDate(item.timestamp);
 
             let index = last7Days.findIndex((el) => el.date === date);
             if (index === -1) {
@@ -70,6 +70,28 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
         onSuccess(last7Days);
 
         return last7Days;
+    } catch (error) {
+        onFailure(error);
+    }
+}
+
+function getTodaysStepsLocally(onSuccess = () => {}, onFailure = (data) => {console.log('Error getting setps', data)}) {
+    try {
+        let data = getLocally('stepsWalked') || [];
+
+        let todaysSteps = {date: getDate(Date.now()), steps: 0};
+        
+        for(let item of data) {
+            if (!(isToday(item.timestamp))) {
+                continue;
+            }
+
+            todaysSteps.steps += item.steps;
+        }
+
+        onSuccess(todaysSteps);
+
+        return todaysSteps;
     } catch (error) {
         onFailure(error);
     }
@@ -99,4 +121,4 @@ function getPreferencesLocally() {
 }
 
 
-export { recordStepsLocally, getAllStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };
+export { recordStepsLocally, getAllStepsLocally, getTodaysStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getPreferencesLocally, getLocally, saveLocally, clearLocalCache };

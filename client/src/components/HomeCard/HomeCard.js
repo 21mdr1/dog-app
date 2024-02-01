@@ -1,17 +1,38 @@
 import dog from '../../assets/icons/dog.svg';
+import { useState, useEffect } from 'react';
+import { getTodaysSteps } from '../../utils/storageUtils';
 import './HomeCard.scss';
 
-function HomeCard() {
+function HomeCard({ signedIn }) {
+
+    let [ steps, setSteps ] = useState({});
+
+    useEffect(() => {
+        getTodaysSteps(
+            signedIn,
+            (data) => setSteps(data), 
+            (error) => console.log('Error getting steps', error)
+        );
+    }, []);
+
     return (
         <div className='home-card'>
             <div className="home-card__left">
                 <div 
                     className="home-card__progress-bar"
                     role="progressbar"
-                    aria-valuenow="7000"
+                    aria-valuenow={steps.steps}
                     aria-valuemin="0"
                     aria-valuemax="10000"
                 ></div>
+                <div className="home-card__legend">
+                    <div className="home-card__steps">
+                        {steps.steps}
+                    </div>
+                    <div className="home-card__steps-header">
+                        stepswalked
+                    </div>
+                </div>
             </div>
             <div className="home-card__right">
                 <div className="home-card__streak">
@@ -19,8 +40,8 @@ function HomeCard() {
                         Streak:
                     </div>
                     <div className='home-card__streak-icons'>
-                        {[1,2,3].map(() => {
-                            return <img src={dog} alt="dog" className="home-card__streak-icon" />
+                        {[1,2,3].map((el) => {
+                            return <img key={el} src={dog} alt="dog" className="home-card__streak-icon" />
                         })}
                     </div>
                 </div>
@@ -29,7 +50,7 @@ function HomeCard() {
                         Today's Progress
                     </div>
                     <div className='home-card__progress-percentage'>
-                        70%
+                        {`${Math.round(steps.steps/10000)}%`}
                     </div>
                 </div>
             </div>
