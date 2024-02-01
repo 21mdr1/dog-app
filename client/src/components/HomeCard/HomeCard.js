@@ -27,7 +27,7 @@ function HomeCard({ signedIn }) {
                     style={{
                         'background': `
                             radial-gradient(closest-side, #C0B1EB 79%, transparent 80% 100%),
-                            conic-gradient(#7058AF ${Math.round(steps.steps/10000)}%, #E6DCFF 0)
+                            conic-gradient(#7058AF ${Math.round((steps.steps/10000)*100)}%, #E6DCFF 0)
                         `}} 
                 ></div>
                 <div className="home-card__legend">
@@ -55,7 +55,7 @@ function HomeCard({ signedIn }) {
                         Today's Progress
                     </div>
                     <div className='home-card__progress-percentage'>
-                        {`${Math.round(steps.steps/10000)}%`}
+                        {`${Math.round((steps.steps/10000)*100)}%`}
                     </div>
                 </div>
             </div>
