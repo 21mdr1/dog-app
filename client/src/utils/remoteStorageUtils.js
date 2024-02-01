@@ -101,7 +101,7 @@ async function recordPreferencesRemotely(preference, value, onSuccess, onFailure
     return data;
 }
 
-async function getStreakRemotely(onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+async function getStreakRemotely(onSuccess, onFailure = (error) => {console.log('Error getting streak', error)}) {
     let data = await getFromDB(
         `${BASE_URL}/user/streak`,
         onSuccess,
