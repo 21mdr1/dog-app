@@ -25,7 +25,7 @@ async function getStepsForDaysAgo(daysAgo, userId) {
         let params = [userId, startDate, endDate];
         let [result, ] = await connection.query(sql, params);
 
-        return result;
+        return result || [{ steps: 0 }];
     } catch (error) {
         console.log('Error fetching steps', error);
         return [{}]
