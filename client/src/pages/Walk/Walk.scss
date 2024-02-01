@@ -9,7 +9,14 @@
         padding: $mobile-spacing;
         position: relative;
 
+        @include tablet {
+            padding: $tablet-spacing;
+        }
         
+        @include desktop {
+            padding: $desktop-spacing;
+        }
+
         &::before {
             content: '';
             background-image: url('../../assets/static-images/walk-background.svg');
