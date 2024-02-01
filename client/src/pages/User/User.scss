@@ -31,5 +31,6 @@
 
 .main-user {
     padding: $mobile-spacing 0;
+    @include flex(center, center, 1.5rem);
 }
 

@@ -17,6 +17,14 @@
         width: 100%;
         position: relative;
 
+        @include tablet {
+            width: 50%;
+        }
+
+        @include desktop {
+            width: 33%;
+        }
+
         &::before {
             display: block;
             content: '';
@@ -51,14 +59,6 @@
     &__right-side {
         border-left: 1px solid $silver;
         flex-grow: 1;
-
-        // background: repeating-linear-gradient(
-        //     to right,
-        //     $mercury,
-        //     $mercury 1.5px,
-        //     transparent 1px,
-        //     transparent 10%
-        // );
     }
 
     &__bar {
