@@ -1,16 +1,24 @@
 import { useState } from 'react';
 import { convertToSteps, convertToMins } from '../../utils/mathUtils';
 import { recordSteps } from '../../utils/storageUtils';
+import Select from 'react-select';
 import './WalkForm.scss';
 
 
 function WalkForm({ setDisplayForm, signedIn }) {
-
-    let [ inputs, setInputs ] = useState({hours: '0', minutes: '10', seconds: '0'})
-    let { hours, minutes, seconds } = inputs;
-
     let [ message, setMessage] = useState("");
 
+    let [ hours, setHours ] = useState({value: '0', label: '0'});
+    let [ minutes, setMinutes ] = useState({value: '15', label: '15'});
+    let [ seconds, setSeconds ] = useState({value: '0', label: '0'});
+
+    let toTwelve = Array.from({length: 13}, (_val, index) => {
+        return {value: index, label: index}
+    })
+
+    let toSixty = Array.from({length: 60}, (_val, index) => {
+        return {value: index, label: index}
+    })
 
     function clickOut() {
         setDisplayForm(false);
@@ -22,7 +30,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
 
     async function submitHandler(event) {
         event.preventDefault();
-        let mins = convertToMins(inputs);
+        let mins = convertToMins({hours: hours, minutes: minutes, seconds: seconds});
         let steps = convertToSteps(mins);
 
         await recordSteps(
@@ -39,62 +47,49 @@ function WalkForm({ setDisplayForm, signedIn }) {
         
     }
 
-    function handleInputChange(event) {
-        setInputs({...inputs, [event.target.name]: event.target.value})
-    }
-
     return (
         <div className='walk-form__background' onClick={clickOut}>
             <form className="walk-form" onClick={dontClickOut} onSubmit={submitHandler}>
                 <div className="walk-form__content">
                     <label htmlFor="hours" className="walk-form__label">
-                        <select className="walk-form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
-                            {Array.from({length: 13}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="hours"
+                            value={hours}
+                            onChange={setHours}
+                            options={toTwelve}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Hours
                     </label>
                     <p className="walk-form__colon">:</p>
                     <label htmlFor="minutes" className="walk-form__label">
-                        <select className="walk-form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
-                            {Array.from({length: 61}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="minutes"
+                            value={minutes}
+                            onChange={setMinutes}
+                            options={toSixty}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Minutes
                     </label>
                     <p className="walk-form__colon">:</p>
                     <label htmlFor="seconds" className="walk-form__label">
-                        <select className="walk-form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
-                            {Array.from({length: 61}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="seconds"
+                            value={seconds}
+                            onChange={setSeconds}
+                            options={toSixty}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Seconds
                     </label>
                 </div>

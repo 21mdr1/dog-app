@@ -37,8 +37,30 @@
         margin-bottom: 0.2rem;
     }
 
+    &__control {
+        height: 100%;
+    }
+
+    &__control &__indicators {
+        display: none;
+    }
+
+    &__menu-list {
+        border-radius: $border-radius;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
     &__option {
         background-color: $mercury;
+        height: 2.8125rem;
+        border-bottom: 1px solid $silver;
+
+        &:last-child {
+            border: none;
+        }
     }
 
     &__label {
