@@ -34,7 +34,9 @@ async function getStepsForDaysAgo(daysAgo, userId) {
 
 async function streakShouldBeIncreased(steps, userId) {
     try {
-        let recordedSteps = await getStepsForDaysAgo(0, userId)[0].steps;
+        let [result, ] = await getStepsForDaysAgo(0, userId)
+        let recordedSteps = result.steps;
+        console.log("should be increased?", (recordedSteps < 10000 && recordedSteps + steps >= 10000))
         return (recordedSteps < 10000 && recordedSteps + steps >= 10000);
     } catch (error) {
         console.log('Error checking if streak should be incresed', error);
@@ -44,7 +46,8 @@ async function streakShouldBeIncreased(steps, userId) {
 
 async function streakShouldBeReset(todaysSteps, userId) {
     try {
-        let yesterdaysSteps = await getStepsForDaysAgo(1, userId)[0].steps;
+        let [result, ] = await getStepsForDaysAgo(1, userId)
+        let yesterdaysSteps = result.steps;
 
         return (yesterdaysSteps < 10000 && todaysSteps < 10000);
 

@@ -49,7 +49,7 @@ const logSteps = async (request, response) => {
     }
 
     try {
-        checkIncreaseStreak();
+        checkIncreaseStreak(steps, userId);
         const connection = await mysql.createConnection(config.db);
         let sql = `
             INSERT INTO steps
