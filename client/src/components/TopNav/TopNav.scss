@@ -36,8 +36,19 @@
     @include flex;
     cursor: pointer;
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    top: $mobile-spacing;
+    left: $mobile-spacing;
+
+    @include tablet {
+        top: $tablet-spacing;
+        left: $tablet-spacing;
+    }
+
+    @include desktop {
+        top: $desktop-spacing;
+        left: $desktop-spacing;
+    }
+
 
     &__text {
         padding-top: 0.2rem;
