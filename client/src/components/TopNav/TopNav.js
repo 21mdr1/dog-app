@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getPreferences } from '../../utils/storageUtils';
 import back from '../../assets/icons/left_line.svg';
 import './TopNav.scss';
 
@@ -7,8 +8,8 @@ function TopNav({ page, signedIn }) {
     let [ avatar, setAvatar ] = useState('');
 
     useEffect(() => {
-        setAvatar('https://api.multiavatar.com/maria.svg');
-    }, []);
+        getPreferences(signedIn, (data) => {data && setAvatar(data.avatar)})
+    }, [signedIn]);
 
     return (
         <nav className={`top-nav top-nav--${page}`}>
@@ -20,7 +21,11 @@ function TopNav({ page, signedIn }) {
                 Log In
             </Link> }
             <Link to='/user' className='avatar__wrapper'>
-                <img src={avatar} alt="user avatar" className="avatar" />
+                {avatar ? 
+                    <img src={avatar} alt="user avatar" className="avatar" /> 
+                    :
+                    <div className="avatar"></div>
+                }
             </Link>
         </nav>
     );

@@ -19,7 +19,7 @@ function Home({ signedIn }) {
                 data.length === 0 ? setSteps({steps: 0}) : setSteps(data[0])}, 
             (error) => console.log('Error getting steps', error)
         );
-    }, []);
+    }, [signedIn]);
 
     return (
         <div className='page page--home'>

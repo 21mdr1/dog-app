@@ -1,5 +1,5 @@
-import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getTodaysStepsLocally, getStreakLocally } from './localStorageUtils';
-import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely, getStreakRemotely } from './remoteStorageUtils';
+import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getTodaysStepsLocally, getStreakLocally, getPreferencesLocally } from './localStorageUtils';
+import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely, getStreakRemotely, getPreferencesRemotely } from './remoteStorageUtils';
 
 // record steps
 
@@ -45,8 +45,18 @@ async function recordPreferences(preferences, userIsSignedIn, onSuccess, onFailu
     if (userIsSignedIn) {
         await recordPreferencesRemotely(preferences, onSuccess, onFailure);
     } else {
-        recordPreferencesLocally(preferences);
+        recordPreferencesLocally(preferences, onSuccess, onFailure);
     }
 }
 
-export { recordSteps, recordPreferences, getLastWeeksSteps, getTodaysSteps, getStreak };
+// get preferences
+
+async function getPreferences(userIsSignedIn, onSuccess, onFailure) {
+    if (userIsSignedIn) {
+        await getPreferencesRemotely(onSuccess, onFailure);
+    } else {
+        getPreferencesLocally(onSuccess, onFailure);
+    }
+}
+
+export { recordSteps, recordPreferences, getPreferences, getLastWeeksSteps, getTodaysSteps, getStreak };

@@ -5,13 +5,18 @@ import User from './pages/User/User';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import EntryForm from './components/EntryForm/EntryForm';
-import { useState } from 'react';
+import { getPreferences } from './utils/storageUtils';
+import { useEffect, useState } from 'react';
 import { userIsSignedIn } from './utils/userUtils';
 import './App.scss';
 
 function App() {
   let [ signedIn, setSignedIn ] = useState(userIsSignedIn());
-  let [ needPreferences, setNeedPreferences ] = useState(true);
+  let [ needPreferences, setNeedPreferences ] = useState(false);
+
+  useEffect(() => {
+    getPreferences(signedIn, (data) => {setNeedPreferences(data === null)})
+  }, [signedIn]);
 
   return (
     <BrowserRouter>
@@ -22,7 +27,7 @@ function App() {
         <Route path='/login' element={<Login setSignedIn={setSignedIn} />} />
         <Route path='/register' element={<Register />} />
       </Routes>
-      {needPreferences && <EntryForm setNeedPreferences={setNeedPreferences} />}
+      {needPreferences && <EntryForm setNeedPreferences={setNeedPreferences} signedIn={signedIn} />}
     </BrowserRouter>
   );
 }

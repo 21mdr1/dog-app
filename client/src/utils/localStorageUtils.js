@@ -186,8 +186,14 @@ function recordPreferencesLocally(preferences, onSuccess = () => {}, onFailure =
 }
 
 
-function getPreferencesLocally() {
-    return getLocally('preferences');
+function getPreferencesLocally(onSuccess = () => {}, onFailure = (data) => {console.log('Error getting preferences', data)}) {
+    try {
+        let preferences = getLocally('preferences');
+        onSuccess(preferences);
+        return preferences;
+    } catch (error) {
+        onFailure(error);
+    }
 }
 
 

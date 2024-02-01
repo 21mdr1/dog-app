@@ -9,7 +9,7 @@ function HomeCard({ steps, signedIn }) {
 
     useEffect(() => {
         getStreak(signedIn, (data) => {setStreak(data.streak)});
-    }, []);
+    }, [signedIn]);
 
     return (
         <div className='home-card'>

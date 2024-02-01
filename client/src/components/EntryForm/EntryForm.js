@@ -1,8 +1,9 @@
+import { recordPreferences } from '../../utils/storageUtils';
 import { useState } from 'react';
 import Select from 'react-select';
 import './EntryForm.scss';
 
-function EntryForm({ setNeedPreferences }) {
+function EntryForm({ setNeedPreferences, signedIn }) {
 
     let [ message, setMessage] = useState("");
 
@@ -12,20 +13,19 @@ function EntryForm({ setNeedPreferences }) {
     async function submitHandler(event) {
         event.preventDefault();
         setMessage = "";
-        let avatar = `https://api.multiavatar.com/${name}.svg`
+        let avatar = `https://api.multiavatar.com/${name}.svg`;
 
-        // await recordSteps(
-        //     { minsWalked: mins, steps: steps },
-        //     signedIn, 
-        //     () => {
-        //         setMessage("Preferences logged successfully");
-        //         setTimeout(() => {setNeedPreferences(false)}, 1500);
-        //     }, 
-        //     () => {
-        //         setMessage("Error recording preferences");
-        //     }
-        // );
-        
+        await recordPreferences(
+            { tooltips: tooltips, avatar: avatar },
+            signedIn, 
+            () => {
+                setMessage("Preferences logged successfully");
+                setTimeout(() => {setNeedPreferences(false)}, 1500);
+            }, 
+            () => {
+                setMessage("Error recording preferences");
+            }
+        ); 
     }
 
     return (
