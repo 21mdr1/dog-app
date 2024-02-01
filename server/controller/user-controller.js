@@ -8,13 +8,15 @@ const { SALT_ROUNDS, SECRET_KEY } = process.env;
 const { emailIsValid, passwordIsValid } = require('../utils/validationUtils');
 
 const createUser = async (request, response) => {
-    let {user, preferences, steps} = request.body;
+    let {user, preferences, steps, streak} = request.body;
 
     if ( !user.username || !user.email || !user.password ) {
         return response.status(400).json({
             message: "Please provide username, email, and password for new user in the request"
         });
     }
+
+    streak = isNaN(Number(streak)) ? 0 : Number(streak);
 
     if ( !emailIsValid(user.email) || !passwordIsValid(user.password) ) {        
         return response.status(400).json({
@@ -33,7 +35,7 @@ const createUser = async (request, response) => {
                 SET ?;
         `;
         let passwordHash = await bcrypt.hash(user.password, Number(SALT_ROUNDS));
-        let userParams = { username: user.username, email: user.email, password: passwordHash};
+        let userParams = { username: user.username, email: user.email, password: passwordHash, streak: streak};
 
         let [{ insertId }, ] = await connection.query(userSql, userParams);
 

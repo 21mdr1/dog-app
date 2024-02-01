@@ -111,12 +111,13 @@ async function getStreakRemotely(onSuccess, onFailure = (error) => {console.log(
     return data;
 }
 
-async function createUser(user, preferences, steps, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
+async function createUser(user, preferences, steps, streak, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
     let data = await saveInDB(
         { 
             user: user,
             preferences: preferences,
             steps: steps,
+            streak: streak,
         },
         `${BASE_URL}/user/register`, 
         onSuccess, 
