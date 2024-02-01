@@ -36,11 +36,9 @@ function getLast7Days(format) {
 }
 
 function isInLastWeek(timestamp) {
-    let today = Date.now();
-    let day = 1000 * 3600 * 24;
-    let difference = Math.floor((today - timestamp) / day);
-
-    return difference < 7;
+    let startTimestamp = new Date(Date.now() - 6 * (1000 * 3600 * 24)).setHours(0, 0, 0, 0);
+    
+    return timestamp > startTimestamp;
 }
 
 function isToday(timestamp) {
