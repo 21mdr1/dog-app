@@ -40,22 +40,34 @@
     left: $mobile-spacing;
 
     @include tablet {
+        padding-top: 0;
         top: $tablet-spacing;
         left: $tablet-spacing;
     }
 
     @include desktop {
+        padding-top: 0.6rem;
         top: $desktop-spacing;
         left: $desktop-spacing;
     }
 
+    &--walk , &--home {
+        display: none;
+    }
+
+    &__image {
+        @include tablet {
+            width: 1.75rem;
+        }
+    }
 
     &__text {
         padding-top: 0.2rem;
-    }
 
-    &--walk , &--home {
-        display: none;
+        @include tablet {
+            padding-top: 0.35rem;
+            font-size: 1.25rem;
+        }
     }
 }
 
