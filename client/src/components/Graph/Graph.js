@@ -10,7 +10,7 @@ function Graph({signedIn }) {
     let [ stepsArr, setStepsArr ] = useState([]); 
     
     useEffect(() => {
-        getLastWeeksSteps(signedIn, (data) => setStepsArr(data))
+        getLastWeeksSteps(signedIn, (data) => setStepsArr(data.reverse()))
     }, [signedIn]);
 
     if ( stepsArr.length === 0) {

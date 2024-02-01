@@ -1,4 +1,4 @@
-import { isInLastWeek, getDate, isToday } from "./dateUtils";
+import { isInLastWeek, isToday } from "./dateUtils";
 
 // Helpers
 
@@ -60,7 +60,7 @@ function getLastWeeksStepsLocally(onSuccess = () => {}, onFailure = (data) => {c
 
             let index = last7Days.findIndex((el) => el.formatted_date === formatted_date);
             if (index === -1) {
-                last7Days.unshift({
+                last7Days.push({
                     formatted_date: formatted_date,
                     date: item.timestamp, 
                     steps: item.steps
