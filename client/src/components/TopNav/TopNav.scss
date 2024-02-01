@@ -83,7 +83,11 @@
 
 .avatar {
     @include avatar;
-    background-color: #6E55AE;
+
+    &--placeholder {
+        background-color: #6E55AE;
+    }
+
     &__wrapper {
         line-height: 0;
     }

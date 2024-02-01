@@ -7,6 +7,8 @@ import './TopNav.scss';
 function TopNav({ page, signedIn }) {
     let [ avatar, setAvatar ] = useState('');
 
+    console.log(avatar);
+
     useEffect(() => {
         getPreferences(signedIn, (data) => {data && setAvatar(data.avatar)})
     }, [signedIn]);
@@ -24,7 +26,7 @@ function TopNav({ page, signedIn }) {
                 {avatar ? 
                     <img src={avatar} alt="user avatar" className="avatar" /> 
                     :
-                    <div className="avatar"></div>
+                    <div className="avatar avatar--placeholder"></div>
                 }
             </Link>
         </nav>
