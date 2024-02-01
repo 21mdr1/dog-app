@@ -176,18 +176,13 @@ function getAllStepsLocally() {
     return getLocally('stepsWalked') || [];
 }
 
-function recordPreferencesLocally(preference, value) { 
-    let defaults = {
-        avatar: null,
-        animal: 'dog',
-        accessories: null,
-        tooltips: true,
-    };
-
-    let preferences = getLocally('preferences') || defaults;
-
-    preferences[preference] = value;
-    saveLocally(preferences);
+function recordPreferencesLocally(preferences, onSuccess = () => {}, onFailure = (data) => {console.log('Error recording preferences', data)}) { 
+    try {
+        saveLocally(preferences);
+        onSuccess();
+    } catch (error) {
+        onFailure(error);
+    }
 }
 
 

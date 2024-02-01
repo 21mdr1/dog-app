@@ -66,7 +66,7 @@ const createPreferences = async (request, response) => {
 }
 
 const changePreferences = async (request, response) => {
-    let { preference, value } = request.body;
+    let { preferences } = request.body;
     let userId = request.user_id;
 
     try {
@@ -75,7 +75,7 @@ const changePreferences = async (request, response) => {
                 SET ?
                 WHERE user_id = ?;
         `;
-        let params = [{[preference]: value}, userId];
+        let params = [{preferences}, userId];
 
         const connection = await mysql.createConnection(config.db);
         let [{ changedRows }, ] = await connection.query(sql, params);

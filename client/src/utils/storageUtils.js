@@ -41,11 +41,11 @@ async function getStreak(userIsSignedIn, onSuccess, onFailure) {
 
 // record preferences
 
-async function recordPreferences(preference, value, userIsSignedIn, onSuccess, onFailure) {
+async function recordPreferences(preferences, userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
-        await recordPreferencesRemotely(preference, value, onSuccess, onFailure);
+        await recordPreferencesRemotely(preferences, onSuccess, onFailure);
     } else {
-        recordPreferencesLocally(preference, value);
+        recordPreferencesLocally(preferences);
     }
 }
 

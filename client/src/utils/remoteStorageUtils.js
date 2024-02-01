@@ -90,9 +90,9 @@ async function getTodaysStepsRemotely(onSuccess, onFailure = (error) => {console
     return data;
 }
 
-async function recordPreferencesRemotely(preference, value, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+async function recordPreferencesRemotely(preferences, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
     let data = await changeInDB(
-        {preference: preference, value: value}, 
+        preferences, 
         `${BASE_URL}/preferences`,
         onSuccess,
         onFailure
