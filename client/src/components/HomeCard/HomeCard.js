@@ -10,7 +10,7 @@ function HomeCard({ signedIn }) {
     useEffect(() => {
         getTodaysSteps(
             signedIn,
-            (data) => setSteps(data), 
+            (data) => setSteps(data[0]), 
             (error) => console.log('Error getting steps', error)
         );
     }, []);
@@ -24,6 +24,11 @@ function HomeCard({ signedIn }) {
                     aria-valuenow={steps.steps}
                     aria-valuemin="0"
                     aria-valuemax="10000"
+                    style={{
+                        'background': `
+                            radial-gradient(closest-side, #C0B1EB 79%, transparent 80% 100%),
+                            conic-gradient(#7058AF ${Math.round(steps.steps/10000)}%, #E6DCFF 0)
+                        `}} 
                 ></div>
                 <div className="home-card__legend">
                     <div className="home-card__steps">

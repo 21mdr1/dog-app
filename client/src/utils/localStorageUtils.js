@@ -89,9 +89,9 @@ function getTodaysStepsLocally(onSuccess = () => {}, onFailure = (data) => {cons
             todaysSteps.steps += item.steps;
         }
 
-        onSuccess(todaysSteps);
+        onSuccess([todaysSteps]);
 
-        return todaysSteps;
+        return [todaysSteps];
     } catch (error) {
         onFailure(error);
     }
