@@ -1,8 +1,9 @@
 import BottomNav from '../../components/BottomNav/BottomNav';
 import AnimatedSittingDog from '../../components/AnimatedSittingDog/AnimatedSittingDog';
 import TopNav from '../../components/TopNav/TopNav';
-import './Home.scss';
 import HomeCard from '../../components/HomeCard/HomeCard';
+import { getRandomElement } from '../../utils/mathUtils';
+import './Home.scss';
 
 function Home({ signedIn }) {
 
@@ -11,7 +12,7 @@ function Home({ signedIn }) {
         "Take 5 minutes to stretch",
         "Paws for thought: a walk a day keeps the stress away",
         "Every step is a step toward a happier you and a happier dog",
-        "Take a break and grab a cup of water"
+        "Take a break and grab a cup of water",
     ];
     let sadMessages = [
         "Stretch those legs and let your dog stretch its paws!", 
@@ -24,6 +25,7 @@ function Home({ signedIn }) {
                 <div className="nav__container">
                     <TopNav page='home' signedIn={signedIn} />
                 </div>
+                <p className="message">{getRandomElement(happyMessages)}</p>
                 <AnimatedSittingDog />
                 <BottomNav page='home' />
             </div>
