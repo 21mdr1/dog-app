@@ -90,9 +90,9 @@ async function getTodaysStepsRemotely(onSuccess, onFailure = (error) => {console
     return data;
 }
 
-async function recordPreferencesRemotely(preference, value, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+async function recordPreferencesRemotely(preferences, onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
     let data = await changeInDB(
-        {preference: preference, value: value}, 
+        preferences, 
         `${BASE_URL}/preferences`,
         onSuccess,
         onFailure
@@ -101,12 +101,33 @@ async function recordPreferencesRemotely(preference, value, onSuccess, onFailure
     return data;
 }
 
-async function createUser(user, preferences, steps, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
+async function getPreferencesRemotely(onSuccess, onFailure = (error) => {console.log('Error getting preferences', error)}) {
+    let data = await getFromDB(
+        `${BASE_URL}/preferences`,
+        onSuccess,
+        onFailure
+    );
+    
+    return data;
+}
+
+async function getStreakRemotely(onSuccess, onFailure = (error) => {console.log('Error getting streak', error)}) {
+    let data = await getFromDB(
+        `${BASE_URL}/user/streak`,
+        onSuccess,
+        onFailure
+    );
+    
+    return data;
+}
+
+async function createUser(user, preferences, steps, streak, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
     let data = await saveInDB(
         { 
             user: user,
             preferences: preferences,
             steps: steps,
+            streak: streak,
         },
         `${BASE_URL}/user/register`, 
         onSuccess, 
@@ -127,4 +148,4 @@ async function logUserIn(user, onSuccess, onFailure = (error) => {console.log('E
     return data;
 }
 
-export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely };
+export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely, getStreakRemotely, getPreferencesRemotely };

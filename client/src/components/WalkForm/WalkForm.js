@@ -31,6 +31,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
 
     async function submitHandler(event) {
         event.preventDefault();
+        setMessage("");
         let mins = convertToMins({hours: hours.value, minutes: minutes.value, seconds: seconds.value});
         let steps = convertToSteps(mins);
 
@@ -39,7 +40,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
             signedIn, 
             () => {
                 setMessage("Walk logged successfully");
-                setTimeout(() => {setDisplayForm(false)}, 2000);
+                setTimeout(() => {setDisplayForm(false)}, 1500);
             }, 
             () => {
                 setMessage("Error logging walk");

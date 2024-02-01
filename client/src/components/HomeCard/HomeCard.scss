@@ -41,7 +41,6 @@
     &__steps-header {
         text-transform: uppercase;
         color: #ffffff;
-        // color: #E1E1E1;
         font-size: 0.625rem;
     }
 
@@ -58,14 +57,6 @@
         text-transform: uppercase;
         color: #ffffff;
         font-size: 1.125rem;
-    }
-
-    &__steak-icons {
-        @include flex;
-    }
-
-    &__streak-icon {
-        width: 1.69rem;
     }
 
     &__progress {

@@ -1,7 +1,15 @@
-import dog from '../../assets/icons/dog.svg';
+import { getStreak } from '../../utils/storageUtils';
+import { useState, useEffect } from 'react';
+import ShowStreak from '../ShowStreak/ShowStreak';
 import './HomeCard.scss';
 
-function HomeCard({ steps }) {
+function HomeCard({ steps, signedIn }) {
+
+    let [ streak, setStreak ] = useState(0);
+
+    useEffect(() => {
+        getStreak(signedIn, (data) => {setStreak(data.streak)});
+    }, [signedIn]);
 
     return (
         <div className='home-card'>
@@ -32,11 +40,7 @@ function HomeCard({ steps }) {
                     <div className="home-card__streak-header">
                         Streak:
                     </div>
-                    <div className='home-card__streak-icons'>
-                        {[1,2,3].map((el) => {
-                            return <img key={el} src={dog} alt="dog" className="home-card__streak-icon" />
-                        })}
-                    </div>
+                    <ShowStreak streak={streak} />
                 </div>
                 <div className="home-card__progress">
                     <div className="home-card__progress-header">

@@ -8,13 +8,15 @@ const { SALT_ROUNDS, SECRET_KEY } = process.env;
 const { emailIsValid, passwordIsValid } = require('../utils/validationUtils');
 
 const createUser = async (request, response) => {
-    let {user, preferences, steps} = request.body;
+    let {user, preferences, steps, streak} = request.body;
 
     if ( !user.username || !user.email || !user.password ) {
         return response.status(400).json({
             message: "Please provide username, email, and password for new user in the request"
         });
     }
+
+    streak = isNaN(Number(streak)) ? 0 : Number(streak);
 
     if ( !emailIsValid(user.email) || !passwordIsValid(user.password) ) {        
         return response.status(400).json({
@@ -33,7 +35,7 @@ const createUser = async (request, response) => {
                 SET ?;
         `;
         let passwordHash = await bcrypt.hash(user.password, Number(SALT_ROUNDS));
-        let userParams = { username: user.username, email: user.email, password: passwordHash};
+        let userParams = { username: user.username, email: user.email, password: passwordHash, streak: streak};
 
         let [{ insertId }, ] = await connection.query(userSql, userParams);
 
@@ -141,7 +143,38 @@ const login = async (request, response) => {
     }
 }
 
+const getStreak = async (request, response) => {
+    let userId = request.user_id;
+
+    try {
+        let sql = `
+            SELECT streak FROM users
+                WHERE user_id = ?;
+        `;
+
+        let params = [userId]
+
+        const connection = await mysql.createConnection(config.db);
+        let [result, ] = await connection.query(sql, params);
+
+        if (result.length === 0) {
+            return response.status(404).json({
+                message: `Streak for user with ID: ${userId} not found`
+            });
+        }
+        
+        response.json(result[0]);
+
+    } catch(error) {
+        response.status(500).json({
+            message: `Error fetching streak for user with ID ${userId}: ${error}`
+        });
+    }
+
+}
+
 module.exports = {
     createUser,
-    login
+    login,
+    getStreak
 }

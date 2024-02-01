@@ -29,20 +29,20 @@ async function seed() {
     for (let user of userSeed) {
         await connection.query(
             `
-            INSERT INTO users(user_id, username, email, password)
+            INSERT INTO users(user_id, streak, username, email, password)
                 VALUES (?, ?, ?, ?);
             `, 
-            [user.user_id, user.username, user.email, user.password]
+            [user.user_id, user.streak, user.username, user.email, user.password]
         );
     }
 
     for (let preference of preferencesSeed) {
         await connection.query(
             `
-            INSERT INTO preferences(user_id, tooltips)
+            INSERT INTO preferences(user_id, avatar, tooltips)
                 VALUES (?, ?);
             `, 
-            [preference.user_id, preference.tooltips]
+            [preference.user_id, preference.avatar, preference.tooltips]
         );
     }
 

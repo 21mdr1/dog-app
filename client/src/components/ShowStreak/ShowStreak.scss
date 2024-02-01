@@ -1,0 +1,16 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.streak {
+    @include flex(flex-start, center, 0.5rem);
+
+    &__num {
+        width: fit-content;
+        color: #ffffff;
+        font-size: 1.125rem;
+    }
+
+    &__icon {
+        width: 1.69rem;
+    }
+}
