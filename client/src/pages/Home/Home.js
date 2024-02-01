@@ -5,6 +5,19 @@ import './Home.scss';
 import HomeCard from '../../components/HomeCard/HomeCard';
 
 function Home({ signedIn }) {
+
+    let happyMessages = [
+        "Have you walked yet today?",
+        "Take 5 minutes to stretch",
+        "Paws for thought: a walk a day keeps the stress away",
+        "Every step is a step toward a happier you and a happier dog",
+        "Take a break and grab a cup of water"
+    ];
+    let sadMessages = [
+        "Stretch those legs and let your dog stretch its paws!", 
+        "Your dog needs a walk - take some time to move",
+    ];
+
     return (
         <div className='page page--home'>
             <div className="page__left">

@@ -34,13 +34,14 @@
     }
 
     &__steps {
-        color: #E1E1E1;
+        color: #ffffff;
         font-size: 1.5rem;
     }
 
     &__steps-header {
         text-transform: uppercase;
-        color: #E1E1E1;
+        color: #ffffff;
+        // color: #E1E1E1;
         font-size: 0.625rem;
     }
 
@@ -55,7 +56,7 @@
 
     &__streak-header {
         text-transform: uppercase;
-        color: #E1E1E1;
+        color: #ffffff;
         font-size: 1.125rem;
     }
 
@@ -74,7 +75,7 @@
     &__progress-header {
         width: 5rem;
         text-transform: uppercase;
-        color: #E1E1E1;
+        color: #ffffff;
         font-size: 0.875rem;
 
         @include flex(flex-end, center);
@@ -87,7 +88,7 @@
     
     &__progress-percentage {
         text-transform: uppercase;
-        color: #7058AF;
+        color: #6E55AE;
         font-size: 2rem;
     }
 

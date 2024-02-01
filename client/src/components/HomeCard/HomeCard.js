@@ -36,7 +36,7 @@ function HomeCard({ signedIn }) {
                         {steps.steps}
                     </div>
                     <div className="home-card__steps-header">
-                        stepswalked
+                        steps walked
                     </div>
                 </div>
             </div>
