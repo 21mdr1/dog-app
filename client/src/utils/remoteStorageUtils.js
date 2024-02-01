@@ -101,6 +101,16 @@ async function recordPreferencesRemotely(preference, value, onSuccess, onFailure
     return data;
 }
 
+async function getStreakRemotely(onSuccess, onFailure = (error) => {console.log('Error recording preferences', error)}) {
+    let data = await getFromDB(
+        `${BASE_URL}/user/streak`,
+        onSuccess,
+        onFailure
+    );
+    
+    return data;
+}
+
 async function createUser(user, preferences, steps, onSuccess, onFailure = (error) => {console.log('Error creating user', error)}) {
     let data = await saveInDB(
         { 
@@ -127,4 +137,4 @@ async function logUserIn(user, onSuccess, onFailure = (error) => {console.log('E
     return data;
 }
 
-export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely };
+export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely, getStreakRemotely };

@@ -1,5 +1,5 @@
 import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getTodaysStepsLocally, getStreakLocally } from './localStorageUtils';
-import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely } from './remoteStorageUtils';
+import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely, getStreakRemotely } from './remoteStorageUtils';
 
 // record steps
 
@@ -33,7 +33,7 @@ async function getTodaysSteps(userIsSignedIn, onSuccess, onFailure) {
 
 async function getStreak(userIsSignedIn, onSuccess, onFailure) {
     if (userIsSignedIn) {
-        //
+        return await getStreakRemotely(onSuccess, onFailure)
     } else {
         return getStreakLocally(onSuccess, onFailure);
     }
