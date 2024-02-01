@@ -31,7 +31,7 @@ function WalkForm({ setDisplayForm, signedIn }) {
 
     async function submitHandler(event) {
         event.preventDefault();
-        let mins = convertToMins({hours: hours, minutes: minutes, seconds: seconds});
+        let mins = convertToMins({hours: hours.value, minutes: minutes.value, seconds: seconds.value});
         let steps = convertToSteps(mins);
 
         await recordSteps(
