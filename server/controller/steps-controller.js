@@ -30,8 +30,6 @@ const getSteps = async (request, response) => {
             checkResetStreak(result[0].steps, userId);
         }
 
-        console.log(result);
-
         response.json(result);
     } catch (error) {
         response.status(500).json({
