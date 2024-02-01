@@ -48,4 +48,11 @@ function isToday(timestamp) {
     return today === date;
 }
 
-export { getWeekday, getLast7Days, isInLastWeek, isToday, getTimestamp, getDate };
+function isYesterday(timestamp) {
+    let date = new Date(timestamp).toDateString();
+    let yesterday = new Date(Date.now() - (1000 * 3600 * 24)).toDateString();
+
+    return yesterday === date;
+}
+
+export { getWeekday, getLast7Days, isInLastWeek, isToday, isYesterday, getTimestamp, getDate };
