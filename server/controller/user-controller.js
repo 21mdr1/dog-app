@@ -160,10 +160,8 @@ const getStreak = async (request, response) => {
                 message: `Streak for user with ID: ${userId} not found`
             });
         }
-
-        response.json({
-            streak: result[0].steak
-        });
+        
+        response.json(result[0]);
 
     } catch(error) {
         response.status(500).json({
