@@ -8,6 +8,10 @@
     &__title {
         text-align: center;
         width: 100%;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
     }
 
     &__container {
@@ -54,6 +58,10 @@
         width: 2rem;
         text-align: right;
         flex-shrink: 0;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
     }
 
     &__right-side {
@@ -99,5 +107,9 @@
         @include flex(space-between);
         flex-grow: 1;
         border-top: 1px solid $silver;
+
+        @include tablet {
+            font-size: 1.25rem;
+        }
     }
 }
