@@ -24,6 +24,10 @@
 @mixin avatar {
     width: $avatar-size;
     filter: contrast(85%);
+
+    @include tablet {
+        width: 4rem;
+    }
 }
 
 @mixin hide-dropdown-arrow {
