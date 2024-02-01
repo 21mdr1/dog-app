@@ -141,7 +141,40 @@ const login = async (request, response) => {
     }
 }
 
+const getStreak = async (request, response) => {
+    let userId = request.user_id;
+
+    try {
+        let sql = `
+            SELECT streak FROM users
+                WHERE user_id = ?;
+        `;
+
+        let params = [userId]
+
+        const connection = await mysql.createConnection(config.db);
+        let [result, ] = await connection.query(sql, params);
+
+        if (result.length === 0) {
+            return response.status(404).json({
+                message: `Streak for user with ID: ${userId} not found`
+            });
+        }
+
+        response.json({
+            streak: result[0].steak
+        });
+
+    } catch(error) {
+        response.status(500).json({
+            message: `Error fetching streak for user with ID ${userId}: ${error}`
+        });
+    }
+
+}
+
 module.exports = {
     createUser,
-    login
+    login,
+    getStreak
 }
