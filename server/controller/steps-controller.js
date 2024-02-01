@@ -26,7 +26,7 @@ const getSteps = async (request, response) => {
         const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
 
-        if (days === 1) {
+        if (days === "1") {
             checkResetStreak(result[0].steps, userId);
         }
 
