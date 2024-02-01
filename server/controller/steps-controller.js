@@ -27,7 +27,8 @@ const getSteps = async (request, response) => {
         let [result, ] = await connection.query(sql, params);
 
         if (days === "1") {
-            checkResetStreak(result[0].steps, userId);
+            let steps = result.length === 0 ? 0 : result[0].steps;
+            checkResetStreak(steps, userId);
         }
 
         response.json(result);
@@ -35,6 +36,7 @@ const getSteps = async (request, response) => {
         response.status(500).json({
             message: `Unable to get steps for user with ID ${userId}: ${error}`
         });
+        console.log(error);
     }
 }
 
