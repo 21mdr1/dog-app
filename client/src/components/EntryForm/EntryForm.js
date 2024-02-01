@@ -12,11 +12,11 @@ function EntryForm({ setNeedPreferences, signedIn }) {
 
     async function submitHandler(event) {
         event.preventDefault();
-        setMessage = "";
+        setMessage("");
         let avatar = `https://api.multiavatar.com/${name}.svg`;
 
         await recordPreferences(
-            { tooltips: tooltips, avatar: avatar },
+            { tooltips: tooltips.value, avatar: avatar },
             signedIn, 
             () => {
                 setMessage("Preferences logged successfully");
