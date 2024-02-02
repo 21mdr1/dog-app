@@ -79,13 +79,13 @@ async function checkResetStreak(todaysSteps, userId) {
     try {
         if(await streakShouldBeReset(todaysSteps, userId)) {
             const connection = await mysql.createConnection(config.db);
-                let increaseSql = `
-                    UPDATE users
-                        SET streak = 0
-                        WHERE user_id = ?
-                `
-                let increaseParams = [userId]
-                await connection.query(increaseSql, increaseParams);
+            let increaseSql = `
+                UPDATE users
+                    SET streak = 0
+                    WHERE user_id = ?
+            `
+            let increaseParams = [userId]
+            await connection.query(increaseSql, increaseParams);
         }
     } catch (error) {
         console.log('Error reseting streak', error);
