@@ -5,7 +5,9 @@ async function getStepsForDaysAgo(daysAgo, userId) {
     try {
         const connection = await mysql.createConnection(config.db);
 
-        let date = new Date(Date.now() - daysAgo * (1000 * 3600 * 24)).toISOString().split('T')[0];
+        let timezoneOffset = new Date().getTimezoneOffset() * 60000;
+
+        let date = new Date(Date.now() - daysAgo * (1000 * 3600 * 24) - timezoneOffset).toISOString().split('T')[0];
 
         let startDate = date + ' 00:00';
         let endDate = date + ' 23:59';
@@ -42,7 +44,6 @@ async function streakShouldBeIncreased(steps, userId) {
         console.log("should be increased?", (recordedSteps < 10000 && recordedSteps + steps >= 10000))
         return (recordedSteps < 10000 && recordedSteps + steps >= 10000);
     } catch (error) {
-        console.log('Error checking if streak should be incresed', error);
         return false;
     }
 }
