@@ -25,7 +25,10 @@ async function getStepsForDaysAgo(daysAgo, userId) {
         let params = [userId, startDate, endDate];
         let [result, ] = await connection.query(sql, params);
 
-        return result || [{ steps: 0 }];
+        if (result.length === 0) {
+            result = [{ steps: 0 }]
+        }
+        return result;
     } catch (error) {
         console.log('Error fetching steps', error);
         return [{}]
@@ -34,7 +37,7 @@ async function getStepsForDaysAgo(daysAgo, userId) {
 
 async function streakShouldBeIncreased(steps, userId) {
     try {
-        let [result, ] = await getStepsForDaysAgo(0, userId)
+        let [result, ] = await getStepsForDaysAgo(0, userId);
         let recordedSteps = result.steps;
         console.log("should be increased?", (recordedSteps < 10000 && recordedSteps + steps >= 10000))
         return (recordedSteps < 10000 && recordedSteps + steps >= 10000);
@@ -46,7 +49,7 @@ async function streakShouldBeIncreased(steps, userId) {
 
 async function streakShouldBeReset(todaysSteps, userId) {
     try {
-        let [result, ] = await getStepsForDaysAgo(1, userId)
+        let [result, ] = await getStepsForDaysAgo(1, userId);
         let yesterdaysSteps = result.steps;
 
         return (yesterdaysSteps < 10000 && todaysSteps < 10000);
