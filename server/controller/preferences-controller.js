@@ -2,6 +2,8 @@ const mysql = require('mysql2/promise');
 const config = require('../config');
 
 const getPreferences = async (request, response) => {
+    const connection = await mysql.createConnection(config.db);
+
     try {
         let sql = `
             SELECT * FROM preferences
@@ -9,10 +11,10 @@ const getPreferences = async (request, response) => {
         `;
         let params = { user_id: request.user_id };
 
-        const connection = await mysql.createConnection(config.db);
         let [result, _fields] = await connection.query(sql, params);
 
         if (result.length === 0) {
+            connection.end();
             return response.status(404).json({
                 message: `Preferences for user with ID ${requser.params.id} not found`
             })
@@ -24,7 +26,8 @@ const getPreferences = async (request, response) => {
         response.status(500).json({
             message: `Unable to retrieve preferences for user with ID ${request.params.userId}`
         });
-
+    } finally {
+        connection.end();
     }
 }
 
@@ -39,6 +42,8 @@ const createPreferences = async (request, response) => {
         tooltips = true;
     }
 
+    const connection = await mysql.createConnection(config.db);
+
     try {
         let sql = `
             INSERT INTO preferences
@@ -46,7 +51,6 @@ const createPreferences = async (request, response) => {
         `;
         let params = { avatar: avatar, user_id: userId, tooltips: tooltips };
 
-        const connection = await mysql.createConnection(config.db);
         let [{ insertId }, ] = await connection.query(sql, params);
 
         sql = `
@@ -62,12 +66,16 @@ const createPreferences = async (request, response) => {
         response.status(500).json({
             message: `Unable to create new preferences entry: ${error}`
         });
+    } finally {
+        connection.end();
     }
 }
 
 const changePreferences = async (request, response) => {
     let { preferences } = request.body;
     let userId = request.user_id;
+
+    const connection = await mysql.createConnection(config.db);
 
     try {
         let sql = `
@@ -77,10 +85,10 @@ const changePreferences = async (request, response) => {
         `;
         let params = [{preferences}, userId];
 
-        const connection = await mysql.createConnection(config.db);
         let [{ changedRows }, ] = await connection.query(sql, params);
 
         if(changedRows === 0) {
+            connection.end();
             return response.status(404).json({
                 message: `Preferences item for user with ID ${userId} not found`
             });
@@ -99,7 +107,9 @@ const changePreferences = async (request, response) => {
         response.status(500).json({
             message: `Unable to update the preferences for user with ID ${request.body.userId}: ${error}`
         });
-    }    
+    } finally {
+        connection.end();
+    }
 }
 
 module.exports = {

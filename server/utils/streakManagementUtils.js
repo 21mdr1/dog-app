@@ -2,9 +2,9 @@ const mysql = require('mysql2/promise');
 const config = require('../config');
 
 async function getStepsForDaysAgo(daysAgo, userId) {
-    try {
-        const connection = await mysql.createConnection(config.db);
+    const connection = await mysql.createConnection(config.db);
 
+    try {
         let timezoneOffset = new Date().getTimezoneOffset() * 60000;
 
         let date = new Date(Date.now() - daysAgo * (1000 * 3600 * 24) - timezoneOffset).toISOString().split('T')[0];
@@ -30,9 +30,13 @@ async function getStepsForDaysAgo(daysAgo, userId) {
         if (result.length === 0) {
             result = [{ steps: 0 }]
         }
+
+        connection.end();
+
         return result;
     } catch (error) {
         console.log('Error fetching steps', error);
+        connection.end();
         return [{}]
     }
 }
@@ -62,9 +66,10 @@ async function streakShouldBeReset(todaysSteps, userId) {
 }
 
 async function checkIncreaseStreak(todaysSteps, userId) {
+    const connection = await mysql.createConnection(config.db);
+
     try {
         if(await streakShouldBeIncreased(todaysSteps, userId)) {
-            const connection = await mysql.createConnection(config.db);
             let increaseSql = `
                 UPDATE users
                     SET streak = streak + 1
@@ -75,14 +80,16 @@ async function checkIncreaseStreak(todaysSteps, userId) {
         }
     } catch (error) {
         console.log('Error increasing streak', error);
+    } finally {
+        connection.end();
     }
     
 }
 
 async function checkResetStreak(todaysSteps, userId) {
+    const connection = await mysql.createConnection(config.db);
     try {
         if(await streakShouldBeReset(todaysSteps, userId)) {
-            const connection = await mysql.createConnection(config.db);
             let increaseSql = `
                 UPDATE users
                     SET streak = 0
@@ -93,6 +100,8 @@ async function checkResetStreak(todaysSteps, userId) {
         }
     } catch (error) {
         console.log('Error reseting streak', error);
+    } finally {
+        connection.end();
     }
 }
 
