@@ -7,7 +7,8 @@ const getSteps = async (request, response) => {
     let userId = request.user_id;
 
     try {
-        let startTimestamp = new Date(Date.now() - (days - 1) * (1000 * 3600 * 24));
+        let timezoneOffset = new Date().getTimezoneOffset() * 60000;
+        let startTimestamp = new Date(Date.now() - (days - 1) * (1000 * 3600 * 24) - timezoneOffset);
 
         let startDate = startTimestamp.toISOString().split('T')[0] + ' 00:00';
 
