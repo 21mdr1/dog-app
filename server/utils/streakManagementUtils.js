@@ -42,7 +42,6 @@ async function streakShouldBeIncreased(steps, userId) {
         console.log("should be increased?", (recordedSteps < 10000 && recordedSteps + steps >= 10000))
         return (recordedSteps < 10000 && recordedSteps + steps >= 10000);
     } catch (error) {
-        console.log('Error checking if streak should be incresed', error);
         return false;
     }
 }
