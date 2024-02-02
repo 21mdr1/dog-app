@@ -29,7 +29,7 @@ function Home({ signedIn }) {
                 </div>
                 <Message steps={steps} />
                 <AnimatedSittingDog />
-                <BottomNav page='home' />
+                <BottomNav page='home' signedIn={signedIn} />
             </div>
             <div className="page__right">
                 <TopNav page='home' signedIn={signedIn} />

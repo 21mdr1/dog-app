@@ -7,8 +7,6 @@ import './TopNav.scss';
 function TopNav({ page, signedIn }) {
     let [ avatar, setAvatar ] = useState('');
 
-    console.log(avatar);
-
     useEffect(() => {
         getPreferences(signedIn, (data) => {data && setAvatar(data.avatar)})
     }, [signedIn]);

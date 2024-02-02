@@ -16,7 +16,7 @@ function Walk({ signedIn }) {
             <Tree className="page__background-tree" />
             <TopNav page='walk' signedIn={signedIn} />
             <AnimatedWalkingDog />
-            <BottomNav page='walk' clickHandler={() => {setDisplayForm(true)}} />
+            <BottomNav page='walk' signedIn={signedIn} clickHandler={() => {setDisplayForm(true)}} />
             {displayForm && <WalkForm setDisplayForm={setDisplayForm} signedIn={signedIn}/>}
         </div>
     )

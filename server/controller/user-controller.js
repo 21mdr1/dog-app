@@ -162,7 +162,7 @@ const getStreak = async (request, response) => {
                 message: `Streak for user with ID: ${userId} not found`
             });
         }
-        
+
         response.json(result[0]);
 
     } catch(error) {
