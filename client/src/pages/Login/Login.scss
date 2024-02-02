@@ -17,6 +17,27 @@
     }
 }
 
+.login-right {
+    display: none;
+    width: 50vw;
+    height: 100vh;
+    background-color: $yellow;
+
+    @include desktop {
+        @include flex(center, center);
+    }
+}
+
+.login-left {
+    @include flex(center, center);
+
+    @include desktop {
+        width: 50vw;
+        height: 100vh;
+    }
+}
+
+
 .login-form {
     
     margin: 1rem;
@@ -29,6 +50,10 @@
         font-weight: 400;
         color: #4B4F52;
         margin: 0 2rem 1rem;
+
+        @include tablet {
+            font-size: 2.25rem;
+        }
     }
 
     &__input {
@@ -39,6 +64,10 @@
         padding-left: 2.25rem;
         border-radius: 50px;
         margin-bottom: 1rem;
+
+        @include tablet {
+            font-size: 1.15rem;
+        }
     }
 
     &__button {
@@ -56,6 +85,10 @@
             background-color: $silver;
             cursor: default;
         }
+
+        @include tablet {
+            font-size: 1.15rem;
+        }
     }
 
     &__text {
@@ -66,6 +99,10 @@
         &--highlight {
             font-weight: 600;
             color: #a82b00;
+        }
+
+        @include tablet {
+            font-size: 1.15rem;
         }
     }
 }   

@@ -1,30 +1,121 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/animations' as *;
 
 .home-main {
     flex-grow: 1;
     @include flex(center, center);
 }
 
-
 .walking-dog {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
+    position: relative;
+    transform: scale(0.3);
 
-    &__container {
-        position: relative;
+    @include tablet {
+        transform: scale(0.4);
+        top: 10%;
+    }
+
+    @include desktop {
+        top: 12%;
     }
 
     &__shadow {
-        background-color: #A6C078; //make this into a variable?
-        width: 10rem;
-        height: 1.125rem;
+        background-color: $green-shadow;
+        width: 50rem;
+        height: 4rem;
         border-radius: 50%;
         position: absolute;
-        transform: translate(-50%, -50%);
-        left: 50%;
-        bottom: -8.75rem;
+        left: -25rem;
+        bottom: -29rem;
+    }
+
+    &__head {
+        position: absolute;
+        top: -11.25rem;
+        right: -14.5rem;
+    }
+
+    &__face {
+        position: absolute;
+        top: -13.65rem;
+        right: -12.1rem;
+    }
+
+    &__eye {
+        position: absolute;
+
+        &--left {
+            top: -1.5rem;
+            left: -0.3rem;
+        }
+
+        &--right {
+            top: -1.7rem;
+            right: -10.1rem;
+        }
+    }
+
+    &__blink-eye {
+        position: absolute;
+        display: none;
+
+        &--left {
+            left: -0.5rem;
+        }
+
+        &--right {
+            right: -10rem;
+            top: -0.5rem;
+        }
+    }
+
+    &__tongue {
+        position: absolute;
+        display: none;
+        top: 6rem;
+        right: -11.4rem;
+    }
+
+    &__full-body {
+        position: absolute;
+        top: 2rem;
+        left: -11rem;
+    }
+
+    &__body {
+        position: absolute;
+        top: -6.75rem;
+        left: -8.7rem;
+    }
+
+    &__far-front-leg {
+        position: absolute;
+        top: 9.25rem;
+        right: -28.5rem;
+    }
+
+    &__near-front-leg {
+        position: absolute;
+        top: 2rem;
+        right: -21.3rem;
+    }
+
+    &__far-back-leg {
+        position: absolute;
+        top: 7.5rem;
+        left: -5rem;
+    }
+
+    &__near-back-leg {
+        position: absolute;
+        top: -0.25rem;
+        left: -13.5rem;
+    }
+
+    &__tail {
+        position: absolute;
+        top: -16rem;
+        left: -15.5rem;
     }
 }

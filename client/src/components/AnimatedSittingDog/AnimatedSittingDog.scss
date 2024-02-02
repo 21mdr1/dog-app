@@ -1,0 +1,53 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/animations';
+
+.sitting-dog {
+    &:hover {
+        & .sitting-dog {
+            &__head {
+                transform: rotate(-10deg);
+                transition: 0.5s;
+                // cubic-bezier(.27,.88,.77,.14) <- for later
+                animation: happy-head-move 2s 0.5s ease-in-out infinite;
+            }
+
+            &__eye {
+                display: none;
+            }
+
+            &__blink-eye {
+                display: block;
+            }
+
+            &__tongue {
+                display: block;
+            }
+
+            &__tail {
+                animation: happy-tail-wag 0.45s linear infinite; 
+            }
+        }
+    }
+
+    &--isBlinking {
+        & .sitting-dog {
+            &__eye {
+                display: none;
+            }
+
+            &__blink-eye {
+                display: block;
+            }
+        }
+    }
+
+    &__head {
+        animation: normal-head-move 23s 5s ease-in-out infinite;
+    }
+
+    &__tail {
+        transform-origin: bottom right;
+        animation: normal-tail-wag 15s 10s ease-in-out infinite;
+    }
+}

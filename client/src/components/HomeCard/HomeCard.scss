@@ -1,0 +1,88 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+
+.home-card {
+    margin-top: 3rem;
+    background-color: #C0B1EB;
+    border-radius: 1rem;
+    width: 100%;
+    padding: 1rem;
+    @include flex;
+    column-gap: 1rem;
+
+    &__left {
+        position: relative;
+    }
+
+    &__progress-bar {
+        width: 8.625rem;
+        height: 8.625rem;
+        border-radius: 50%; 
+        background: 
+            radial-gradient(closest-side, #C0B1EB 79%, transparent 80% 100%);
+    }
+
+    &__legend {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include flex(center, center);
+        flex-direction: column;
+        width: 8.625rem;
+        height: 8.625rem;
+    }
+
+    &__steps {
+        color: #ffffff;
+        font-size: 1.5rem;
+    }
+
+    &__steps-header {
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 0.625rem;
+    }
+
+    &__right {
+        @include flex(space-evenly, flex-start);
+        flex-direction: column;
+    }
+
+    &__streak {
+        @include flex(flex-start, center, 1rem);
+    }
+
+    &__streak-header {
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 1.125rem;
+    }
+
+    &__progress {
+        @include flex(flex-start, center, 1rem);
+    }
+
+    &__progress-header {
+        width: 5rem;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 0.875rem;
+
+        @include flex(flex-end, center);
+
+        &::after {
+            content: ':';
+            font-size: 1.125rem;
+        }
+    }
+    
+    &__progress-percentage {
+        text-transform: uppercase;
+        color: #6E55AE;
+        font-size: 2rem;
+    }
+
+}
+
+

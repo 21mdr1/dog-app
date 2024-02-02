@@ -4,18 +4,30 @@ import Walk from './pages/Walk/Walk';
 import User from './pages/User/User';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import EntryForm from './components/EntryForm/EntryForm';
+import { getPreferences } from './utils/storageUtils';
+import { useEffect, useState } from 'react';
+import { userIsSignedIn } from './utils/userUtils';
 import './App.scss';
 
 function App() {
+  let [ signedIn, setSignedIn ] = useState(userIsSignedIn());
+  let [ needPreferences, setNeedPreferences ] = useState(false);
+
+  useEffect(() => {
+    getPreferences(signedIn, (data) => {setNeedPreferences(data === null)})
+  }, [signedIn]);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/walk' element={<Walk />} />
-        <Route path='/user' element={<User />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Home signedIn={signedIn} />} />
+        <Route path='/walk' element={<Walk signedIn={signedIn} />} />
+        <Route path='/user' element={<User signedIn={signedIn} />} />
+        <Route path='/login' element={<Login setSignedIn={setSignedIn} />} />
         <Route path='/register' element={<Register />} />
       </Routes>
+      {needPreferences && <EntryForm setNeedPreferences={setNeedPreferences} signedIn={signedIn} />}
     </BrowserRouter>
   );
 }

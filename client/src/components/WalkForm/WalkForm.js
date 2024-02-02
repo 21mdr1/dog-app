@@ -1,13 +1,25 @@
 import { useState } from 'react';
 import { convertToSteps, convertToMins } from '../../utils/mathUtils';
 import { recordSteps } from '../../utils/storageUtils';
+import close from '../../assets/icons/close_line.svg';
+import Select from 'react-select';
 import './WalkForm.scss';
 
 
-function WalkForm({ setDisplayForm }) {
+function WalkForm({ setDisplayForm, signedIn }) {
+    let [ message, setMessage] = useState("");
 
-    let [ inputs, setInputs ] = useState({hours: '0', minutes: '10', seconds: '0'})
-    let { hours, minutes, seconds } = inputs;
+    let [ hours, setHours ] = useState({value: '0', label: '0'});
+    let [ minutes, setMinutes ] = useState({value: '15', label: '15'});
+    let [ seconds, setSeconds ] = useState({value: '0', label: '0'});
+
+    let toTwelve = Array.from({length: 13}, (_val, index) => {
+        return {value: index, label: index}
+    })
+
+    let toSixty = Array.from({length: 60}, (_val, index) => {
+        return {value: index, label: index}
+    })
 
     function clickOut() {
         setDisplayForm(false);
@@ -19,75 +31,73 @@ function WalkForm({ setDisplayForm }) {
 
     async function submitHandler(event) {
         event.preventDefault();
-        let mins = convertToMins(inputs);
+        setMessage("");
+        let mins = convertToMins({hours: hours.value, minutes: minutes.value, seconds: seconds.value});
         let steps = convertToSteps(mins);
-        // call api to submit walk, 
-        //show a success message under the form for a few seconds or error message if it doesn't work?
-        await recordSteps({ minsWalked: mins, steps: steps });
-        
-        setDisplayForm(false);
-    }
 
-    function handleInputChange(event) {
-        setInputs({...inputs, [event.target.name]: event.target.value})
+        await recordSteps(
+            { minsWalked: mins, steps: steps },
+            signedIn, 
+            () => {
+                setMessage("Walk logged successfully");
+                setTimeout(() => {setDisplayForm(false)}, 1500);
+            }, 
+            () => {
+                setMessage("Error logging walk");
+            }
+        );
+        
     }
 
     return (
         <div className='walk-form__background' onClick={clickOut}>
             <form className="walk-form" onClick={dontClickOut} onSubmit={submitHandler}>
+                <img src={close} alt="close" className="walk-form__exit" onClick={clickOut} />
                 <div className="walk-form__content">
                     <label htmlFor="hours" className="walk-form__label">
-                        <select className="walk-form__input" id='hours' name='hours' value={hours} onChange={handleInputChange}>
-                            {Array.from({length: 13}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="hours"
+                            value={hours}
+                            onChange={setHours}
+                            options={toTwelve}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Hours
                     </label>
                     <p className="walk-form__colon">:</p>
                     <label htmlFor="minutes" className="walk-form__label">
-                        <select className="walk-form__input" id='minutes' name='minutes' value={minutes} onChange={handleInputChange}>
-                            {Array.from({length: 61}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="minutes"
+                            value={minutes}
+                            onChange={setMinutes}
+                            options={toSixty}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Minutes
                     </label>
                     <p className="walk-form__colon">:</p>
                     <label htmlFor="seconds" className="walk-form__label">
-                        <select className="walk-form__input" id="seconds" name="seconds" value={seconds} onChange={handleInputChange}>
-                            {Array.from({length: 61}, (_val, index) => {
-                                return (
-                                    <option 
-                                        key={index} 
-                                        value={index} 
-                                        className='walk-form__option'
-                                    >
-                                        {index}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <Select 
+                            className="walk-form__input"
+                            classNamePrefix="walk-form"
+                            id="seconds"
+                            value={seconds}
+                            onChange={setSeconds}
+                            options={toSixty}
+                            isSearchable={false}
+                            unstyled={true}
+                        />
                         Seconds
                     </label>
                 </div>
                 <button type='submit' className="walk-form__button">Log Walk</button>
+                <p className="walk-form__message">{message}</p>
             </form>
         </div>
     );

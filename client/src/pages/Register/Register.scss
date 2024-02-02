@@ -8,6 +8,26 @@
     }
 }
 
+.register-right {
+    display: none;
+    width: 50vw;
+    height: 100vh;
+    background-color: $yellow;
+
+    @include desktop {
+        @include flex(center, center);
+    }
+}
+
+.register-left {
+    @include flex(center, center);
+
+    @include desktop {
+        width: 50vw;
+        height: 100vh;
+    }
+}
+
 .back-button {
     &__text {
         &--register {
@@ -27,6 +47,10 @@
         font-weight: 400;
         color: #4B4F52;
         margin: 0 2rem 1rem;
+
+        @include tablet {
+            font-size: 2.25rem;
+        }
     }
 
     &__input {
@@ -41,12 +65,15 @@
         &--invalid {
             outline: 1px solid #D22D2D;
         }
+
+        @include tablet {
+            font-size: 1.15rem;
+        }
     }
 
     &__error {
         font-size: 0.75rem;
         text-align: center;
-        text-transform: lowercase;
         color: #D22D2D;
     }
 
@@ -65,6 +92,10 @@
             background-color: $silver;
             cursor: default;
         }
+
+        @include tablet {
+            font-size: 1.15rem;
+        }
     }
 
     &__text {
@@ -75,6 +106,10 @@
         &--highlight {
             font-weight: 600;
             color: #a82b00;
+        }
+
+        @include tablet {
+            font-size: 1.15rem;
         }
     }
 }   

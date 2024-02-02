@@ -6,25 +6,107 @@
     @include flex(center, center);
 }
 
-
 .sitting-dog {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
+    position: relative;
+    transform: scale(0.6);
 
-    &__container {
-        position: relative;
+    @include tablet {
+        transform: scale(0.8);
     }
 
     &__shadow {
-        background-color: #937FCE; //make this into a variable?
-        width: 10rem;
-        height: 1.125rem;
+        background-color: $purple-shadow;
+        width: 13rem;
+        height: 2.75rem;
         border-radius: 50%;
         position: absolute;
-        transform: translate(-50%, -50%);
-        left: 50%;
-        bottom: -8.75rem;
+        left: -6.5rem;
+        bottom: -13.75rem;
+    }
+
+    &__full-body {
+        position: absolute;
+        top: 6.45rem;
+    }
+
+    &__body {
+        position: absolute;
+        top: -6.47rem;
+        left: -7.66rem;
+    }
+
+    &__tail {
+        position: absolute;
+        top: -4.28rem;
+        left: -10.03rem;
+    }
+
+    &__neck {
+        position: absolute;
+        top: -9rem;
+        left: -4.85rem;
+    }
+
+    &__head {
+        transform: rotate(0deg);
+        position: absolute;
+        top: -5rem;
+        left: 0.2rem;
+    }
+
+    &__face {
+        position: absolute;
+        top: -5.69rem;
+        left: -6.22rem;
+    }
+
+    &__ear {
+        position: absolute;
+        top: -8.21rem;
+
+        &--right {
+            right: -6.5rem;
+        }
+
+        &--left {
+            left: -6.55rem;
+        }
+    }
+
+    &__eye {
+        position: absolute;
+        top: -1rem;
+
+        &--right {
+            right: -3.75rem;
+        }
+
+        &--left {
+            left: -3.75rem;
+        }
+    }
+
+    &__blink-eye {
+        position: absolute;
+        top: -0.5rem;
+        transform: scale(0.75);
+        display: none;
+
+        &--right {
+            transform: rotateY(180deg) scale(0.65);
+            right: -5rem;
+        }
+
+        &--left {
+            transform: scale(0.65);
+            left: -5rem;
+        }
+    } 
+
+    &__tongue {
+        position: absolute;
+        top: 3.8rem;
+        left: -0.68rem;
+        display: none;
     }
 }

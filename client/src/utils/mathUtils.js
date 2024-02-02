@@ -1,6 +1,11 @@
 
-function getRandomNum(max) { // will delete soon
+function getRandomNum(max) {
     return Math.floor(Math.random() * max);
+}
+
+function getRandomElement(array) {
+    let randomNum = getRandomNum(array.length);
+    return array[randomNum]
 }
 
 function roundToNext5000(num) {
@@ -15,4 +20,4 @@ function convertToSteps(mins) {
     return mins*60;
 }
 
-export { getRandomNum, roundToNext5000, convertToMins, convertToSteps };
+export { getRandomNum, getRandomElement, roundToNext5000, convertToMins, convertToSteps };
