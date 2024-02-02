@@ -24,9 +24,9 @@ const createUser = async (request, response) => {
         });
     }
 
-    try {
+    const connection = await mysql.createConnection(config.db);
 
-        const connection = await mysql.createConnection(config.db);
+    try {
 
         // create user
 
@@ -90,6 +90,8 @@ const createUser = async (request, response) => {
         response.status(500).json({
             message: `Unable to create new user: ${error}`
         });
+    } finally {
+        connection.end();
     }
     
 }
@@ -103,6 +105,8 @@ const login = async (request, response) => {
         });
     }
 
+    const connection = await mysql.createConnection(config.db);
+
     try {
         let sql = `
             SELECT user_id, username, password FROM users
@@ -110,10 +114,10 @@ const login = async (request, response) => {
         `;
         let params = [username];
 
-        const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
 
         if (result.length === 0) {
+            connection.end();
             return response.status(404).json({
                 message: `User with username ${username} not found`
             });
@@ -122,6 +126,7 @@ const login = async (request, response) => {
         let passwordMatches = await bcrypt.compare(password, result[0].password);
 
         if (!passwordMatches) {
+            connection.end();
             return response.status(401).json({
                 message: `Username and password pair do not match`
             });
@@ -140,11 +145,15 @@ const login = async (request, response) => {
         response.status(500).json({
             message: `Error logging in user with username ${username}: ${error}`
         })
+    } finally {
+        connection.end();
     }
 }
 
 const getStreak = async (request, response) => {
     let userId = request.user_id;
+
+    const connection = await mysql.createConnection(config.db);
 
     try {
         let sql = `
@@ -154,10 +163,10 @@ const getStreak = async (request, response) => {
 
         let params = [userId]
 
-        const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
 
         if (result.length === 0) {
+            connection.end();
             return response.status(404).json({
                 message: `Streak for user with ID: ${userId} not found`
             });
@@ -169,8 +178,9 @@ const getStreak = async (request, response) => {
         response.status(500).json({
             message: `Error fetching streak for user with ID ${userId}: ${error}`
         });
+    } finally {
+        connection.end();
     }
-
 }
 
 module.exports = {

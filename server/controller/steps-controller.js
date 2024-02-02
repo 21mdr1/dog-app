@@ -6,6 +6,8 @@ const getSteps = async (request, response) => {
     let days = request.query.days || 7;
     let userId = request.user_id;
 
+    const connection = await mysql.createConnection(config.db);
+
     try {
         let timezoneOffset = new Date().getTimezoneOffset() * 60000;
         let startTimestamp = new Date(Date.now() - (days - 1) * (1000 * 3600 * 24) - timezoneOffset);
@@ -24,7 +26,6 @@ const getSteps = async (request, response) => {
 
         let params = [userId, startDate];
 
-        const connection = await mysql.createConnection(config.db);
         let [result, ] = await connection.query(sql, params);
 
         if (days === "1") {
@@ -37,7 +38,8 @@ const getSteps = async (request, response) => {
         response.status(500).json({
             message: `Unable to get steps for user with ID ${userId}: ${error}`
         });
-        console.log(error);
+    } finally {
+        connection.end();
     }
 }
 
@@ -51,9 +53,10 @@ const logSteps = async (request, response) => {
         });
     }
 
+    const connection = await mysql.createConnection(config.db);
+
     try {
         checkIncreaseStreak(steps, userId);
-        const connection = await mysql.createConnection(config.db);
         let sql = `
             INSERT INTO steps
                 SET ?;
@@ -75,6 +78,8 @@ const logSteps = async (request, response) => {
         response.status(500).json({
             message: `Unable to create new steps entry: ${error}`
         });
+    } finally {
+        connection.end();
     }
 }
 
