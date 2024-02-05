@@ -11,11 +11,11 @@ const userRoutes = require('./routes/user-routes');
 app.use(cors({ origin: CORS_ORIGIN}));
 app.use(express.json());
 
-app.use('/images', express.static('./public/images'));
+app.use('/api/images', express.static('./public/images'));
 
-app.use('/steps', stepsRoutes);
-app.use('/preferences', preferencesRoutes);
-app.use('/user', userRoutes);
+app.use('/api/steps', stepsRoutes);
+app.use('/api/preferences', preferencesRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
