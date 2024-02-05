@@ -12,6 +12,12 @@
     }
 }
 
+@mixin monitor {
+    @media (min-width: $monitor) {
+        @content;
+    }
+}
+
 @mixin flex($justify-content: initial, $align-items: initial, $column-gap: initial, $row-gap: initial, $flex-wrap: nowrap) {
     display: flex;
     justify-content: $justify-content;
