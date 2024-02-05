@@ -16,7 +16,7 @@ The back-end is written in Express with a MySQL database. Queries were written i
 
 ### Deployment
 
-The deployment process has not been completed yet. The app will be deployed using Nginx on an AWS EC2 instance running RedHat Enterprise Linux. 
+The deployment process has not been completed yet. The app will be deployed using Nginx on an AWS EC2 instance running RedHat Enterprise Linux. Deployment scripts will be written in Bash.
 
 ## Instalation Instructions
 
