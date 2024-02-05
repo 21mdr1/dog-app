@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Walk from './pages/Walk/Walk';
 import User from './pages/User/User';
@@ -24,8 +24,8 @@ function App() {
         <Route path='/' element={<Home signedIn={signedIn} />} />
         <Route path='/walk' element={<Walk signedIn={signedIn} />} />
         <Route path='/user' element={<User signedIn={signedIn} />} />
-        <Route path='/login' element={<Login setSignedIn={setSignedIn} />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={signedIn ? <Navigate to='/' /> : <Login setSignedIn={setSignedIn} />} />
+        <Route path='/register' element={signedIn ? <Navigate to='/' /> : <Register />} />
       </Routes>
       {needPreferences && <EntryForm setNeedPreferences={setNeedPreferences} signedIn={signedIn} />}
     </BrowserRouter>

@@ -6,9 +6,6 @@ import './AnimatedSittingDog.scss';
 
 function AnimatedSittingDog() {
     let [ isBlinking, setIsBlinking ] = useState(false);
-    // need to straighten out some animations before I can use these
-    // let [ isBobbingHead, setIsBobbingHead ] = useState(false);
-    // let [ isWaggingTail, setIsWaggingTail ] = useState(false);
 
     useEffect(() => {
         let intervals = [];
