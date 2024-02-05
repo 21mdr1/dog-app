@@ -7,7 +7,7 @@ module.exports = [
         user_id: 1,
         streak: 0,
         username: "testUser",
-        password: bcrypt.hash("test123", Number(SALT_ROUNDS)),
+        password: bcrypt.hashSync("test123", Number(SALT_ROUNDS)),
         email: "test1@example.com",
     }
 ];
