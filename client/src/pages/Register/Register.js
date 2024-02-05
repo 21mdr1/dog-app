@@ -6,7 +6,7 @@ import back from '../../assets/icons/left_line.svg';
 import registerImage from '../../assets/static-images/register-image.svg';
 import './Register.scss';
 
-function Register() {
+function Register({ setSignedIn }) {
     let [ inputs, setInputs ] = useState({email: '', username: '', password: '', confirmPassword: ''});
     let { email, username, password, confirmPassword } = inputs;
 
@@ -34,6 +34,7 @@ function Register() {
         if (formIsValid(inputs)) {
             register(
                 { username: username, email: email, password: password },
+                setSignedIn,
                 () => {
                     setMessage("Account created successfully");
                     setTimeout(() => {navigate('/login')}, 1500);
