@@ -17,7 +17,12 @@
     }
 
     @include desktop {
+        transform: scale(0.32);
         top: 12%;
+    }
+    
+    @include monitor {
+        transform: scale(0.4);
     }
 
     &__shadow {
