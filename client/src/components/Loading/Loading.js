@@ -24,5 +24,6 @@ function Loading() {
     );
 }
 
+export default Loading;
 
 // from https://uiverse.io/Nawsome/wet-mayfly-23
