@@ -83,8 +83,8 @@ The app will be running on http://localhost:3000/. Feel free to use the app with
 
 ## Gallery
 
-![](./readme_images/home-mobile.png) ![](./readme_images/user-mobile.png)
+![](./readme_images/prod-home-page.png | width=50%) ![](./readme_images/prod-user-page.png | width=50%)
 
-![](./readme_images/walk-mobile.png) ![](./readme_images/form-mobile.png)
+![](./readme_images/prod-walk-page.png) ![](./readme_images/prod-walk-form.png)
 
-![](./readme_images/login-mobile.png) ![](./readme_images/register-mobile.png)
+![](./readme_images/prod-login-page.png) ![](./readme_images/prod-register-page.png)
