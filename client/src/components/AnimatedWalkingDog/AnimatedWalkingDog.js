@@ -5,8 +5,6 @@ import './AnimatedWalkingDog.scss';
 
 function AnimatedWalkingDog() {
 
-    // let [ isWalking, setIsWalking ] = useState(false);
-
     let [ isBobbingHead, setIsBobbingHead] = useState(false);
     let [ tongueIsOut, setTongueIsOut ] = useState(false);
     let [ isWaggingTail, setIsWaggingTail ] = useState(false);
