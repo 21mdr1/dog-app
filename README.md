@@ -82,9 +82,8 @@ npm start
 The app will be running on http://localhost:3000/. Feel free to use the app without an account, make your own account, or use the test user `testUser/test123`.
 
 ## Gallery
+<img src="./readme_images/prod-home-page.png" width="48%"> <img src="./readme_images/prod-user-page.png" width="48%">
 
-![](./readme_images/prod-home-page.png width="100") ![](./readme_images/prod-user-page.png width="100")
+<img src="./readme_images/prod-walk-page.png" width="48%"> <img src="./readme_images/prod-walk-form.png" width="48%">
 
-![](./readme_images/prod-walk-page.png) ![](./readme_images/prod-walk-form.png)
-
-![](./readme_images/prod-login-page.png) ![](./readme_images/prod-register-page.png)
+<img src="./readme_images/prod-login-page.png" width="48%"> <img src="./readme_images/prod-register-page.png" width="48%">
