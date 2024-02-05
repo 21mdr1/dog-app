@@ -75,17 +75,6 @@ const createUser = async (request, response) => {
         
         // send back token
 
-        // let getUserSql = `
-        //     SELECT user_id, username, email, accnt_creation FROM users
-        //         WHERE user_id = ?;
-        // `;
-
-        // let getUserParams = [insertId];
-
-        // let [result, ] = await connection.query(getUserSql, getUserParams);
-
-        // response.status(201).json(result[0]);
-
         let token = jwt.sign(
             {user_id: insertId},
             SECRET_KEY
