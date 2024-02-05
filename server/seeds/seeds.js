@@ -30,7 +30,7 @@ async function seed() {
         await connection.query(
             `
             INSERT INTO users(user_id, streak, username, email, password)
-                VALUES (?, ?, ?, ?);
+                VALUES (?, ?, ?, ?, ?);
             `, 
             [user.user_id, user.streak, user.username, user.email, user.password]
         );
@@ -40,7 +40,7 @@ async function seed() {
         await connection.query(
             `
             INSERT INTO preferences(user_id, avatar, tooltips)
-                VALUES (?, ?);
+                VALUES (?, ?, ?);
             `, 
             [preference.user_id, preference.avatar, preference.tooltips]
         );
