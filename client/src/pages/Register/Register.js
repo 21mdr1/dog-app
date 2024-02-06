@@ -27,8 +27,6 @@ function Register({ setSignedIn }) {
         confirmPassword: confirmPasswordErrors 
     } = errors;
 
-    console.log(errors);
-
     let [ message, setMessage ] = useState(null);
 
     let navigate = useNavigate();

@@ -17,8 +17,6 @@ function Login({ setSignedIn }) {
     });
     let { loginUsername: loginUsernameErrors, loginPassword: loginPasswordErrors } = errors;
 
-    console.log(errors);
-
     let [ message, setMessage ] = useState(null);
 
 
@@ -50,7 +48,6 @@ function Login({ setSignedIn }) {
               }
             );
         } else {
-            setMessage('Error logging in');
             let newErrors = {};
             for(let key in inputs) {
                 newErrors[key] = getInputError(key, inputs[key]);
