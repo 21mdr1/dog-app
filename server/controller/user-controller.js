@@ -200,7 +200,7 @@ const checkUsername = async (request, response) => {
 
         let params = {username: username};
 
-        let [result, ] = connection.query(sql, params);
+        let [result, ] = await connection.query(sql, params);
 
         response.json({
             exists: result.length === 0 ? false : true,
