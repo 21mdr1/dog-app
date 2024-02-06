@@ -1,30 +1,54 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { formIsValid, inputIsValid } from '../../utils/validationUtils';
+import { formIsValid, getInputError } from '../../utils/validationUtils';
 import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import registerImage from '../../assets/static-images/register-image.svg';
 import './Register.scss';
 
 function Register({ setSignedIn }) {
-    let [ inputs, setInputs ] = useState({email: '', username: '', password: '', confirmPassword: ''});
+    let [ inputs, setInputs ] = useState({
+        email: '', 
+        username: '', 
+        password: '', 
+        confirmPassword: ''
+    });
     let { email, username, password, confirmPassword } = inputs;
 
-    let [ errors, setErrors] = useState({email: [], username: [], password: [], confirmPassword: []});
-    let { email: emailErrors, username: usernameErrors, password: passwordErrors, confirmPassword: confirmPasswordErrors } = errors;
+    let [ errors, setErrors ] = useState({
+        email: null, 
+        username: null, 
+        password: null, 
+        confirmPassword: null
+    });
+    let { email: emailErrors, 
+        username: usernameErrors, 
+        password: passwordErrors, 
+        confirmPassword: confirmPasswordErrors 
+    } = errors;
 
     let [ message, setMessage ] = useState(null);
 
     let navigate = useNavigate();
 
-    function handleInputChange(event) {
+    async function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
+
+        if(name === 'password') {
+            setErrors({...errors, 
+                ["password"]: getInputError("password", value), 
+                ["confirmPassword"]: await getInputError("confirmPassword", confirmPassword, value)
+            });
+        } else {
+            setErrors({...errors, [name]: await getInputError(name, value, password)});
+        }
+
     }
 
-    function handleInputBlur(event) {
+    async function handleInputBlur(event) {
         const { name, value } = event.target;
-        setErrors({...errors, [name]: inputIsValid(name, value, password, true)});
+        setErrors({...errors, [name]: await getInputError(name, value, password)});
     }
 
     async function handleSubmit(event) {
@@ -47,6 +71,11 @@ function Register({ setSignedIn }) {
 
         } else {
             setMessage("Error creating account");
+            let newErrors = {};
+            for(let key in inputs) {
+                newErrors[key] = await getInputError(key, inputs[key], password);
+            }
+            setErrors(newErrors);
         }
     }
 
@@ -66,50 +95,50 @@ function Register({ setSignedIn }) {
                     <input 
                         type="text" 
                         name='email' 
-                        className={`register-form__input ${emailErrors.length !== 0 && 'register-form__input--invalid'}`}
+                        className={`register-form__input ${emailErrors && 'register-form__input--invalid'}`}
                         placeholder='Email'
                         value={email}
                         onChange={handleInputChange}
                         onBlur={handleInputBlur}
                     />
-                    { emailErrors.length !== 0 && <p className="register-form__error">
-                        {emailErrors[0]}
-                    </p>}
+                    { emailErrors && <p className="register-form__error">
+                        {emailErrors}
+                    </p> }
                     <input 
                         type="text" 
                         name='username' 
-                        className={`register-form__input ${usernameErrors.length !== 0 && 'register-form__input--invalid'}`}
+                        className={`register-form__input ${usernameErrors && 'register-form__input--invalid'}`}
                         placeholder='Username'
                         value={username}
                         onChange={handleInputChange}
                         onBlur={handleInputBlur}
                     />
-                    { usernameErrors.length !== 0 && <p className="register-form__error">
-                        {usernameErrors[0]}
+                    { usernameErrors && <p className="register-form__error">
+                        {usernameErrors}
                     </p> }
                     <input 
                         type="password" 
                         name='password' 
-                        className={`register-form__input ${passwordErrors.length !== 0 && 'register-form__input--invalid'}`}
+                        className={`register-form__input ${passwordErrors && 'register-form__input--invalid'}`}
                         placeholder='Password'
                         value={password}
                         onChange={handleInputChange}
                         onBlur={handleInputBlur} 
                     />
-                    { passwordErrors.length !== 0 && <p className="register-form__error">
-                        {passwordErrors[0]}
+                    { passwordErrors && <p className="register-form__error">
+                        {passwordErrors}
                     </p> }
                     <input 
                         type="password" 
                         name='confirmPassword' 
-                        className={`register-form__input ${confirmPasswordErrors.length !== 0 && 'register-form__input--invalid'}`} 
+                        className={`register-form__input ${confirmPasswordErrors && 'register-form__input--invalid'}`} 
                         placeholder='Confirm password'
                         value={confirmPassword}
                         onChange={handleInputChange}
                         onBlur={handleInputBlur}
                     />
-                    { confirmPasswordErrors.length !== 0 && <p className="register-form__error">
-                        {confirmPasswordErrors[0]}
+                    { confirmPasswordErrors && <p className="register-form__error">
+                        {confirmPasswordErrors}
                     </p> }
                     <button className="register-form__button" disabled={!formIsValid(inputs)}>
                         Create Account

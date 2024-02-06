@@ -40,10 +40,21 @@
             padding: 0.3rem 0.5rem;
         }
 
+        &--invalid {
+            outline: 1px solid #D22D2D;
+        }
+
         @include tablet {
             font-size: 1.25rem;
             width: 10rem;
         }
+    }
+
+    &__error {
+        font-size: 0.75rem;
+        text-align: center;
+        color: #D22D2D;
+        margin: -0.75rem 0;
     }
 
     &__option {

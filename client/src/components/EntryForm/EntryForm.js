@@ -1,5 +1,6 @@
 import { recordPreferences } from '../../utils/storageUtils';
 import { useState } from 'react';
+import { formIsValid } from '../../utils/validationUtils';
 import Select from 'react-select';
 import './EntryForm.scss';
 
@@ -7,25 +8,33 @@ function EntryForm({ setNeedPreferences, signedIn }) {
 
     let [ message, setMessage] = useState("");
 
-    let [ name, setname ] = useState("");
+    let [ name, setName ] = useState("");
     let [ tooltips, setTooltips ] = useState({value: true, label: 'Yes'});
+
+    let [ invalid, setInvalid ] = useState(false);
 
     async function submitHandler(event) {
         event.preventDefault();
         setMessage("");
-        let avatar = `https://api.multiavatar.com/${name}.svg`;
+        setInvalid(false);
 
-        await recordPreferences(
-            { tooltips: tooltips.value, avatar: avatar },
-            signedIn, 
-            () => {
-                setMessage("Preferences logged successfully");
-                setTimeout(() => {setNeedPreferences(false)}, 1500);
-            }, 
-            () => {
-                setMessage("Error recording preferences");
-            }
-        ); 
+        if (formIsValid({name: name, tooltips: tooltips})) {
+            let avatar = `https://api.multiavatar.com/${name}.svg`;
+
+            await recordPreferences(
+                { tooltips: tooltips.value, avatar: avatar },
+                signedIn, 
+                () => {
+                    setMessage("Preferences logged successfully");
+                    setTimeout(() => {setNeedPreferences(false)}, 1500);
+                }, 
+                () => {
+                    setMessage("Error recording preferences");
+                }
+            );
+        } else {
+            setInvalid(true);
+        }
     }
 
     return (
@@ -36,14 +45,20 @@ function EntryForm({ setNeedPreferences, signedIn }) {
                         What can we call you?
                     </label>
                     <input 
-                        className="entry-form__input"
+                        className={`entry-form__input ${invalid && "entry-form__input--invalid"}`}
                         id="name"
                         name="name"
                         placeholder="Name"
                         value={name}
-                        onChange={(e) => setname(e.target.value)}
+                        onChange={(e) => {
+                            setName(e.target.value)
+                            e.target.value && setInvalid(false);
+                        }}
                     />
                 </div>
+                { invalid && <p className="entry-form__error">
+                        This field is required
+                    </p> }
                 <div className="entry-form__container">
                     <label htmlFor="tooltips" className="entry-form__label">
                     Do you want to see tooltips?

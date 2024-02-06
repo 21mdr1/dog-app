@@ -148,4 +148,15 @@ async function logUserIn(user, onSuccess, onFailure = (error) => {console.log('E
     return data;
 }
 
-export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely, getStreakRemotely, getPreferencesRemotely };
+async function checkUsername(username, onSuccess, onFailure = (error) => {console.log('Error checking username', error)}) {
+    let data = await saveInDB(
+        {username: username},
+        `${BASE_URL}/user/username`,
+        onSuccess,
+        onFailure
+    );
+
+    return data;
+}
+
+export { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, createUser, logUserIn, getTodaysStepsRemotely, getStreakRemotely, getPreferencesRemotely, checkUsername };
