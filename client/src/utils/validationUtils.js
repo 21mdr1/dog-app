@@ -14,6 +14,23 @@ function formIsValid(inputs, returnErrors = false) {
     return returnErrors ? [] : true;
 }
 
+function getInputError(inputType, input, input2) {
+    switch (inputType) {
+        case 'email':
+            return emailIsValid(input) ? null :
+                "Email must be in the format yourname@example.com";
+        case 'password':
+            return passwordIsValid(input) ? null :
+                'Password must be at least 8 characters long, contain a number, a special character, and a lowercase and uppercase letter';
+        case 'confirmPassword':
+            return passwordConfirmIsValid(input, input2) ? null :
+                'Password confirmation must match password';
+        default: 
+            return defaultInputIsValid ? null : 
+                'This field is requires'
+    }
+}
+
 function inputIsValid(inputType, input, input2, returnErrors = false) {
     let errors;
     switch (inputType) {
@@ -31,6 +48,10 @@ function inputIsValid(inputType, input, input2, returnErrors = false) {
             break;
     }
     return returnErrors ? errors : !errors.length; 
+}
+
+function defaultInputIsValid(input) {
+    return !(input === '');
 }
 
 function emailIsValid(email) {
@@ -66,4 +87,4 @@ function passwordConfirmIsValid(confirmPass, pass) {
     return (confirmPass !== '' && confirmPass === pass) ? [] : ['Password confirmation must match password'];
 }
 
-export { formIsValid, inputIsValid }; 
+export { formIsValid, inputIsValid, getInputError }; 
