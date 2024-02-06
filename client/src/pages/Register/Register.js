@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { formIsValid, inputIsValid, getInputError } from '../../utils/validationUtils';
+import { formIsValid, getInputError } from '../../utils/validationUtils';
 import { register } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import registerImage from '../../assets/static-images/register-image.svg';
@@ -105,7 +105,7 @@ function Register({ setSignedIn }) {
                     />
                     { emailErrors && <p className="register-form__error">
                         {emailErrors}
-                    </p>}
+                    </p> }
                     <input 
                         type="text" 
                         name='username' 

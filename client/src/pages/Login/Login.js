@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { formIsValid } from '../../utils/validationUtils';
+import { formIsValid, getInputError } from '../../utils/validationUtils';
 import { login } from '../../utils/userUtils';
 import back from '../../assets/icons/left_line.svg';
 import loginImage from '../../assets/static-images/login-image.svg';
@@ -8,8 +8,16 @@ import './Login.scss';
 
 function Login({ setSignedIn }) {
     let navigate = useNavigate();
-    let [ inputs, setInputs ] = useState({ username: '', password: '' });
-    let { username, password } = inputs;
+    let [ inputs, setInputs ] = useState({ loginUsername: '', loginPassword: '' });
+    let { loginUsername, loginPassword } = inputs;
+
+    let [ errors, setErrors ] = useState({
+        loginUsername: null, 
+        loginPassword: null, 
+    });
+    let { loginUsername: loginUsernameErrors, loginPassword: loginPasswordErrors } = errors;
+
+    console.log(errors);
 
     let [ message, setMessage ] = useState(null);
 
@@ -17,6 +25,12 @@ function Login({ setSignedIn }) {
     function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
+        setErrors({...errors, [name]: getInputError(name, value)})
+    }
+
+    function handleInputBlur(event) {
+        const { name, value } = event.target;
+        setErrors({...errors, [name]: getInputError(name, value)});
     }
 
     async function handleSubmit(event) {
@@ -25,7 +39,7 @@ function Login({ setSignedIn }) {
 
         if (formIsValid(inputs)) {
             login(
-              username, password, setSignedIn,
+              loginUsername, loginPassword, setSignedIn,
               () => {
                 setMessage("Logged In Successfully");
                 setTimeout(() => {navigate('/')}, 1500);
@@ -37,6 +51,11 @@ function Login({ setSignedIn }) {
             );
         } else {
             setMessage('Error logging in');
+            let newErrors = {};
+            for(let key in inputs) {
+                newErrors[key] = getInputError(key, inputs[key]);
+            }
+            setErrors(newErrors);
         }
     }
 
@@ -55,20 +74,28 @@ function Login({ setSignedIn }) {
                     <h1 className='login-form__title'>Welcome Back!</h1>
                     <input 
                         type="text" 
-                        name='username' 
-                        className="login-form__input" 
+                        name='loginUsername' 
+                        className={`login-form__input ${loginUsernameErrors && 'login-form__input--invalid'}`} 
                         placeholder='Username'
-                        value={username}
+                        value={loginUsername}
                         onChange={handleInputChange}
+                        onBlur={handleInputBlur}
                     />
+                    { loginUsernameErrors && <p className="login-form__error">
+                        {loginUsernameErrors}
+                    </p> }
                     <input 
-                        type="password" 
-                        name='password' 
-                        className="login-form__input"
+                        type="text" 
+                        name='loginPassword' 
+                        className={`login-form__input ${loginPasswordErrors && 'login-form__input--invalid'}`}
                         placeholder='Password'
-                        value={password}
+                        value={loginPassword}
                         onChange={handleInputChange} 
+                        onBlur={handleInputBlur}
                     />
+                    { loginPasswordErrors && <p className="login-form__error">
+                        {loginPasswordErrors}
+                    </p> }
                     <button className="login-form__button" disabled={!formIsValid(inputs)}>
                         Sign In
                     </button>
