@@ -1,69 +1,79 @@
+import { checkUsername } from "./remoteStorageUtils";
 
-function capitalize(string) {
-    return string.replace(/^.|\s./, (char) => char.toUpperCase());
-}
-
-function formIsValid(inputs, returnErrors = false) {
+function formIsValid(inputs) {
     for(let key in inputs) {
-        let errors = inputIsValid(key, inputs[key], inputs['password'], true);
-        if(errors.length) {
-            return returnErrors ? errors : false;
+        if(!inputIsValid(key, inputs[key], inputs['password'])) {
+            return false;
         }
     }
-
-    return returnErrors ? [] : true;
+    return true;
 }
 
-function inputIsValid(inputType, input, input2, returnErrors = false) {
-    let errors;
+async function getInputError(inputType, input, input2) {
     switch (inputType) {
         case 'email':
-            errors = emailIsValid(input);
-            break;
+            return emailIsValid(input) ? null :
+                "Email must be in the format yourname@example.com";
         case 'password':
-            errors = passwordIsValid(input);
-            break;
+            return passwordIsValid(input) ? null :
+                'Password must be at least 8 characters long, contain a number, a special character, and a lowercase and uppercase letter';
         case 'confirmPassword':
-            errors = passwordConfirmIsValid(input, input2);
-            break;
+            return passwordConfirmIsValid(input, input2) ? null :
+                'Password confirmation must match password';
+        case 'username':
+            if(!input) {return 'This field is required'}
+            return await usernameIsValid(input) ? null :
+                'Username is already in use';
         default: 
-            errors = (input.length > 0) ? [] : [`${capitalize(inputType)} must not be empty`];
-            break;
+            return defaultInputIsValid(input) ? null : 
+                'This field is required'
     }
-    return returnErrors ? errors : !errors.length; 
+}
+
+async function inputIsValid(inputType, input, input2) {
+    switch (inputType) {
+        case 'email':
+            return emailIsValid(input);
+        case 'password':
+            return passwordIsValid(input);
+        case 'confirmPassword':
+            return passwordConfirmIsValid(input, input2);
+        case 'username':
+            return await usernameIsValid(input);
+        default: 
+            return defaultInputIsValid(input)
+    }
+}
+
+function defaultInputIsValid(input) {
+    return !(input === '');
 }
 
 function emailIsValid(email) {
-    return /^[\S]+[@][\S]+[.][\S]+$/.test(email) ? [] : ['Email is invalid'];
+    return /^[\S]+[@][\S]+[.][\S]+$/.test(email);
+}
+
+async function usernameIsValid(username) {
+    if(!username) {
+        return false;
+    }
+    let { exists } = await checkUsername(username, ()=>{});
+    return !exists;
 }
 
 function passwordIsValid(pass) {
-    let error = [];
-    if(pass.length < 8) {
-        error.push('Password must be at least 8 characters long');
+    if(pass.length >= 8 && 
+        pass.match(/[A-Z]/) && 
+        pass.match(/[a-z]/) &&
+        pass.match(/[0-9]/) &&
+        pass.match(/[^A-Za-z0-9]/)) {
+        return true;
     }
-
-    if (pass.match(/[A-Z]/) === null) {
-        error.push('Password must contain an uppercase letter');
-    }
-
-    if (pass.match(/[a-z]/) === null) {
-        error.push('Password must contain a lowercase letter');
-    }
-
-    if (pass.match(/[0-9]/) === null) {
-        error.push('Password must contain a number');
-    }
-
-    if (pass.match(/[^A-Za-z0-9]/) === null) {
-        error.push('Password must contain a special character');
-    }
-
-    return error;
+    return false;
 }
 
 function passwordConfirmIsValid(confirmPass, pass) {
-    return (confirmPass !== '' && confirmPass === pass) ? [] : ['Password confirmation must match password'];
+    return (confirmPass !== '' && confirmPass === pass);
 }
 
-export { formIsValid, inputIsValid }; 
+export { formIsValid, inputIsValid, getInputError }; 

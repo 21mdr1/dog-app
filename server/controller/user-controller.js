@@ -28,6 +28,22 @@ const createUser = async (request, response) => {
 
     try {
 
+        // validate username
+        let usernameSql = `
+            SELECT * FROM users
+                WHERE ?
+        `
+        let usernameParams = {username: username};
+
+        let [result, ] = await connection.query(usernameSql, usernameParams);
+
+        if(result.length > 0) {
+            connection.end();
+            return response.status(400).json({
+                message: `Username ${username} is already in use`,
+            });
+        }
+        
         // create user
 
         let userSql = `
@@ -181,8 +197,44 @@ const getStreak = async (request, response) => {
     }
 }
 
+const checkUsername = async (request, response) => {
+    let { username } = request.body;
+
+    if (!username) {
+        return response.status(400).json({
+            message: "Please include a username in the request"
+        }); 
+    }
+
+    const connection = await mysql.createConnection(config.db);
+
+    try {
+        let sql = `
+            SELECT * FROM users
+                WHERE ?
+        `
+
+        let params = {username: username};
+
+        let [result, ] = await connection.query(sql, params);
+
+        response.json({
+            exists: result.length === 0 ? false : true,
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            message: `Error checking if username ${username} exists: ${error}`
+        });
+    } finally {
+        connection.end();
+    }
+
+}
+
 module.exports = {
     createUser,
     login,
-    getStreak
+    getStreak,
+    checkUsername
 }
