@@ -28,6 +28,22 @@ const createUser = async (request, response) => {
 
     try {
 
+        // validate username
+        let usernameSql = `
+            SELECT * FROM users
+                WHERE ?
+        `
+        let usernameParams = {username: username};
+
+        let [result, ] = await connection.query(usernameSql, usernameParams);
+
+        if(result.length > 0) {
+            connection.end();
+            return response.status(400).json({
+                message: `Username ${username} is already in use`,
+            });
+        }
+        
         // create user
 
         let userSql = `
