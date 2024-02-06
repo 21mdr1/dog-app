@@ -31,24 +31,24 @@ function Register({ setSignedIn }) {
 
     let navigate = useNavigate();
 
-    function handleInputChange(event) {
+    async function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
 
         if(name === 'password') {
             setErrors({...errors, 
                 ["password"]: getInputError("password", value), 
-                ["confirmPassword"]: getInputError("confirmPassword", confirmPassword, value)
+                ["confirmPassword"]: await getInputError("confirmPassword", confirmPassword, value)
             });
         } else {
-            setErrors({...errors, [name]: getInputError(name, value, password)});
+            setErrors({...errors, [name]: await getInputError(name, value, password)});
         }
 
     }
 
-    function handleInputBlur(event) {
+    async function handleInputBlur(event) {
         const { name, value } = event.target;
-        setErrors({...errors, [name]: getInputError(name, value, password)});
+        setErrors({...errors, [name]: await getInputError(name, value, password)});
     }
 
     async function handleSubmit(event) {
@@ -73,7 +73,7 @@ function Register({ setSignedIn }) {
             setMessage("Error creating account");
             let newErrors = {};
             for(let key in inputs) {
-                newErrors[key] = getInputError(key, inputs[key], password);
+                newErrors[key] = await getInputError(key, inputs[key], password);
             }
             setErrors(newErrors);
         }

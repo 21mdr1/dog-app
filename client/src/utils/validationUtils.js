@@ -1,3 +1,4 @@
+import { checkUsername } from "./remoteStorageUtils";
 
 function formIsValid(inputs) {
     for(let key in inputs) {
@@ -8,7 +9,7 @@ function formIsValid(inputs) {
     return true;
 }
 
-function getInputError(inputType, input, input2) {
+async function getInputError(inputType, input, input2) {
     switch (inputType) {
         case 'email':
             return emailIsValid(input) ? null :
@@ -19,13 +20,17 @@ function getInputError(inputType, input, input2) {
         case 'confirmPassword':
             return passwordConfirmIsValid(input, input2) ? null :
                 'Password confirmation must match password';
+        case 'username':
+            if(!input) {return 'This field is required'}
+            return await usernameIsValid(input) ? null :
+                'Username is already in use';
         default: 
             return defaultInputIsValid(input) ? null : 
                 'This field is required'
     }
 }
 
-function inputIsValid(inputType, input, input2) {
+async function inputIsValid(inputType, input, input2) {
     switch (inputType) {
         case 'email':
             return emailIsValid(input);
@@ -33,6 +38,8 @@ function inputIsValid(inputType, input, input2) {
             return passwordIsValid(input);
         case 'confirmPassword':
             return passwordConfirmIsValid(input, input2);
+        case 'username':
+            return await usernameIsValid(input);
         default: 
             return defaultInputIsValid(input)
     }
@@ -44,6 +51,14 @@ function defaultInputIsValid(input) {
 
 function emailIsValid(email) {
     return /^[\S]+[@][\S]+[.][\S]+$/.test(email);
+}
+
+async function usernameIsValid(username) {
+    if(!username) {
+        return false;
+    }
+    let { exists } = await checkUsername(username, ()=>{});
+    return !exists;
 }
 
 function passwordIsValid(pass) {
