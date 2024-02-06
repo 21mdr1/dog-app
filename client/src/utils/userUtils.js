@@ -24,7 +24,7 @@ function signOut(setSignedIn) {
     setSignedIn(false);
 }
 
-async function register(user, onSuccess, onFailure) {
+async function register(user, setSignedIn, onSuccess, onFailure) {
     let preferences = getPreferencesLocally();
     let steps = getAllStepsLocally();
     let streak = getStreakLocally();
@@ -34,11 +34,13 @@ async function register(user, onSuccess, onFailure) {
         preferences, 
         steps,
         streak, 
-        () => {
+        (data) => {
             clearLocalCache('preferences');
             clearLocalCache('stepsWalked');
             clearLocalCache('streak');
-            onSuccess && onSuccess();
+            saveLocally('token', data.token);
+            setSignedIn(true);
+            onSuccess && onSuccess(data);
         },
         onFailure
     );

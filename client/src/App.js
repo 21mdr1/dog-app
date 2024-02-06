@@ -26,7 +26,7 @@ function App() {
         <Route path='/walk' element={<Walk signedIn={signedIn} />} />
         <Route path='/user' element={<User signedIn={signedIn} />} />
         <Route path='/login' element={signedIn ? <Navigate to='/' /> : <Login setSignedIn={setSignedIn} />} />
-        <Route path='/register' element={signedIn ? <Navigate to='/' /> : <Register />} />
+        <Route path='/register' element={signedIn ? <Navigate to='/' /> : <Register setSignedIn={setSignedIn} />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       {needPreferences && <EntryForm setNeedPreferences={setNeedPreferences} signedIn={signedIn} />}

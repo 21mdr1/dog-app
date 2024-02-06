@@ -73,18 +73,16 @@ const createUser = async (request, response) => {
             }
         }
         
-        // send back user
+        // send back token
 
-        let getUserSql = `
-            SELECT user_id, username, email, accnt_creation FROM users
-                WHERE user_id = ?;
-        `;
+        let token = jwt.sign(
+            {user_id: insertId},
+            SECRET_KEY
+        )
 
-        let getUserParams = [insertId];
-
-        let [result, ] = await connection.query(getUserSql, getUserParams);
-
-        response.status(201).json(result[0]);
+        response.status(201).json({
+            token: token
+        });
 
     } catch (error) {
         response.status(500).json({
