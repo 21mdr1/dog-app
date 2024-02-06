@@ -12,4 +12,7 @@ router.route("/register")
 router.route("/login")
     .post(userController.login);
 
+router.route("/username")
+    .post(userController.checkUsername);
+
 module.exports = router;
