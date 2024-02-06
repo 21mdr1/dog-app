@@ -85,7 +85,7 @@ function Login({ setSignedIn }) {
                         {loginUsernameErrors}
                     </p> }
                     <input 
-                        type="text" 
+                        type="password" 
                         name='loginPassword' 
                         className={`login-form__input ${loginPasswordErrors && 'login-form__input--invalid'}`}
                         placeholder='Password'
