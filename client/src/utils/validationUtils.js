@@ -31,7 +31,6 @@ async function getInputError(inputType, input, input2) {
 }
 
 async function inputIsValid(inputType, input, input2) {
-    console.log(inputType);
     switch (inputType) {
         case 'email':
             return emailIsValid(input);
