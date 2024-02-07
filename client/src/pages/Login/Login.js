@@ -17,18 +17,20 @@ function Login({ setSignedIn }) {
     });
     let { loginUsername: loginUsernameErrors, loginPassword: loginPasswordErrors } = errors;
 
+    console.log(errors);
+
     let [ message, setMessage ] = useState(null);
 
 
-    function handleInputChange(event) {
+    async function handleInputChange(event) {
         let { name, value } = event.target;
         setInputs({...inputs, [name]: value});
-        setErrors({...errors, [name]: getInputError(name, value)})
+        setErrors({...errors, [name]: await getInputError(name, value)})
     }
 
-    function handleInputBlur(event) {
+    async function handleInputBlur(event) {
         const { name, value } = event.target;
-        setErrors({...errors, [name]: getInputError(name, value)});
+        setErrors({...errors, [name]: await getInputError(name, value)});
     }
 
     async function handleSubmit(event) {
@@ -50,7 +52,7 @@ function Login({ setSignedIn }) {
         } else {
             let newErrors = {};
             for(let key in inputs) {
-                newErrors[key] = getInputError(key, inputs[key]);
+                newErrors[key] = await getInputError(key, inputs[key]);
             }
             setErrors(newErrors);
         }
