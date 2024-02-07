@@ -17,8 +17,6 @@ function Login({ setSignedIn }) {
     });
     let { loginUsername: loginUsernameErrors, loginPassword: loginPasswordErrors } = errors;
 
-    console.log(errors);
-
     let [ message, setMessage ] = useState(null);
 
 
