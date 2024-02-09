@@ -9,14 +9,14 @@ function fillInDataGaps(data) {
 
     for(let item of data) {
         for(let day of fullDays) {
-            if(item.date === day.date) {
+            if(item.formatted_date === day.formatted_date) {
                 day.steps = item.steps;
                 break;
             }
         }
     }
 
-    return fullDays;
+    return fullDays.toReversed();
 }
 
 // record steps
