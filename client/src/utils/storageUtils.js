@@ -1,5 +1,23 @@
 import { recordStepsLocally, getLastWeeksStepsLocally, recordPreferencesLocally, getTodaysStepsLocally, getStreakLocally, getPreferencesLocally } from './localStorageUtils';
 import { recordStepsRemotely, getLastWeeksStepsRemotely, recordPreferencesRemotely, getTodaysStepsRemotely, getStreakRemotely, getPreferencesRemotely } from './remoteStorageUtils';
+import { getLast7Days } from './dateUtils';
+
+// data utils
+
+function fillInDataGaps(data) {
+    let fullDays = getLast7Days();
+
+    for(let item of data) {
+        for(let day of fullDays) {
+            if(item.date === day.date) {
+                day.steps = item.steps;
+                break;
+            }
+        }
+    }
+
+    return fullDays;
+}
 
 // record steps
 
@@ -14,11 +32,15 @@ async function recordSteps(steps, userIsSignedIn, onSuccess, onFailure) {
 // retrieve steps
 
 async function getLastWeeksSteps(userIsSignedIn, onSuccess, onFailure) {
+    let steps;
+
     if (userIsSignedIn) {
-        return await getLastWeeksStepsRemotely(onSuccess, onFailure);
+        steps = await getLastWeeksStepsRemotely((data) => onSuccess(fillInDataGaps(data)), onFailure);
     } else {
-        return getLastWeeksStepsLocally(onSuccess, onFailure);
+        steps = getLastWeeksStepsLocally((data) => onSuccess(fillInDataGaps(data)), onFailure);
     }
+
+    return fillInDataGaps(steps);
 }
 
 async function getTodaysSteps(userIsSignedIn, onSuccess, onFailure) {

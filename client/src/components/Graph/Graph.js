@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import GraphRow from '../GraphRow/GraphRow';
 import './Graph.scss';
 
-function Graph({signedIn }) {
+function Graph({ signedIn }) {
 
     let [ stepsArr, setStepsArr ] = useState([]); 
     
