@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import GraphRow from '../GraphRow/GraphRow';
 import './Graph.scss';
 
-function Graph({signedIn }) {
+function Graph({ signedIn }) {
 
     let [ stepsArr, setStepsArr ] = useState([]); 
-    
+
     useEffect(() => {
         getLastWeeksSteps(signedIn, (data) => setStepsArr(data.reverse()))
     }, [signedIn]);
@@ -22,7 +22,7 @@ function Graph({signedIn }) {
         );
     }
 
-    let maxLength = roundToNext5000(Math.max(...stepsArr.map(a => a.steps)));
+    let maxLength = roundToNext5000(Math.max(...stepsArr.map(a => a.steps))) || 5000;
 
     return (
         <div className="graph__container">
