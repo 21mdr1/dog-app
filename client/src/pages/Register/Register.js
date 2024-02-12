@@ -37,7 +37,7 @@ function Register({ setSignedIn }) {
 
         if(name === 'password') {
             setErrors({...errors, 
-                ["password"]: getInputError("password", value), 
+                ["password"]: await getInputError("password", value), 
                 ["confirmPassword"]: await getInputError("confirmPassword", confirmPassword, value)
             });
         } else {
